@@ -1,0 +1,97 @@
+<div style="margin-left:20px;text-align:left;font-family:arial;color:#337ab7">
+    <h3><b>Lucent Test Utility v.02</b></h3>
+</div>
+
+<!-- TODO: remove manual persistence after normal version is implemented. -->
+
+<div style='margin-left:20px;'>
+    <button (click)="onUpdateMeta()">Persist meta data (dev purpose only)</button>
+    <button (click)="testDataFetch()">TestDataFetch</button>
+</div>
+<br>
+<div style='margin-left:20px;margin-right:20px;'>
+    <form (submit)="addServerMeta(serverInfo.value)">
+        <div>
+            <!--
+            <table>
+                <td style="width:10%;text-align:right;"><label for="serverInfo">Add Server Instance:</label></td>
+                <td style="width:60%;"><input type="text" #serverInfo></td>
+                <td style="width:30%;"></td>
+            </table>
+        -->
+        <table style="width:60%;">
+                <tr><label for="serverInfo">Add Server Instance:</label></tr>
+                <tr><input type="text" #serverInfo></tr>
+            </table>
+        </div>
+    </form>
+
+</div>
+
+<div style="margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;">
+    <collapsible-list [type]="collapsibleType">
+        <collapsible-list-item *ngFor="let server of servers; let i = index">
+            <collapsible-header class="waves-effect" style="background-color:lightgrey">
+                <i class="fa fa-chevron-down"
+                [ngClass]="{
+                  'fa-chevron-down': server.expanded,
+                  'fa-chevron-right': !server.expanded
+                }"
+                aria-hidden="true"></i>
+                {{server.label}}
+            </collapsible-header>
+
+            <collapsible-body  [expanded]="server.expanded"
+            (toggleState)="server.expanded = $event">
+            <p style="text-align: left">
+                {{server.url}}</p>
+                <!-- add detail inputs and option to delete server entry -->
+                <table>
+                    <td> Complete URL: http://{{server.domain}}:{{server.port}}/{{server.path}}</td>
+                    <td>
+                        <div style="text-align:right;">
+                            <button  (click)="deleteServerInfo(server)">delete</button>
+                        </div>
+                    </td>
+                </table>
+               
+                <form (ngSubmit)="addServerDetail(server,domain.value,port.value,path.value,notes.value)">
+                    <table>
+                        <tr>
+                        <td style="width:35%;">
+                            
+                            <label for="domain">Domain:</label><input type="text" #domain>
+                            <label for="port">Port:</label><input type="number" #port>
+                            <label for="path">Path:</label><input type="text" #path>
+                        
+                        </td>
+                        <td style="width:35%;">
+                        
+                        </td>
+                        <td style="width:30%;">
+                            <label for="path">Notes:</label><textarea style="height:150px;" #notes></textarea>
+                        </td>
+                        </tr>
+                        <tr>
+                                <div style="text-align:left;">
+                                        <button type="submit" class="btn btn-primary">submit</button>
+                                    </div>
+                        </tr>
+                        <tr>
+                            <br>
+                        </tr>
+                    </table>
+                    
+                </form>
+                
+                
+                <app-treeview></app-treeview>
+            </collapsible-body>
+
+        </collapsible-list-item>
+    </collapsible-list>
+
+</div>
+
+
+
