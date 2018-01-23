@@ -1,98 +1,76 @@
-import { Component, OnInit } from '@angular/core';
+import { Inject, Injectable, Component, OnInit } from '@angular/core';
 import { DataService} from './services/data.service';
 import { resource } from 'selenium-webdriver/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommsService } from './comms.service';
+import { ServerInfo, ReportInfo, DiagnosticsInfo, FetchReportListPacket } from './comms.service';
+import { v4 as uuid } from 'uuid';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
-interface ServerInfo {
-  label ?:string,
-  domain ?:string,
-  port ?: number,
-  path ?: string,
-  username ?:string,
-  password ?:string,
-  notes ?:string,
-  reports ?:ReportInfo[]
-  expanded ?:boolean
-}
+//jsw.test.start.
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+//jsw.test.end.
 
-interface ReportInfo {
-  selected ?:boolean,
-  name ?:string,
-  url ?:string
+interface TestResults {
+  execTime:string,
+  execId:string
 }
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers:[CommsService]
 })
 
 export class AppComponent implements OnInit {
   title = 'app';
   servers:ServerInfo[] = [];
+  workingServer:ServerInfo;
   workingServerLabel:string;
-
-  constructor(private dataService: DataService) {
+  selectedReportsForm:FormGroup;
+  busyDialog:MatDialogRef<BusyDialog>;
+  progressDialog:MatDialogRef<ProgressDialog>;
+ 
+  constructor(private dataService: DataService, private commsService: CommsService, private dialog:MatDialog) {
+  
   }
 
   ngOnInit(){ //test intitialization of some server entries.
-    let r1:ReportInfo = {
-      selected:true, name:'first Report', url:"repo://test/report1" 
-    }
 
-    let r2:ReportInfo = {
-      selected:true, name:'second Report', url:"repo://test/report2"
-    }
-
-    let testReports:ReportInfo[] = [r1, r2];
-    
-    let s1:ServerInfo = {
-      label:'first test server label',
-      domain:'localhost',
-      port: 8080,
-      path: 'jasperserver-pro',
-      username:'superuser',
-      password:'superuser', 
-      notes:'some random notes',
-      reports:testReports,
-      expanded:false };
-
-      let s2:ServerInfo = {
-        label:'second test server label',
-        domain:'localhost',
-        port: 8080,
-        path: 'jasperserver-pro',
-        username:'superuser',
-        password:'superuser',
-        notes:'some random notes for server 2',
-        reports:testReports,
-        expanded:false };
-  
-    this.servers.push(s1);
-    this.servers.push(s2);
+    this.selectedReportsForm = new FormGroup({
+      iterationsControl : new FormControl('5',[<any>Validators.min(1),<any>Validators.required]),
+      thinkTimeControl : new FormControl('10',[<any>Validators.min(1),<any>Validators.required])
+    });
   }
 
-  onUpdateMeta(){
-    console.log("persist meta data");
-  }
-
-  addServerMeta(serverInfo){
+  addServerMeta(){
     //console.log(serverInfo);
     let srs:ReportInfo[] = [];
+    let diagModule:DiagnosticsInfo = {
+      reports:srs,
+      expanded:true
+    };
 
     let ss:ServerInfo = {
-      label:serverInfo,
-      domain:'',
-      port: 8080,
-      path: 'jasperserver-pro',
-      username:'',
-      password:'',
-      notes:'',
-      reports:srs,
-      expanded:true };
+    id:String(uuid()),
+    label:this.workingServerLabel,
+    domain:'',
+    port: 8080,
+    path: 'jasperserver-pro',
+    username:'',
+    password:'',
+    notes:'',
+    diagnosticsModule:diagModule,
+    expanded:true };
+
+    //this.servers.unshift(ss);
+    this.workingServerLabel = '';
+    this.workingServer = ss;  //TODO: find another means of transmitting the server ref.
 
     this.servers.unshift(ss);
-
-    return false;
+    return false; 
   }
 
   deleteServerInfo(server){
@@ -103,24 +81,88 @@ export class AppComponent implements OnInit {
     }
   }
 
-  addServerDetail(server,domain,port,path,notes){
+  deleteReportInfo(server, report){
+    for (let r=0; r<server.diagnosticsModule.reports.length;r++){
+      if (server.diagnosticsModule.reports[r]==report){
+        server.diagnosticsModule.reports.splice(r,1);
+      }
+    }
+  }
+
+  addServerDetail(server){
     //update details and try to update the list of reports.
-    //console.log(domain + port + path);
-    server.domain = domain;
-    server.port = port;
-    server.path = path;
-    server.notes = notes;
+
+    //if form is valid, submit this information about the server to be persisted.
+    //also refresh the contents of the report list for the server.
+
+    this.workingServer = server;  //TODO: find another means of transmitting the server ref.
+   
+    this.busyDialog = this.dialog.open(BusyDialog, {
+      disableClose: true,
+      width: '400px',
+      data: { }
+    });
+    let newFetchPacket:FetchReportListPacket = {
+      serverInfo: server,
+      dialogR:  this.busyDialog
+    };
+
+    this.commsService.updateReportTable(newFetchPacket); //get info from the server
   }
 
-  testDataFetch(){
-    console.log("test data fetch:");
-    // var objOut:any = this.dataService.getRepoReports();
-    // var stringOut:string = JSON.stringify(objOut);
-    this.dataService.getRepoReports().subscribe((resource) => {console.log(resource); });
+  addSelectedReport(data:any){ 
+    
+    let nr:ReportInfo = { 
+      selected: true,
+      iterations: 5,
+      thinkTime: 10,
+      name: data.row.label, 
+      url: data.row.uri
+    };
 
-    //console.log(stringOut);
+    this.workingServer.diagnosticsModule.reports.unshift(nr);
+  } 
+
+  executeReportTests(){
+    //jsw.test.start.
+    this.progressDialog = this.dialog.open(ProgressDialog, {
+      disableClose: true,
+      width: '500px',
+      data: { }
+    });
+    //jsw.test.end.
+    this.executeReportTestsCall();
+
   }
 
+  executeReportTestsCall(){
+    this.dataService.execLoadTest(this.workingServer).subscribe((sResp) => {
+      var serverResponse = sResp;
+      alert(String(serverResponse.status)); 
+    })
+  }
 }
+  
+  @Component({
+    selector: 'dialog-busy',
+    templateUrl: './dialogs/dialog.busy.window.html',
+  })
+  export class BusyDialog { 
+  
+    constructor(
+      public dialogRef: MatDialogRef<BusyDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  }
+  
+  @Component({
+    selector: 'dialog-progress',
+    templateUrl: './dialogs/dialog.progress.window.html',
+  })
+  export class ProgressDialog { 
+  
+    constructor(
+      public dialogRef: MatDialogRef<ProgressDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  }

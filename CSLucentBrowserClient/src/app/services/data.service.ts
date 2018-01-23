@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable, Component, Inject } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+
+import { ServerInfo, ReportInfo, DiagnosticsInfo } from '../comms.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -17,8 +19,25 @@ export class DataService {
       
   }
 
-  getRepoReports(){
-    return this.http.get('http://localhost:8080/jasperserver-pro/rest_v2/resources?type=reportUnit&j_username=superuser&j_password=superuser')
+  getRepoReports(hostName:string, port:string, path:string, username:string, password:string){
+ 
+    var reportResults = this.http.get('/serverinfo?hostname=' + hostName + 
+    '&port=' + port + '&path=' + path + '&username=' + username + '&password=' + password)
     .map(res => res.json());
+
+    return reportResults;
+ 
   }
-}
+
+  execLoadTest(server:ServerInfo){
+    var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('LoadTestId', 'testId1_jswTest');
+    return this.http.post('/loadtest/start', server, {headers}).map(res => res.json());
+  }
+
+} 
+
+
+
+

@@ -1,703 +1,827 @@
 export const TableData:Array<any> = [
-    {
-      'name': 'Victoria Cantrell',
-      'position': 'Integer Corporation',
-      'office': 'Croatia',
-      'ext': `<strong>0839</strong>`,
-      'startDate': '2015/08/19',
-      'salary': 208.178
-    }, {
-      'name': 'Pearl Crosby',
-      'position': 'In PC',
-      'office': 'Cambodia',
-      'ext': `<strong>8262</strong>`,
-      'startDate': '2014/10/08',
-      'salary': 114.367
-    }, {
-      'name': 'Colette Foley',
-      'position': 'Lorem Inc.',
-      'office': 'Korea, North',
-      'ext': '8968',
-      'startDate': '2015/07/19',
-      'salary': 721.473
-    }, {
-      'name': 'Anastasia Shaffer',
-      'position': 'Dolor Nulla Semper LLC',
-      'office': 'Suriname',
-      'ext': '7980',
-      'startDate': '2015/04/20',
-      'salary': 264.620
-    }, {
-      'name': 'Gabriel Castro',
-      'position': 'Sed Limited',
-      'office': 'Bahrain',
-      'ext': '0757',
-      'startDate': '2015/03/04',
-      'salary': 651.350
-    }, {
-      'name': 'Cherokee Ware',
-      'position': 'Tincidunt LLC',
-      'office': 'United Kingdom (Great Britain)',
-      'ext': '3995',
-      'startDate': '2015/06/17',
-      'salary': 666.259
-    }, {
-      'name': 'Barry Moss',
-      'position': 'Sociis Industries',
-      'office': 'Western Sahara',
-      'ext': '6697',
-      'startDate': '2015/08/13',
-      'salary': 541.631
-    }, {
-      'name': 'Maryam Tucker',
-      'position': 'Elit Pede Malesuada Inc.',
-      'office': 'Brazil',
-      'ext': '5203',
-      'startDate': '2014/10/02',
-      'salary': 182.294
-    }, {
-      'name': 'Constance Clayton',
-      'position': 'Auctor Velit Aliquam LLP',
-      'office': 'United Arab Emirates',
-      'ext': '4204',
-      'startDate': '2015/08/01',
-      'salary': 218.597
-    }, {
-      'name': 'Rogan Tucker',
-      'position': 'Arcu Vestibulum Ante Associates',
-      'office': 'Jersey',
-      'ext': '0885',
-      'startDate': '2015/01/04',
-      'salary': 861.632
-    }, {
-      'name': 'Emery Mcdowell',
-      'position': 'Gravida Company',
-      'office': 'New Zealand',
-      'ext': '3951',
-      'startDate': '2015/06/02',
-      'salary': 413.568
-    }, {
-      'name': 'Yael Greer',
-      'position': 'Orci Limited',
-      'office': 'Madagascar',
-      'ext': '1416',
-      'startDate': '2014/12/04',
-      'salary': 121.831
-    }, {
-      'name': 'Jared Burgess',
-      'position': 'Auctor Incorporated',
-      'office': 'Burundi',
-      'ext': '4673',
-      'startDate': '2015/01/12',
-      'salary': 62.243
-    }, {
-      'name': 'Sharon Campbell',
-      'position': 'Elit Curabitur Sed Consulting',
-      'office': 'Comoros',
-      'ext': '6274',
-      'startDate': '2014/09/14',
-      'salary': 200.854
-    }, {
-      'name': 'Yeo Church',
-      'position': 'Donec Vitae Erat PC',
-      'office': 'Saudi Arabia',
-      'ext': '0269',
-      'startDate': '2015/06/07',
-      'salary': 581.193
-    }, {
-      'name': 'Kylie Barlow',
-      'position': 'Fermentum Risus Corporation',
-      'office': 'Papua New Guinea',
-      'ext': '2010',
-      'startDate': '2014/12/03',
-      'salary': 418.115
-    }, {
-      'name': 'Nell Leonard',
-      'position': 'Vestibulum Consulting',
-      'office': 'Saudi Arabia',
-      'ext': '4839',
-      'startDate': '2015/05/29',
-      'salary': 466.201
-    }, {
-      'name': 'Brandon Fleming',
-      'position': 'Donec Egestas Associates',
-      'office': 'Poland',
-      'ext': '0622',
-      'startDate': '2015/01/22',
-      'salary': 800.011
-    }, {
-      'name': 'Inga Pena',
-      'position': 'Et Magnis Dis Limited',
-      'office': 'Belgium',
-      'ext': '8140',
-      'startDate': '2015/05/18',
-      'salary': 564.245
-    }, {
-      'name': 'Arden Russo',
-      'position': 'Est Tempor Bibendum Corp.',
-      'office': 'Dominican Republic',
-      'ext': '6774',
-      'startDate': '2015/07/23',
-      'salary': 357.222
-    }, {
-      'name': 'Liberty Gallegos',
-      'position': 'Nec Diam LLC',
-      'office': 'Ghana',
-      'ext': '9266',
-      'startDate': '2015/06/18',
-      'salary': 554.375
-    }, {
-      'name': 'Dennis York',
-      'position': 'Nullam Suscipit Foundation',
-      'office': 'Namibia',
-      'ext': '3133',
-      'startDate': '2015/03/20',
-      'salary': 90.417
-    }, {
-      'name': 'Petra Chandler',
-      'position': 'Pede Nonummy Inc.',
-      'office': 'Namibia',
-      'ext': '3367',
-      'startDate': '2015/03/26',
-      'salary': 598.915
-    }, {
-      'name': 'Aurelia Marshall',
-      'position': 'Donec Consulting',
-      'office': 'Nicaragua',
-      'ext': '2690',
-      'startDate': '2015/08/18',
-      'salary': 201.680
-    }, {
-      'name': 'Rose Carter',
-      'position': 'Enim Consequat Purus Industries',
-      'office': 'Morocco',
-      'ext': '0619',
-      'startDate': '2015/03/06',
-      'salary': 220.187
-    }, {
-      'name': 'Denton Atkins',
-      'position': 'Non Vestibulum PC',
-      'office': 'Mali',
-      'ext': '5806',
-      'startDate': '2015/04/19',
-      'salary': 324.588
-    }, {
-      'name': 'Germaine Osborn',
-      'position': 'Tristique Aliquet PC',
-      'office': 'Lesotho',
-      'ext': '4469',
-      'startDate': '2015/01/19',
-      'salary': 351.108
-    }, {
-      'name': 'Nell Butler',
-      'position': 'Sit Amet Dapibus Industries',
-      'office': 'Cuba',
-      'ext': '7860',
-      'startDate': '2015/01/06',
-      'salary': 230.072
-    }, {
-      'name': 'Brent Stein',
-      'position': 'Eu Augue Porttitor LLP',
-      'office': 'Cyprus',
-      'ext': '4697',
-      'startDate': '2014/11/02',
-      'salary': 853.413
-    }, {
-      'name': 'Alexandra Shaw',
-      'position': 'Aenean Gravida Limited',
-      'office': 'Uruguay',
-      'ext': '1140',
-      'startDate': '2015/05/16',
-      'salary': 401.970
-    }, {
-      'name': 'Veronica Allison',
-      'position': 'Aliquet Diam Sed Institute',
-      'office': 'Samoa',
-      'ext': '9966',
-      'startDate': '2015/05/17',
-      'salary': 79.193
-    }, {
-      'name': 'Katelyn Gamble',
-      'position': 'Sed Associates',
-      'office': 'Mauritius',
-      'ext': '4767',
-      'startDate': '2015/03/20',
-      'salary': 484.299
-    }, {
-      'name': 'James Greer',
-      'position': 'A Dui Incorporated',
-      'office': 'Norway',
-      'ext': '5517',
-      'startDate': '2015/02/21',
-      'salary': 333.518
-    }, {
-      'name': 'Cain Vasquez',
-      'position': 'Nulla Facilisis Suspendisse Institute',
-      'office': 'China',
-      'ext': '3179',
-      'startDate': '2015/05/27',
-      'salary': 651.761
-    }, {
-      'name': 'Shaeleigh Barr',
-      'position': 'Eleifend Cras Institute',
-      'office': 'Ghana',
-      'ext': '5904',
-      'startDate': '2015/04/01',
-      'salary': 627.095
-    }, {
-      'name': 'Baker Mckay',
-      'position': 'Ut Sagittis Associates',
-      'office': 'Isle of Man',
-      'ext': '9840',
-      'startDate': '2015/01/12',
-      'salary': 742.247
-    }, {
-      'name': 'Jayme Pace',
-      'position': 'Cras Eu Tellus Associates',
-      'office': 'Bouvet Island',
-      'ext': '4580',
-      'startDate': '2015/08/12',
-      'salary': 591.588
-    }, {
-      'name': 'Reuben Albert',
-      'position': 'Lobortis Institute',
-      'office': 'Zambia',
-      'ext': '8725',
-      'startDate': '2015/04/04',
-      'salary': 791.408
-    }, {
-      'name': 'Idola Burns',
-      'position': 'Non Industries',
-      'office': 'Myanmar',
-      'ext': '3201',
-      'startDate': '2015/06/24',
-      'salary': 142.906
-    }, {
-      'name': 'Laura Macias',
-      'position': 'Phasellus Inc.',
-      'office': 'Mauritania',
-      'ext': '2033',
-      'startDate': '2014/11/21',
-      'salary': 226.591
-    }, {
-      'name': 'Nichole Salas',
-      'position': 'Duis PC',
-      'office': 'Madagascar',
-      'ext': '4397',
-      'startDate': '2015/01/18',
-      'salary': 234.196
-    }, {
-      'name': 'Hunter Walter',
-      'position': 'Ullamcorper Duis Cursus Foundation',
-      'office': 'Brazil',
-      'ext': '2227',
-      'startDate': '2015/02/28',
-      'salary': 655.052
-    }, {
-      'name': 'Asher Rich',
-      'position': 'Mauris Ipsum LLP',
-      'office': 'Paraguay',
-      'ext': '7288',
-      'startDate': '2015/08/08',
-      'salary': 222.946
-    }, {
-      'name': 'Angela Carlson',
-      'position': 'Donec Tempor Institute',
-      'office': 'Papua New Guinea',
-      'ext': '5416',
-      'startDate': '2015/02/12',
-      'salary': 562.194
-    }, {
-      'name': 'James Dorsey',
-      'position': 'Ipsum Leo Associates',
-      'office': 'Congo (Brazzaville)',
-      'ext': '6019',
-      'startDate': '2015/01/10',
-      'salary': 629.925
-    }, {
-      'name': 'Wesley Cobb',
-      'position': 'Nunc Est Incorporated',
-      'office': 'Australia',
-      'ext': '6466',
-      'startDate': '2015/01/30',
-      'salary': 343.476
-    }, {
-      'name': 'Meghan Stephens',
-      'position': 'Interdum PC',
-      'office': 'Turkey',
-      'ext': '8001',
-      'startDate': '2014/10/11',
-      'salary': 469.305
-    }, {
-      'name': 'Bertha Herrera',
-      'position': 'Amet Limited',
-      'office': 'Kenya',
-      'ext': '4799',
-      'startDate': '2014/11/22',
-      'salary': 56.606
-    }, {
-      'name': 'Karina Key',
-      'position': 'Quisque Varius Nam Company',
-      'office': 'France',
-      'ext': '3907',
-      'startDate': '2015/03/26',
-      'salary': 314.260
-    }, {
-      'name': 'Uriel Carson',
-      'position': 'Penatibus PC',
-      'office': 'Venezuela',
-      'ext': '5902',
-      'startDate': '2015/01/07',
-      'salary': 106.335
-    }, {
-      'name': 'Mira Baird',
-      'position': 'Felis Orci PC',
-      'office': 'Niue',
-      'ext': '4189',
-      'startDate': '2015/08/25',
-      'salary': 515.671
-    }, {
-      'name': 'Ursula Parrish',
-      'position': 'Ac Corporation',
-      'office': 'Macao',
-      'ext': '4771',
-      'startDate': '2015/06/30',
-      'salary': 72.295
-    }, {
-      'name': 'Josephine Sykes',
-      'position': 'Blandit Congue Limited',
-      'office': 'Holy See (Vatican City State)',
-      'ext': '4684',
-      'startDate': '2014/12/22',
-      'salary': 694.656
-    }, {
-      'name': 'Maggie Sims',
-      'position': 'Vulputate Posuere Industries',
-      'office': 'Sudan',
-      'ext': '6482',
-      'startDate': '2014/11/22',
-      'salary': 363.743
-    }, {
-      'name': 'Rogan Fuentes',
-      'position': 'Vestibulum Accumsan Neque Company',
-      'office': 'Jersey',
-      'ext': '4837',
-      'startDate': '2015/07/29',
-      'salary': 606.004
-    }, {
-      'name': 'Maya Haney',
-      'position': 'Ac Foundation',
-      'office': 'Falkland Islands',
-      'ext': '5752',
-      'startDate': '2015/09/03',
-      'salary': 745.500
-    }, {
-      'name': 'Aquila Battle',
-      'position': 'Sociis Natoque Penatibus Foundation',
-      'office': 'Azerbaijan',
-      'ext': '8470',
-      'startDate': '2015/03/06',
-      'salary': 582.265
-    }, {
-      'name': 'Connor Coleman',
-      'position': 'Orci Lacus Vestibulum Foundation',
-      'office': 'Croatia',
-      'ext': '6217',
-      'startDate': '2014/10/21',
-      'salary': 416.958
-    }, {
-      'name': 'Charity Thomas',
-      'position': 'Convallis Ligula Donec Inc.',
-      'office': 'Benin',
-      'ext': '6240',
-      'startDate': '2015/07/12',
-      'salary': 540.999
-    }, {
-      'name': 'Blythe Powers',
-      'position': 'Amet Orci Limited',
-      'office': 'Falkland Islands',
-      'ext': '5608',
-      'startDate': '2015/01/23',
-      'salary': 480.067
-    }, {
-      'name': 'Adria Battle',
-      'position': 'Ornare Lectus Incorporated',
-      'office': 'British Indian Ocean Territory',
-      'ext': '7419',
-      'startDate': '2015/05/28',
-      'salary': 257.937
-    }, {
-      'name': 'Melanie Mcintyre',
-      'position': 'Nunc Corp.',
-      'office': 'Mongolia',
-      'ext': '4326',
-      'startDate': '2015/01/06',
-      'salary': 359.737
-    }, {
-      'name': 'Keely Bauer',
-      'position': 'Nec Tempus Institute',
-      'office': 'Somalia',
-      'ext': '8372',
-      'startDate': '2015/03/09',
-      'salary': 99.718
-    }, {
-      'name': 'Noelani Strong',
-      'position': 'Nec LLP',
-      'office': 'Iran',
-      'ext': '0049',
-      'startDate': '2015/08/24',
-      'salary': 480.718
-    }, {
-      'name': 'Jeanette Henderson',
-      'position': 'Eu Elit Nulla Corporation',
-      'office': 'Italy',
-      'ext': '7586',
-      'startDate': '2015/06/19',
-      'salary': 253.772
-    }, {
-      'name': 'Candace Huber',
-      'position': 'Sed Institute',
-      'office': 'Uganda',
-      'ext': '7183',
-      'startDate': '2015/06/16',
-      'salary': 388.879
-    }, {
-      'name': 'Bethany Potter',
-      'position': 'Vivamus Nibh Dolor Incorporated',
-      'office': 'Puerto Rico',
-      'ext': '3354',
-      'startDate': '2014/11/12',
-      'salary': 747.310
-    }, {
-      'name': 'Whoopi Burks',
-      'position': 'Justo Inc.',
-      'office': 'Fiji',
-      'ext': '2185',
-      'startDate': '2014/09/24',
-      'salary': 803.037
-    }, {
-      'name': 'Sheila Long',
-      'position': 'Diam Associates',
-      'office': 'Sao Tome and Principe',
-      'ext': '7760',
-      'startDate': '2014/12/21',
-      'salary': 674.379
-    }, {
-      'name': 'Sonya Church',
-      'position': 'Laoreet Institute',
-      'office': 'Grenada',
-      'ext': '8920',
-      'startDate': '2015/06/03',
-      'salary': 625.147
-    }, {
-      'name': 'Shaine Forbes',
-      'position': 'Eu Arcu LLP',
-      'office': 'Cyprus',
-      'ext': '2369',
-      'startDate': '2015/01/18',
-      'salary': 208.100
-    }, {
-      'name': 'Alexandra Patrick',
-      'position': 'Ligula Donec Inc.',
-      'office': 'Viet Nam',
-      'ext': '8531',
-      'startDate': '2015/04/09',
-      'salary': 104.063
-    }, {
-      'name': 'Patience Vincent',
-      'position': 'Sem Molestie Associates',
-      'office': 'Philippines',
-      'ext': '8888',
-      'startDate': '2015/07/04',
-      'salary': 673.556
-    }, {
-      'name': 'Evelyn Smith',
-      'position': 'Fusce Industries',
-      'office': 'Togo',
-      'ext': '5051',
-      'startDate': '2015/08/15',
-      'salary': 737.284
-    }, {
-      'name': 'Kieran Gonzalez',
-      'position': 'Non Corp.',
-      'office': 'Equatorial Guinea',
-      'ext': '4834',
-      'startDate': '2015/08/24',
-      'salary': 90.195
-    }, {
-      'name': 'Molly Oneil',
-      'position': 'Non Dui Consulting',
-      'office': 'Belize',
-      'ext': '7501',
-      'startDate': '2014/10/28',
-      'salary': 140.767
-    }, {
-      'name': 'Nigel Davenport',
-      'position': 'Ullamcorper Velit In Industries',
-      'office': 'Vanuatu',
-      'ext': '0976',
-      'startDate': '2015/03/16',
-      'salary': 70.536
-    }, {
-      'name': 'Thor Young',
-      'position': 'Malesuada Consulting',
-      'office': 'French Southern Territories',
-      'ext': '0211',
-      'startDate': '2015/01/28',
-      'salary': 75.501
-    }, {
-      'name': 'Finn Delacruz',
-      'position': 'Lorem Industries',
-      'office': 'Cocos (Keeling) Islands',
-      'ext': '2980',
-      'startDate': '2014/12/11',
-      'salary': 754.967
-    }, {
-      'name': 'Lane Henderson',
-      'position': 'Pede Foundation',
-      'office': 'Kazakhstan',
-      'ext': '1446',
-      'startDate': '2015/07/02',
-      'salary': 842.050
-    }, {
-      'name': 'Shea Potter',
-      'position': 'Curabitur Limited',
-      'office': 'Timor-Leste',
-      'ext': '4654',
-      'startDate': '2015/05/07',
-      'salary': 263.629
-    }, {
-      'name': 'Brynn Yang',
-      'position': 'Ut Limited',
-      'office': 'Mayotte',
-      'ext': '4668',
-      'startDate': '2015/01/17',
-      'salary': 74.292
-    }, {
-      'name': 'Kylan Fuentes',
-      'position': 'Sapien Aenean Associates',
-      'office': 'Brazil',
-      'ext': '6623',
-      'startDate': '2014/12/28',
-      'salary': 108.632
-    }, {
-      'name': 'Lionel Mcbride',
-      'position': 'Ipsum PC',
-      'office': 'Portugal',
-      'ext': '3978',
-      'startDate': '2015/07/11',
-      'salary': 34.244
-    }, {
-      'name': 'Paul Lucas',
-      'position': 'Eget LLP',
-      'office': 'Nicaragua',
-      'ext': '8890',
-      'startDate': '2014/09/30',
-      'salary': 690.834
-    }, {
-      'name': 'Lareina Williamson',
-      'position': 'Imperdiet Ullamcorper Ltd',
-      'office': 'Cocos (Keeling) Islands',
-      'ext': '9489',
-      'startDate': '2014/12/01',
-      'salary': 603.498
-    }, {
-      'name': 'Amy Acevedo',
-      'position': 'Id Institute',
-      'office': 'Cook Islands',
-      'ext': '5592',
-      'startDate': '2015/02/04',
-      'salary': 125.165
-    }, {
-      'name': 'Nomlanga Silva',
-      'position': 'Eget LLC',
-      'office': 'Belize',
-      'ext': '3110',
-      'startDate': '2015/01/31',
-      'salary': 268.509
-    }, {
-      'name': 'Amena Stone',
-      'position': 'Enim Incorporated',
-      'office': 'Guinea',
-      'ext': '1211',
-      'startDate': '2014/09/23',
-      'salary': 214.381
-    }, {
-      'name': 'Danielle Coffey',
-      'position': 'Feugiat Placerat Corp.',
-      'office': 'Sao Tome and Principe',
-      'ext': '8176',
-      'startDate': '2015/06/17',
-      'salary': 137.423
-    }, {
-      'name': 'Buffy Russell',
-      'position': 'Lacus Quisque Ltd',
-      'office': 'Ecuador',
-      'ext': '6741',
-      'startDate': '2014/10/17',
-      'salary': 612.184
-    }, {
-      'name': 'Kaitlin Lamb',
-      'position': 'Malesuada Fringilla Est Associates',
-      'office': 'Algeria',
-      'ext': '5054',
-      'startDate': '2014/10/18',
-      'salary': 327.367
-    }, {
-      'name': 'Leilani Yates',
-      'position': 'Mus Proin LLC',
-      'office': 'South Sudan',
-      'ext': '1550',
-      'startDate': '2015/05/27',
-      'salary': 743.493
-    }, {
-      'name': 'Jemima Moon',
-      'position': 'Phasellus Corp.',
-      'office': 'South Georgia and The South Sandwich Islands',
-      'ext': '7582',
-      'startDate': '2015/05/21',
-      'salary': 496.067
-    }, {
-      'name': 'Hiroko Schwartz',
-      'position': 'Neque Institute',
-      'office': 'Saint Vincent and The Grenadines',
-      'ext': '9368',
-      'startDate': '2015/03/13',
-      'salary': 178.782
-    }, {
-      'name': 'Nathaniel Jensen',
-      'position': 'Mi Tempor Limited',
-      'office': 'Dominica',
-      'ext': '8331',
-      'startDate': '2014/12/05',
-      'salary': 37.441
-    }, {
-      'name': 'Silas Sweeney',
-      'position': 'Ultrices Institute',
-      'office': 'Turkmenistan',
-      'ext': '0746',
-      'startDate': '2014/11/13',
-      'salary': 152.980
-    }, {
-      'name': 'Jermaine Barry',
-      'position': 'Dapibus Corporation',
-      'office': 'Uzbekistan',
-      'ext': '1545',
-      'startDate': '2015/03/06',
-      'salary': 409.463
-    }, {
-      'name': 'Tatiana Nichols',
-      'position': 'Nec Diam Industries',
-      'office': 'Cook Islands',
-      'ext': '4395',
-      'startDate': '2015/05/22',
-      'salary': 51.155
-    }, {
-      'name': 'Rama Waller',
-      'position': 'Sem Pellentesque LLC',
-      'office': 'Andorra',
-      'ext': '2973',
-      'startDate': '2014/12/01',
-      'salary': 223.227
-    }
-  ];
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample HTML5 multi-axis column chart from Domain showing Sales, Units, and $ Per Square Foot by Country and Store Type with various filters. Created from an Ad Hoc View.",
+      "label": "01. Geographic Results by Segment Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-14T10:46:00",
+      "uri": "/public/Samples/Reports/01._Geographic_Results_by_Segment_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample HTML5 Spider Line chart from OLAP source. Created from an Ad Hoc View.",
+      "label": "02. Sales Mix by Demographic Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-25T09:05:59",
+      "uri": "/public/Samples/Reports/02._Sales_Mix_by_Demographic_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample OLAP chart with HTML5 Grouped Bar chart and Filter. Created from an Ad Hoc View.",
+      "label": "03. Store Segment Performance Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-25T09:06:57",
+      "uri": "/public/Samples/Reports/03._Store_Segment_Performance_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample Filtered Table Report Showing Multiple Measures. Created from Sample Ad Hoc View.",
+      "label": "04. Product Results by Store Type Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-15T17:06:02",
+      "uri": "/public/Samples/Reports/04._Product_Results_by_Store_Type_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Basic interactive Table Component report with Bookmarks Panel",
+      "label": "05. Accounts Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-17T10:07:12",
+      "uri": "/public/Samples/Reports/AllAccounts",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Basic interactive Table Component report with alternate color scheme.",
+      "label": "05g. Accounts Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2013-10-03T16:17:06",
+      "uri": "/public/Samples/Reports/5g.AccountsReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "06. Profit Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:28:15",
+      "uri": "/public/Samples/Reports/ProfitDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "06g. Profit Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:28:56",
+      "uri": "/public/Samples/Reports/06g.ProfitDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "07. Revenue Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:29:17",
+      "uri": "/public/Samples/Reports/RevenueDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "07g. Revenue Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:29:39",
+      "uri": "/public/Samples/Reports/07g.RevenueDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "08. Unit Sales Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:29:57",
+      "uri": "/public/Samples/Reports/08.UnitSalesDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample report containing containing interactive  HTML5 Chart and Table data with input controls. This report is also defined as a drill-down from the SuperMart Dashboard gauge.",
+      "label": "08g. Unit Sales Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:30:15",
+      "uri": "/public/Samples/Reports/08g.UnitSalesDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Sample report with multiple charts, interactive table, and input controls. Also called as drill-through from the SuperMart and Performance Summary Dashboards.",
+      "label": "09. Customer Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:30:29",
+      "uri": "/public/Samples/Reports/9.CustomerDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Sample report with multiple charts, interactive table, and input controls. Also called as drill-through from the SuperMart and Performance Summary Dashboards.",
+      "label": "09g. Customer Detail Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:30:43",
+      "uri": "/public/Samples/Reports/9g.CustomerDetailReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample report with Pie Chart and crosstab showing sales performance by store type and product category.",
+      "label": "10. Performance By Store Type",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:36:19",
+      "uri": "/public/Samples/Reports/State_Performance",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Sample report with Pie Chart and crosstab showing sales performance by store type and product category.",
+      "label": "10g. Performance By Store Type",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:31:13",
+      "uri": "/public/Samples/Reports/10g.PerformanceByStoreType",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Used in the Supermart dashboard.",
+      "label": "11. Sales By Month Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2013-09-25T04:48:31",
+      "uri": "/public/Samples/Reports/SalesByMonthReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Used in the Supermart alternate color scheme dashboard.",
+      "label": "11g. Sales By Month Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:31:40",
+      "uri": "/public/Samples/Reports/11g.SalesByMonthReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Drill-through from the Supermart dashboard.",
+      "label": "12. Promotion Details Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:31:55",
+      "uri": "/public/Samples/Reports/PromotionDetailsReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:19",
+      "description": "Drill-through from the Supermart dashboard with alternate color scheme.",
+      "label": "12g. Promotion Details Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:32:10",
+      "uri": "/public/Samples/Reports/12g.PromotionDetailsReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:17",
+      "description": "Top five customers, products, and promotions. Used in the Supermart Dashboard.",
+      "label": "13. Top Fives Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-09-07T09:48:40",
+      "uri": "/public/Samples/Reports/TopFivesReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Top five customers, products, and promotions. Used in the Supermart Dashboard with alternate color scheme.",
+      "label": "13g. Top Fives Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2013-10-03T16:25:05",
+      "uri": "/public/Samples/Reports/13g.TopFivesReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Report used for Performance Summary Dashboard.",
+      "label": "14. Performance Summary",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:32:53",
+      "uri": "/public/Samples/Reports/14.PerformanceSummary",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:17",
+      "description": "Report used for Performance Summary Dashboard.",
+      "label": "14. Stop Light KPI",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-11-06T16:55:43",
+      "uri": "/public/Samples/Reports/14._Stop_Light_KPI",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:17",
+      "description": "Report used for Performance Summary Dashboard.",
+      "label": "14. World Map",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-09-08T17:35:54",
+      "uri": "/public/Samples/Reports/14._World_Map",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Report used for Performance Summary Dashboard with alternate color scheme.",
+      "label": "14g. Performance Summary",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:33:17",
+      "uri": "/public/Samples/Reports/14g.PerformanceSummary",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Meter Gauges used in the Supermart Dashboard.",
+      "label": "15. Sales Gauges Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2013-09-16T04:41:40",
+      "uri": "/public/Samples/Reports/SalesGaugesReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Meter Gauges used in the Supermart Dashboard with alternate color scheme.",
+      "label": "15g. Sales Gauges Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-13T16:33:39",
+      "uri": "/public/Samples/Reports/15g.SalesGaugesReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Interactive table and chart.",
+      "label": "16. Interactive Sales Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2015-11-13T14:45:40",
+      "uri": "/public/Samples/Reports/Cascading_Report_2_Updated",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Interactive table and chart with alternate color scheme.",
+      "label": "16g. Interactive Sales Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2015-11-13T14:45:53",
+      "uri": "/public/Samples/Reports/16g.InteractiveSalesReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Sample report book with table of contents.",
+      "label": "17. Report Workbook",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2015-10-27T10:55:44",
+      "uri": "/public/Samples/Reports/17._Report_Workbook",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Sample Report used for basic Visualize.js demo",
+      "label": "20.1 Account List",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-05-16T08:17:01",
+      "uri": "/public/Samples/Reports/AccountList",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample Report used for basic Visualize.js demo",
+      "label": "20.2 Cities",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-24T14:12:34",
+      "uri": "/public/Samples/Reports/Cities",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:20",
+      "description": "Sample Report created from Ad Hoc View for Basic Visualize.js Demo",
+      "label": "20.3 SalesPerCityReport",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-24T14:21:45",
+      "uri": "/public/Samples/Reports/20.3_SalesPerCityReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample Report used for basic Visualize.js demo",
+      "label": "20.4 States",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-24T14:14:15",
+      "uri": "/public/Samples/Reports/States",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample Report used for basic Visualize.js demo",
+      "label": "20.5 StatesJFC",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-24T14:14:28",
+      "uri": "/public/Samples/Reports/StatesJFC",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "Sample Report used for basic Visualize.js demo",
+      "label": "20.6 Store Details",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2014-04-24T14:14:41",
+      "uri": "/public/Samples/Reports/StoreDetails",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "All Accounts Report",
+      "label": "All Accounts Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/AllAccounts",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "",
+      "label": "Analysis of Product Sales by City Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2015-04-30T01:38:15",
+      "uri": "/organizations/organization_1/reports/interactive/Analysis_of_Product_Sales_by_City_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "All events report",
+      "label": "Archived Audit Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:22",
+      "uri": "/public/audit/reports/archive/Audit_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "Audit crosstab report",
+      "label": "Archived Performance Crosstab Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:28",
+      "uri": "/public/audit/reports/archive/Performance_Crosstab_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "Performance Audit Report",
+      "label": "Archived Performance Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:31",
+      "uri": "/public/audit/reports/archive/Performance_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "Audit Report",
+      "label": "Archived Repository Resources Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:34",
+      "uri": "/public/audit/reports/archive/Repository_Resources_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "Audit Report",
+      "label": "Archived Resource Execution Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:38",
+      "uri": "/public/audit/reports/archive/Resource_Execution_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": "Audit Report",
+      "label": "Archived User Activity Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:44",
+      "uri": "/public/audit/reports/archive/User_Activity_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:14",
+      "description": "All events report",
+      "label": "Audit Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:49",
+      "uri": "/public/audit/reports/Audit_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:28",
+      "description": null,
+      "label": "BlankBackground",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2013-09-06T03:56:37",
+      "uri": "/public/Samples/Resources/Extras/BlankBackground",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Shows cascading input controls. Multi-select and single select queries",
+      "label": "Cascading multi select topic",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/Cascading_multi_select_topic",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Parameterized Report with no default values for parameters",
+      "label": "Customers Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/CustomersReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:27",
+      "description": "Customers Report",
+      "label": "Customers Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:49",
+      "uri": "/organizations/organization_1/reports/interactive/CustomersReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Topic containing shipping costs for orders",
+      "label": "demo for adhoc",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/AdhocDemo",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:12",
+      "description": null,
+      "label": "Diagnostic Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-10-17T16:30:38",
+      "uri": "/public/diagnostic/JSDiagnosticReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:14",
+      "description": "",
+      "label": "Diagnostic Topic",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-09-26T10:59:42",
+      "uri": "/public/adhoc/topics/JSDiagnosticTopic",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Employee List topic based on Employee List report in /Reports/Samples folder",
+      "label": "Employees",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/Employees",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:21",
+      "description": "foodmart data for crosstab",
+      "label": "foodmart data for crosstab",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-10-15T09:33:18",
+      "uri": "/public/Samples/Topics/CrosstabDemo",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "foodmart data for crosstab",
+      "label": "foodmart data for crosstab",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/CrosstabDemo",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "Report with Mondrian Datasource",
+      "label": "Foodmart Mondrian Sales Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:49",
+      "uri": "/organizations/organization_1/analysis/reports/FoodmartSalesMondrianReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Columns are Internationalizable.<br>Default support for English, French, German, Japanese, and Spanish.<br>To add support for more languages add Resource Bundles to this topic",
+      "label": "i18n columns",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/i18nColumns",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:27",
+      "description": "Map Report",
+      "label": "Map Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:50",
+      "uri": "/organizations/organization_1/reports/interactive/MapReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Example of topic with MDX query",
+      "label": "MDX example",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/MDXExample",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "MDX Frequency Report",
+      "label": "MDX Frequency",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:50",
+      "uri": "/organizations/organization_1/performance/reports/mdxFrequency",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:25",
+      "description": "Parameterized Report",
+      "label": "Parameterized Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/ShippingParam",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:14",
+      "description": "Audit crosstab report",
+      "label": "Performance Crosstab Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:53",
+      "uri": "/public/audit/reports/Performance_Crosstab_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:14",
+      "description": "Performance Audit Report",
+      "label": "Performance Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:51:57",
+      "uri": "/public/audit/reports/Performance_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:30",
+      "description": "",
+      "label": "Product Sales Trend",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2015-04-30T02:26:12",
+      "uri": "/organizations/organization_1/reports/interactive/Analysis/Product_Sales_Trend",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "Query Timings Report",
+      "label": "Query Timings",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:50",
+      "uri": "/organizations/organization_1/performance/reports/queryTimings",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:15",
+      "description": "The Report Monitoring Details report",
+      "label": "Report Monitoring Details Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-11-02T22:22:08",
+      "uri": "/public/monitoring/reports/Report_Monitoring_Details_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:15",
+      "description": "The Report Monitoring Resources report",
+      "label": "Report Monitoring Resources Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-11-02T22:45:17",
+      "uri": "/public/monitoring/reports/Report_Monitoring_Resources_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:15",
+      "description": "Audit Report",
+      "label": "Repository Resources Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:52:01",
+      "uri": "/public/audit/reports/Repository_Resources_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:15",
+      "description": "Audit Report",
+      "label": "Resource Execution Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:52:05",
+      "uri": "/public/audit/reports/Resource_Execution_Report",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "SQL Frequency Report",
+      "label": "SQL Frequency",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:50",
+      "uri": "/organizations/organization_1/performance/reports/sqlFrequency",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "Information about all of the products sold by SuperMart",
+      "label": "SuperMart Products",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/SuperMartProductsTopic",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:26",
+      "description": "Simple Topic. Good for trying calculations (sales - cost = profit). Add summaries for sales and profit. Group by State, then show Chart.",
+      "label": "SuperMart Stores",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:32:07",
+      "uri": "/organizations/organization_1/adhoc/topics/SuperMartStoresTopic",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:27",
+      "description": "Table Report",
+      "label": "Table Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2017-10-31T12:31:50",
+      "uri": "/organizations/organization_1/reports/interactive/TableReport",
+      "version": "0"
+  },
+  {
+      "creationDate": "2017-11-29T10:34:15",
+      "description": "Audit Report",
+      "label": "User Activity Report",
+      "permissionMask": "1",
+      "resourceType": "reportUnit",
+      "selectable": false,
+      "updateDate": "2012-05-03T16:52:10",
+      "uri": "/public/audit/reports/User_Activity_Report",
+      "version": "0"
+  }
+];

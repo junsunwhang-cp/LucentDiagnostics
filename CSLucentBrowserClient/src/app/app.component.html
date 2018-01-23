@@ -1,16 +1,19 @@
 <div style="margin-left:20px;text-align:left;font-family:arial;color:#337ab7">
-    <h3><b>Lucent Test Utility v.02</b></h3>
+    <h3><b>Lucent Utilities - alpha 02</b></h3>
 </div>
 
 <!-- TODO: remove manual persistence after normal version is implemented. -->
 
+<!--
 <div style='margin-left:20px;'>
     <button (click)="onUpdateMeta()">Persist meta data (dev purpose only)</button>
     <button (click)="testDataFetch()">TestDataFetch</button>
 </div>
 <br>
+-->
 <div style='margin-left:20px;margin-right:20px;'>
-    <form (submit)="addServerMeta(serverInfo.value)">
+    <!-- <form (submit)="addServerMeta(serverInfo.value)"> -->
+        <form (submit)="addServerMeta()">
         <div>
             <!--
             <table>
@@ -19,9 +22,12 @@
                 <td style="width:30%;"></td>
             </table>
         -->
-        <table style="width:60%;">
+        <table style="width:50%;">
+                <!--    
                 <tr><label for="serverInfo">Add Server Instance:</label></tr>
-                <tr><input type="text" #serverInfo></tr>
+                <tr><input type="text" #serverInfo></tr> -->
+                Add Server Definition:
+                <tr><input [(ngModel)]='workingServerLabel' name='workingServerLabel' type="text"></tr>
             </table>
         </div>
     </form>
@@ -31,14 +37,15 @@
 <div style="margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;">
     <collapsible-list [type]="collapsibleType">
         <collapsible-list-item *ngFor="let server of servers; let i = index">
-            <collapsible-header class="waves-effect" style="background-color:lightgrey">
+
+            <collapsible-header class="waves-effect" style="background-color:darkgrey">
                 <i class="fa fa-chevron-down"
                 [ngClass]="{
                   'fa-chevron-down': server.expanded,
                   'fa-chevron-right': !server.expanded
                 }"
                 aria-hidden="true"></i>
-                {{server.label}}
+                <b>{{server.label}} <span style="color:lightslategrey"> - http://{{server.domain}}:{{server.port}}/{{server.path}} </span></b> 
             </collapsible-header>
 
             <collapsible-body  [expanded]="server.expanded"
@@ -46,46 +53,175 @@
             <p style="text-align: left">
                 {{server.url}}</p>
                 <!-- add detail inputs and option to delete server entry -->
-                <table>
-                    <td> Complete URL: http://{{server.domain}}:{{server.port}}/{{server.path}}</td>
-                    <td>
-                        <div style="text-align:right;">
-                            <button  (click)="deleteServerInfo(server)">delete</button>
-                        </div>
-                    </td>
-                </table>
-               
-                <form (ngSubmit)="addServerDetail(server,domain.value,port.value,path.value,notes.value)">
-                    <table>
-                        <tr>
-                        <td style="width:35%;">
-                            
-                            <label for="domain">Domain:</label><input type="text" #domain>
-                            <label for="port">Port:</label><input type="number" #port>
-                            <label for="path">Path:</label><input type="text" #path>
-                        
-                        </td>
-                        <td style="width:35%;">
-                        
-                        </td>
-                        <td style="width:30%;">
-                            <label for="path">Notes:</label><textarea style="height:150px;" #notes></textarea>
-                        </td>
-                        </tr>
-                        <tr>
-                                <div style="text-align:left;">
-                                        <button type="submit" class="btn btn-primary">submit</button>
+
+                <!-- <div class="container"> -->
+                    <form #serverForm="ngForm" (ngSubmit)="addServerDetail(server)">
+                        <table>
+                            <tr>
+                            <td style="width:35%;">
+                                <!-- <label for="domain">Domain:</label> -->
+                                <div class="form-group" style="padding-right:40px;">
+                                Host Name <label for="required"> ( Required ) </label>
+                                <!-- <input style="padding:3px; height:15px;" formControlName='serverDomainControl' required name='serverDomain' type="text" class='form-control'> -->
+                                <input style="padding:3px; height:15px;" [(ngModel)]='server.domain' required name='serverDomain' #serverDomain="ngModel" type="text" class='form-control'>
+                                <div *ngIf="serverDomain.invalid && (serverDomain.dirty || serverDomain.touched)" class="alert alert-danger">
+                                    Host name is required.
+                                </div>
+                                </div>
+                                <!-- <label for="port">Port:</label>-->
+                                <div class="form-group" style="padding-right:40px;">
+                                Port <label for="required"> ( Required ) </label>
+                                
+                                <!-- <input  style="padding:3px; height:15px;" formControlName='serverPortControl' required name='serverPort' type="number" class='form-control'> -->
+                                <input  style="padding:3px; height:15px;" [(ngModel)]='server.port' required name='serverPort' #serverPort="ngModel" type="number" class='form-control'>
+                                <div *ngIf="serverPort.invalid && (serverPort.dirty || serverPort.touched)" class="alert alert-danger">
+                                        Port number is required.
                                     </div>
-                        </tr>
-                        <tr>
-                            <br>
-                        </tr>
-                    </table>
-                    
-                </form>
+                                </div>
+                                <!--<label for="path">Path:</label>-->
+                                <div class="form-group" style="padding-right:40px;">
+                                App Name <label for="required"> ( Required ) </label>
+                                
+                                <!-- <input  style="padding:3px; height:15px;" formControlName='serverPathControl' required name='serverPath' type="text" class='form-control'> -->
+                                <input  style="padding:3px; height:15px;" [(ngModel)]='server.path' required name='serverPath' #serverPath="ngModel" type="text" class='form-control'>
+                                <div *ngIf="serverPath.invalid && (serverPath.dirty || serverPath.touched)" class="alert alert-danger">
+                                        Web application name is required.
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:35%;">
+
+                                <div class="form-group" style="padding-right:40px;">
+                                Username <label for="required"> ( Required ) </label>
+                                
+                                <!-- <input style="padding:3px; height:15px;" formControlName='serverUsernameControl' required name='serverUsername' type="text" class='form-control'> -->
+                                <input style="padding:3px; height:15px;" [(ngModel)]='server.username' required name='serverUsername' #serverUsername="ngModel" type="text" class='form-control'>
+                                    <div *ngIf="serverUsername.invalid && (serverUsername.dirty || serverUsername.touched)" class="alert alert-danger">
+                                        User name is required.
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding-right:40px;">
+                                Password <label for="required"> ( Required ) </label>
+                                
+                                <!-- <input  style="padding:3px; height:15px;" formControlName='serverPasswordControl' required name='serverPassword' type="text" class='form-control'> -->
+                                <input  style="padding:3px; height:15px;" [(ngModel)]='server.password' required name='serverPassword' #serverPassword="ngModel" type="text" class='form-control'>
+                                <div *ngIf="serverPassword.invalid && (serverPassword.dirty || serverPassword.touched)" class="alert alert-danger">
+                                        Password is required.
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:30%;">
+                                <!--<label for="path">Notes:</label>-->
+                                Notes<textarea [(ngModel)]='server.notes' name='serverNotes' #serverNotes="ngModel" style="height:150px;" >
+                                    {{server.notes}}</textarea>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="text-align:left;">
+                                            <button type="submit" class="btn btn-primary" style="height:30px;"
+                                            [disabled]="serverForm.invalid"
+                                            >refresh</button>
+                                    </div> 
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div style="text-align:right;">
+                                        <button  (click)="deleteServerInfo(server)">Delete server definition</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <br>
+                            </tr>
+                        </table>
+                    </form>
+                <!-- </div> -->
                 
-                
-                <app-treeview></app-treeview>
+                <div style="margin-left:5px; margin-right:5px; margin-top:5px; margin-bottom:5px;">
+                    <collapsible-list [type]="collapsibleType">
+                        <collapsible-list-item>
+                        
+                        <collapsible-header class="waves-effect" style="background-color:lightgrey">
+                            <i class="fa fa-chevron-down"
+                            [ngClass]="{
+                              'fa-chevron-down': server.diagnosticsModule.expanded,
+                              'fa-chevron-right': !server.diagnosticsModule.expanded
+                            }"
+                            aria-hidden="true"></i>
+                            <b>Load Test<span style="color:lightslategrey"></span></b> 
+                        </collapsible-header>
+            
+                        <collapsible-body  [expanded]="server.diagnosticsModule.expanded"
+                        (toggleState)="server.diagnosticsModule.expanded = $event">
+
+
+                            <!-- jsw.test.start -->
+                            <!--
+                            <div>
+                                <dialog-overview-example>loading</dialog-overview-example>
+                            </div>
+                            -->
+                            <!-- jsw.test.end -->
+                            
+                            <app-treeview></app-treeview>
+
+                            <h4><b>Selected Reports:</b></h4>
+                            <form #reportExecsForm="ngForm" [formGroup]="selectedReportsForm" (ngSubmit)="executeReportTests()">
+                                <ul style="list-style-type:disc">                    
+                                    <li *ngFor="let report of server.diagnosticsModule.reports; let i=index"> <b>{{report.name}}</b> ( {{report.url}} ) <button  (click)="deleteReportInfo(server,report)"> X </button><br> 
+                                        <table>
+                                            <tr>
+                                                <td style="width:50%;">
+                                                        <div  style="padding-right:40px;">
+                                                    Number of report execution iterations <label for="required"> ( Required ) </label>
+                                                    <input required class="form-group" formControlName="iterationsControl" style="padding:3px; height:15px;" name='reportIterations' 
+                                                    type="number" class='form-control'>  
+                                                    <!--    
+                                                    <input [formControl]="minRangeFormControl" style="padding:3px; height:15px;" [(ngModel)]='report.iterations' required name='reportIterations' 
+                                                    #reportIterations="ngModel" type="number"> 
+                                                    -->
+                                                    <!--
+                                                    <div *ngIf="reportIterations{{i}}.invalid && (reportIterations{{i}}.dirty || reportIterations{{i}}.touched)" class="alert alert-danger">
+                                                            Number of iterations for the report to be run is required.
+                                                        </div>
+                                                    -->
+                                                    </div>
+                                                </td>
+                                                <td style="width:50%;">
+                                                        <div style="padding-right:40px;">
+                                                    Think time in seconds <label for="required"> ( Required ) </label>
+                                                    <input required class="form-group" formControlName='thinkTimeControl' style="padding:3px; height:15px;" name='reportThinktime' 
+                                                    type="number" class='form-control'>                                        
+                                                    <!--
+                                                    <input min="1" style="padding:3px; height:15px;" [(ngModel)]='report.thinkTime' required name='reportThinktime' 
+                                                    #reportThinktime="ngModel" type="number">
+                                                    -->
+                                                    <!--
+                                                    <div *ngIf="reportThinktime{{i}}.invalid && (reportThinktime{{i}}.dirty || reportThinktime{{i}}.touched)" class="alert alert-danger">
+                                                            Number of seconds between report iterations is required.
+                                                        </div>
+                                                    -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </li>
+                                </ul>
+                                <div style="text-align:left;">
+                                        <button type="submit" class="btn btn-primary" style="height:30px;"
+                                        [disabled]="(reportExecsForm.invalid || server.diagnosticsModule.reports.length<1)"
+                                        >execute tests</button>
+                                </div> 
+                            </form>             
+
+                        </collapsible-body>
+
+                    </collapsible-list-item>
+                </collapsible-list>
+                </div>
             </collapsible-body>
 
         </collapsible-list-item>

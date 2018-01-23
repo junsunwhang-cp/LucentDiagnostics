@@ -1,34 +1,112 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { TreeviewComponent } from './components/treeview/treeview.component';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
+
+import { TreeviewComponent } from './components/treeview/treeview.component';
 
 import { DataService } from './services/data.service';
 import { PaginationModule, AlertModule } from 'ngx-bootstrap';
 import { CollapsibleModule } from 'angular2-collapsible';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//import { MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
+
+//jsw.test.start.
+import { BusyDialog, ProgressDialog } from './app.component';
+//jsw.test.end.
+
 @NgModule({
   declarations: [
     AppComponent,
-    TreeviewComponent
+    TreeviewComponent, 
+    BusyDialog,
+    ProgressDialog
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
-    FormsModule,
-    HttpModule,
+    HttpModule, 
     Ng2TableModule,
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
-    CollapsibleModule
+    CollapsibleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatStepperModule
+  ],
+  entryComponents: [
+    BusyDialog, ProgressDialog
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
-})
-export class AppModule { }
+}) 
+export class AppModule { } 
