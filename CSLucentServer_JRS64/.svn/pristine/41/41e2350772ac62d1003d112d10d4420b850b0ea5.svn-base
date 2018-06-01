@@ -1,0 +1,5 @@
+package com.tibco.jaspersoft.cs.lucent.server.ws;
+
+public class LucentJaxRsService {
+
+}

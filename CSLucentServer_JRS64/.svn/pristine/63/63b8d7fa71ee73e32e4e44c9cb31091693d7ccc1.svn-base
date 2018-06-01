@@ -1,0 +1,68 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.EntryCategory;
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+import com.tibco.jaspersoft.cs.lucent.server.core.LucentConfiguration;
+
+/*
+ * $Id$
+ */
+public class LogEntryImpl implements LogEntry {
+
+	private final static long serialVersionUID = 1l;
+	
+	private EntryCategory entryCategory;
+	private Object value;
+	private long startTimeNs;
+	private long elapsedTimeNs;
+		
+	public LogEntryImpl(String entryCategoryId, long startTimeNs, long elapsedTimeNs, Object value){
+		this.startTimeNs = startTimeNs;
+		this.elapsedTimeNs = elapsedTimeNs;
+		this.value = value;
+		this.entryCategory = getEntryCategoryById(entryCategoryId);
+	}
+	
+	public EntryCategory getEntryCategory() {
+		return entryCategory;
+	}
+
+	public void setEntryCategory(EntryCategory entryCategory) {
+		this.entryCategory = entryCategory;
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
+	
+	public long getStartTimeNs() {
+		return startTimeNs;
+	}
+
+	public void setStartTimeNs(long startTimeNs) {
+		this.startTimeNs = startTimeNs;
+	}
+
+	public long getElapsedTimeNs() {
+		return elapsedTimeNs;
+	}
+
+	public void setElapsedTimeNs(long elapsedTimeNs) {
+		this.elapsedTimeNs = elapsedTimeNs;
+	}
+
+	protected EntryCategory getEntryCategoryById(String id){
+		EntryCategory entryCat = LucentConfiguration.getCategories().get(id);
+		if (entryCat!=null){
+			return entryCat;
+		} else { //return an undefined category.
+			return EntryCategoryImpl.getUndefinedCategory();
+		}
+	}
+}
+
+

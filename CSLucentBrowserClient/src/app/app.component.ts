@@ -1,12 +1,14 @@
-import { Inject, Injectable, Component, OnInit } from '@angular/core';
+import { Inject, Injectable, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { DecimalPipe, DOCUMENT } from '@angular/common';
 import { DataService} from './services/data.service';
 import { resource } from 'selenium-webdriver/http';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommsService } from './comms.service';
-import { ServerInfo, ReportInfo, DiagnosticsInfo, FetchReportListPacket } from './comms.service';
+import { ServerInfo, ServerRuntimeInfo, ReportInfo, DiagnosticsInfo, FetchReportListPacket } from './comms.service';
 import { v4 as uuid } from 'uuid';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import { DomSanitizer } from '@angular/platform-browser'
 
 //jsw.test.start.
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -15,6 +17,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 interface TestResults {
   execTime:string,
   execId:string
+}
+
+@Pipe({ name: 'SafeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    //console.log(this.sanitized.bypassSecurityTrustHtml(value))
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
 }
 
 @Component({
@@ -27,22 +38,49 @@ interface TestResults {
 export class AppComponent implements OnInit {
   title = 'app';
   servers:ServerInfo[] = [];
-  workingServer:ServerInfo;
+  serverRuntimes:ServerRuntimeInfo[] = [];
+
+  //workingServer:ServerInfo;
   workingServerLabel:string;
-  selectedReportsForm:FormGroup;
+  //selectedReportsForm:FormGroup;
   busyDialog:MatDialogRef<BusyDialog>;
   progressDialog:MatDialogRef<ProgressDialog>;
- 
+  testsConcluded = false; //used for modal global wait state.
+  testIntervalId;
+  //testResultsHtml = ' ';
+  DOCUMENT: any;
+
   constructor(private dataService: DataService, private commsService: CommsService, private dialog:MatDialog) {
   
   }
 
   ngOnInit(){ //test intitialization of some server entries.
-
+/*
     this.selectedReportsForm = new FormGroup({
-      iterationsControl : new FormControl('5',[<any>Validators.min(1),<any>Validators.required]),
-      thinkTimeControl : new FormControl('10',[<any>Validators.min(1),<any>Validators.required])
+      iterationsControl : new FormControl('3',[<any>Validators.min(1),<any>Validators.required]),
+      thinkTimeControl : new FormControl('5',[<any>Validators.min(1),<any>Validators.required])
     });
+    */
+    //populate with server meta data if any exists already.
+    this.dataService.getServerMeta().subscribe((serverMeta) => {
+    this.servers = serverMeta;
+
+    //console.log(String(this.servers));
+    //iterate through server entries and ensure report list is populated with a non null array.
+    var serverEntryLength = this.servers.length;
+    for (var i=0; i<serverEntryLength; i++){
+      console.log(this.servers[i]);
+      this.servers[i].diagnosticsModule.reports = new Array();
+      let sri:ServerRuntimeInfo = {
+        id:String(this.servers[i].id),
+        innerhtml:''
+      };
+      this.serverRuntimes.push(sri);
+    }
+
+  });
+
+
   }
 
   addServerMeta(){
@@ -53,8 +91,10 @@ export class AppComponent implements OnInit {
       expanded:true
     };
 
+    let serverId = uuid();
+
     let ss:ServerInfo = {
-    id:String(uuid()),
+    id:String(serverId),
     label:this.workingServerLabel,
     domain:'',
     port: 8080,
@@ -65,11 +105,17 @@ export class AppComponent implements OnInit {
     diagnosticsModule:diagModule,
     expanded:true };
 
+    let sri:ServerRuntimeInfo = {
+      id:String(serverId),
+      innerhtml:''
+    };
+
     //this.servers.unshift(ss);
     this.workingServerLabel = '';
-    this.workingServer = ss;  //TODO: find another means of transmitting the server ref.
+   // this.workingServer = ss;  //TODO: find another means of transmitting the server ref.
 
     this.servers.unshift(ss);
+    this.serverRuntimes.unshift(sri);
     return false; 
   }
 
@@ -95,7 +141,7 @@ export class AppComponent implements OnInit {
     //if form is valid, submit this information about the server to be persisted.
     //also refresh the contents of the report list for the server.
 
-    this.workingServer = server;  //TODO: find another means of transmitting the server ref.
+    //this.workingServer = server;  //TODO: find another means of transmitting the server ref.
    
     this.busyDialog = this.dialog.open(BusyDialog, {
       disableClose: true,
@@ -110,39 +156,115 @@ export class AppComponent implements OnInit {
     this.commsService.updateReportTable(newFetchPacket); //get info from the server
   }
 
-  addSelectedReport(data:any){ 
+  addSelectedReport(treeServerId:string, data:any){ 
     
     let nr:ReportInfo = { 
       selected: true,
-      iterations: 5,
-      thinkTime: 10,
+      iterations: 3,
+      thinkTime: 5,
       name: data.row.label, 
       url: data.row.uri
     };
 
-    this.workingServer.diagnosticsModule.reports.unshift(nr);
+    this.getServerInstance(treeServerId).diagnosticsModule.reports.unshift(nr);
+
+    //this.workingServer.diagnosticsModule.reports.unshift(nr);
   } 
 
-  executeReportTests(){
-    //jsw.test.start.
+  executeReportTests(serverid:string){ 
+
+    //console.log('submitted val:' + subVal);
+
     this.progressDialog = this.dialog.open(ProgressDialog, {
       disableClose: true,
       width: '500px',
       data: { }
     });
-    //jsw.test.end.
-    this.executeReportTestsCall();
-
+    
+    this.executeReportTestsCall(serverid);
   }
 
-  executeReportTestsCall(){
-    this.dataService.execLoadTest(this.workingServer).subscribe((sResp) => {
+  executeReportTestsCall(serverid:string){
+
+    let relatedServer:ServerInfo = this.getServerInstance(serverid);
+
+    this.dataService.execLoadTest(relatedServer).subscribe((sResp) => {
+      this.testsConcluded = false;
       var serverResponse = sResp;
-      alert(String(serverResponse.status)); 
     })
+ 
+    this.testIntervalId = setInterval( ()=>this.checkStatusReportTests(serverid) , 1000);
   }
-}
-  
+
+  checkStatusReportTests(serverid:string){
+    if (this.testsConcluded === true){
+      clearInterval(this.testIntervalId); //no need to update status.
+    } else { //retrieve status and update the progress indicator.
+      //get results.
+      let relatedServer:ServerInfo = this.getServerInstance(serverid);
+      this.dataService.execStatusCheck(relatedServer).subscribe((sResp) =>{
+        //update progress bar.
+        var status = sResp.status;
+        var completed = sResp.totalcompleted;
+        var assigned = sResp.totalassigned;
+        this.progressDialog.componentInstance.setProgress( (completed/assigned) * 100 );        
+
+        if ((typeof assigned!='undefined') && (typeof completed!='undefined') && (completed === assigned)) {
+          //if tests are complete:
+          //  1.set the flag to indicate tests are done
+          //  2.close the dialog.          
+
+          //jsw.test.start
+          //window.open("/viewreport?LoadTestId=testId1_jswTest", "_blank");
+          this.dataService.viewReportResults().subscribe((gResp) => {
+            //var sample = gResp.text();
+           
+            this.setServerRuntimeHtml(serverid,gResp.text());
+
+            var tempInterval = setInterval(function(){
+              window.document.getElementById('reportBottom_' + serverid).scrollIntoView(true); 
+              clearInterval(tempInterval);
+            }, 1000);
+
+            this.testsConcluded = true;
+            this.progressDialog.close();
+          });
+          //jsw.test.end
+        } 
+      })
+    }
+  }
+
+  getServerInstance(serverid:string){
+    let i:number;
+    for (i=0; i<this.servers.length ;i++){
+      if (this.servers[i].id === serverid){
+        return this.servers[i];
+      }
+    }
+  }
+
+  setServerRuntimeHtml(serverid:string, inner:string){
+    let i:number;
+    for (i=0; i<this.serverRuntimes.length ;i++){
+      if (this.serverRuntimes[i].id === serverid){
+        this.serverRuntimes[i].innerhtml = inner;
+      }
+    }
+  }
+
+  getServerRuntimeHtml(serverid:string){
+    let i:number;
+    for (i=0; i<this.serverRuntimes.length ;i++){
+      if (this.serverRuntimes[i].id === serverid){
+        return this.serverRuntimes[i].innerhtml;
+      }
+    }
+    return null;
+  }
+
+} 
+
   @Component({
     selector: 'dialog-busy',
     templateUrl: './dialogs/dialog.busy.window.html',
@@ -161,8 +283,17 @@ export class AppComponent implements OnInit {
   })
   export class ProgressDialog { 
   
+    progressPerc:number = 0;
+
     constructor(
       public dialogRef: MatDialogRef<ProgressDialog>,
       @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+    setProgress(progress:number){
+      this.progressPerc = progress;
+    }
+
   }
+
+
+

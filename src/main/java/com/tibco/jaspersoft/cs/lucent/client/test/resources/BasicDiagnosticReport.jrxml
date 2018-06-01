@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2018-02-08T13:35:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BasicDiagnosticReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="37e92ec9-fc28-4471-9191-2238879e9a1e">
+	<style name="banding">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT} % 2)==1)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F1FAF0"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="pieDataset" uuid="cce5131a-3cbd-4a55-b618-8424e74e7b01">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="reportUrl" class="java.lang.String"/>
+		<field name="averageMs" class="java.lang.Long"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="reportUrl" class="java.lang.String"/>
+	<field name="startTime" class="java.util.Date"/>
+	<field name="timeMs" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="279" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="782" height="30" uuid="b8a16eef-e212-4ee9-b19b-8cbe1aecd1ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="22"/>
+				</textElement>
+				<text><![CDATA[Load Test Results]]></text>
+			</staticText>
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="10" y="40" width="781" height="230" uuid="1a98c137-6f27-496a-a409-c76db3f4a965"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="pieDataset" uuid="a7ef3888-2e7b-4128-a976-c0d6d539a7d6">
+							<dataSourceExpression><![CDATA[((com.tibco.jaspersoft.cs.lucent.client.test.BasicDiagnosticReportDs)$P{REPORT_DATA_SOURCE}).getPieChartDataSource()]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{reportUrl}]]></keyExpression>
+					<valueExpression><![CDATA[$F{averageMs}]]></valueExpression>
+					<labelExpression><![CDATA[$F{reportUrl}  + " : " + String.valueOf($F{averageMs})]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="510" height="30" backcolor="#DFE2F5" uuid="9b5cd6d7-16e3-47f6-ba7a-ff86334e9fbb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Report Url]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="610" y="0" width="190" height="30" backcolor="#DFE2F5" uuid="87695ba8-dbb1-44d9-b765-634212497b09"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Start Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="510" y="0" width="100" height="30" backcolor="#DFE2F5" uuid="e0170e70-bffb-4c18-b359-d807d63c5871"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Time Ms]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="banding" x="0" y="0" width="510" height="20" uuid="98988609-e1b1-41d7-b69c-1fc4e229fbc0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reportUrl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="banding" x="610" y="0" width="190" height="20" uuid="1e8477c2-fe9b-47b0-a525-83be58769cfd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{startTime}]]></textFieldExpression>
+				<patternExpression><![CDATA["yyyy-MM-dd HH:mm:ss aa"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement style="banding" x="510" y="0" width="100" height="20" uuid="d5637d83-a0d5-4de6-a8aa-a314be8662c8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeMs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
+</jasperReport>

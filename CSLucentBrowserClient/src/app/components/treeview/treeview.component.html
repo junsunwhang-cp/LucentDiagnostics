@@ -1,19 +1,19 @@
 <!-- <div style="margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;"> -->
 <h4><b>Repository Reports:</b></h4>
 <div>
-  <ng-table ng-mouseover="table-hover" id="reportViewTable" [config]="config"
-    (tableChanged)="onChangeTable(config)"
+  <ng-table ng-mouseover="table-hover" id="reportViewTable_{{serverid}}" [config]="getCurrentInstance(serverid).config"
+    (tableChanged)="onChangeTable(getCurrentInstance(serverid).config)"
     (cellClicked)="onCellClick($event)"
-    [rows]="rows" [columns]="columns">
+    [rows]="getCurrentInstance(serverid).instrows" [columns]="getCurrentInstance(serverid).instcolumns">
   </ng-table>
-  <pagination *ngIf="config.paging" class="pagination-sm"
-    [(ngModel)]="page"
-    [totalItems]="length"
-    [itemsPerPage]="itemsPerPage"
-    [maxSize]="maxSize"
+  <pagination *ngIf="getCurrentInstance(serverid).config.paging" class="pagination-sm"
+    [(ngModel)]="getCurrentInstance(serverid).page"
+    [totalItems]="getCurrentInstance(serverid).length"
+    [itemsPerPage]="getCurrentInstance(serverid).itemsPerPage"
+    [maxSize]="getCurrentInstance(serverid).maxSize"
     [boundaryLinks]="true"
     [rotate]="false"
-    (pageChanged)="onChangeTable(config,$event)"
-    (numPages)="numPages = $event">
+    (pageChanged)="onChangeTable(getCurrentInstance(serverid).config,$event)"
+    (numPages)="getCurrentInstance(serverid).numPages = $event">
   </pagination>
 </div>

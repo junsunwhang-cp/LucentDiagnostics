@@ -1,0 +1,63 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.jaspersoft.jasperserver.api.metadata.user.domain.impl.client.MetadataUserDetails;
+
+/*
+ * $Id$
+ */
+public class LucentGlobalContext {
+
+	private static LucentGlobalContext lucentGlobalContext = null;
+	private Queue<LogEntry> entryQueue = new ConcurrentLinkedQueue<LogEntry>();
+	
+	private LucentGlobalContext(){	
+	}
+	
+	public synchronized static LucentGlobalContext getInstance(){
+		if (lucentGlobalContext==null){
+			lucentGlobalContext= new LucentGlobalContext();
+		}
+		return lucentGlobalContext;
+	}
+
+	
+	public Queue<LogEntry> getEntryQueue() {
+		return entryQueue;
+	}
+
+	//test id will be bound to the executing thread.
+	public void addEntry(String entryCategoryId, long elapsedTime){
+		
+	}
+	
+	public void addEntry(String entryCategoryId, long elapsedTime, Object value){
+		//TODO: support injection of custom data structures.
+		
+	}
+	
+	//TODO: remove for more specific version.
+//	public void setEntryQueue(Queue<LogEntry> entryQueue) {
+//		this.entryQueue = entryQueue;
+//	}
+	
+	public LucentFlowContext getFlowContext(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object userDetailObj = auth.getPrincipal();
+		if (userDetailObj instanceof MetadataUserDetails){
+			MetadataUserDetails mud = (MetadataUserDetails)userDetailObj;
+			LucentFlowContext lfc = mud.getLucentFlowContext();
+			if (lfc==null){
+				lfc = new LucentFlowContext();
+			}
+			return lfc;
+		}
+		return null;
+	}
+	
+}

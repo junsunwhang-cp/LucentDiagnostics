@@ -16,9 +16,15 @@ import { BusyDialog } from './app.component';
     expanded ?:boolean
   }
 
+  export interface ServerRuntimeInfo {
+    id ?:string,
+    innerhtml ?:string
+  }
+
   export interface DiagnosticsInfo {
     reports ?:ReportInfo[],
-    expanded ?:boolean
+    expanded ?:boolean,
+    testResultsHtml ?:string
   }
 
   export interface ReportInfo { 
@@ -52,3 +58,5 @@ export class CommsService {
     }
 
 }
+
+

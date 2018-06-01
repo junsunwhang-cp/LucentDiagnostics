@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".ng-valid[required], .ng-valid.required  {\r\n    border-left: 5px solid #42A948; /* green */\r\n}\r\n  \r\n.ng-invalid:not(form)  {\r\n    border-left: 5px solid #a94442; /* red */\r\n}", ""]);
 
 // exports
 
@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"margin-left:20px;text-align:left;font-family:arial;color:#337ab7\">\r\n    <h3><b>Lucent Test Utility v.02</b></h3>\r\n</div>\r\n\r\n<!-- TODO: remove manual persistence after normal version is implemented. -->\r\n\r\n<div style='margin-left:20px;'>\r\n    <button (click)=\"onUpdateMeta()\">Persist meta data (dev purpose only)</button>\r\n    <button (click)=\"testDataFetch()\">TestDataFetch</button>\r\n</div>\r\n<br>\r\n<div style='margin-left:20px;margin-right:20px;'>\r\n    <form (submit)=\"addServerMeta(serverInfo.value)\">\r\n        <div>\r\n            <!--\r\n            <table>\r\n                <td style=\"width:10%;text-align:right;\"><label for=\"serverInfo\">Add Server Instance:</label></td>\r\n                <td style=\"width:60%;\"><input type=\"text\" #serverInfo></td>\r\n                <td style=\"width:30%;\"></td>\r\n            </table>\r\n        -->\r\n        <table style=\"width:60%;\">\r\n                <tr><label for=\"serverInfo\">Add Server Instance:</label></tr>\r\n                <tr><input type=\"text\" #serverInfo></tr>\r\n            </table>\r\n        </div>\r\n    </form>\r\n\r\n</div>\r\n\r\n<div style=\"margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;\">\r\n    <collapsible-list [type]=\"collapsibleType\">\r\n        <collapsible-list-item *ngFor=\"let server of servers; let i = index\">\r\n            <collapsible-header class=\"waves-effect\" style=\"background-color:lightgrey\">\r\n                <i class=\"fa fa-chevron-down\"\r\n                [ngClass]=\"{\r\n                  'fa-chevron-down': server.expanded,\r\n                  'fa-chevron-right': !server.expanded\r\n                }\"\r\n                aria-hidden=\"true\"></i>\r\n                {{server.label}}\r\n            </collapsible-header>\r\n\r\n            <collapsible-body  [expanded]=\"server.expanded\"\r\n            (toggleState)=\"server.expanded = $event\">\r\n            <p style=\"text-align: left\">\r\n                {{server.url}}</p>\r\n                <!-- add detail inputs and option to delete server entry -->\r\n                <table>\r\n                    <td> Complete URL: http://{{server.domain}}:{{server.port}}/{{server.path}}</td>\r\n                    <td>\r\n                        <div style=\"text-align:right;\">\r\n                            <button  (click)=\"deleteServerInfo(server)\">delete</button>\r\n                        </div>\r\n                    </td>\r\n                </table>\r\n               \r\n                <form (ngSubmit)=\"addServerDetail(server,domain.value,port.value,path.value,notes.value)\">\r\n                    <table>\r\n                        <tr>\r\n                        <td style=\"width:35%;\">\r\n                            \r\n                            <label for=\"domain\">Domain:</label><input type=\"text\" #domain>\r\n                            <label for=\"port\">Port:</label><input type=\"number\" #port>\r\n                            <label for=\"path\">Path:</label><input type=\"text\" #path>\r\n                        \r\n                        </td>\r\n                        <td style=\"width:35%;\">\r\n                        \r\n                        </td>\r\n                        <td style=\"width:30%;\">\r\n                            <label for=\"path\">Notes:</label><textarea style=\"height:150px;\" #notes></textarea>\r\n                        </td>\r\n                        </tr>\r\n                        <tr>\r\n                                <div style=\"text-align:left;\">\r\n                                        <button type=\"submit\" class=\"btn btn-primary\">submit</button>\r\n                                    </div>\r\n                        </tr>\r\n                        <tr>\r\n                            <br>\r\n                        </tr>\r\n                    </table>\r\n                    \r\n                </form>\r\n                \r\n                \r\n                <app-treeview></app-treeview>\r\n            </collapsible-body>\r\n\r\n        </collapsible-list-item>\r\n    </collapsible-list>\r\n\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<div style=\"margin-left:20px;text-align:left;font-family:arial;color:#337ab7\">\r\n    <h3><b>Lucent Utilities - a.04</b></h3>\r\n</div>\r\n\r\n<!-- TODO: remove manual persistence after normal version is implemented. -->\r\n\r\n<!--\r\n<div style='margin-left:20px;'>\r\n    <button (click)=\"onUpdateMeta()\">Persist meta data (dev purpose only)</button>\r\n    <button (click)=\"testDataFetch()\">TestDataFetch</button>\r\n</div>\r\n<br>\r\n-->\r\n<div style='margin-left:20px;margin-right:20px;'>\r\n    <!-- <form (submit)=\"addServerMeta(serverInfo.value)\"> -->\r\n        <form (submit)=\"addServerMeta()\">\r\n        <div>\r\n            <!--\r\n            <table>\r\n                <td style=\"width:10%;text-align:right;\"><label for=\"serverInfo\">Add Server Instance:</label></td>\r\n                <td style=\"width:60%;\"><input type=\"text\" #serverInfo></td>\r\n                <td style=\"width:30%;\"></td>\r\n            </table>\r\n        -->\r\n        <table style=\"width:50%;\">\r\n                <!--    \r\n                <tr><label for=\"serverInfo\">Add Server Instance:</label></tr>\r\n                <tr><input type=\"text\" #serverInfo></tr> -->\r\n                Add Server Definition:\r\n                <tr><input [(ngModel)]='workingServerLabel' name='workingServerLabel' type=\"text\"></tr>\r\n            </table>\r\n        </div>\r\n    </form>\r\n\r\n</div>\r\n\r\n<div style=\"margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;\">\r\n    <collapsible-list [type]=\"collapsibleType\">\r\n        <collapsible-list-item *ngFor=\"let server of servers; let i = index\">\r\n\r\n            <collapsible-header class=\"waves-effect\" style=\"background-color:darkgrey\">\r\n                <i class=\"fa fa-chevron-down\"\r\n                [ngClass]=\"{\r\n                  'fa-chevron-down': server.expanded,\r\n                  'fa-chevron-right': !server.expanded\r\n                }\"\r\n                aria-hidden=\"true\"></i>\r\n                <b>{{server.label}} <span style=\"color:lightslategrey\"> - http://{{server.domain}}:{{server.port}}/{{server.path}} </span></b> \r\n            </collapsible-header>\r\n\r\n            <collapsible-body  [expanded]=\"server.expanded\"\r\n            (toggleState)=\"server.expanded = $event\">\r\n            <p style=\"text-align: left\">\r\n                {{server.url}}</p>\r\n                <!-- add detail inputs and option to delete server entry -->\r\n\r\n                <!-- <div class=\"container\"> -->\r\n                    <form #serverForm=\"ngForm\" (ngSubmit)=\"addServerDetail(server)\">\r\n                        <table>\r\n                            <tr>\r\n                            <td style=\"width:35%;\">\r\n                                <!-- <label for=\"domain\">Domain:</label> -->\r\n                                <div class=\"form-group\" style=\"padding-right:40px;\">\r\n                                Host Name <label for=\"required\"> ( Required ) </label>\r\n                                <!-- <input style=\"padding:3px; height:15px;\" formControlName='serverDomainControl' required name='serverDomain' type=\"text\" class='form-control'> -->\r\n                                <input style=\"padding:3px; height:15px;\" [(ngModel)]='server.domain' required name='serverDomain' #serverDomain=\"ngModel\" type=\"text\" class='form-control'>\r\n                                <div *ngIf=\"serverDomain.invalid && (serverDomain.dirty || serverDomain.touched)\" class=\"alert alert-danger\">\r\n                                    Host name is required.\r\n                                </div>\r\n                                </div>\r\n                                <!-- <label for=\"port\">Port:</label>-->\r\n                                <div class=\"form-group\" style=\"padding-right:40px;\">\r\n                                Port <label for=\"required\"> ( Required ) </label>\r\n                                \r\n                                <!-- <input  style=\"padding:3px; height:15px;\" formControlName='serverPortControl' required name='serverPort' type=\"number\" class='form-control'> -->\r\n                                <input  style=\"padding:3px; height:15px;\" [(ngModel)]='server.port' required name='serverPort' #serverPort=\"ngModel\" type=\"number\" class='form-control'>\r\n                                <div *ngIf=\"serverPort.invalid && (serverPort.dirty || serverPort.touched)\" class=\"alert alert-danger\">\r\n                                        Port number is required.\r\n                                    </div>\r\n                                </div>\r\n                                <!--<label for=\"path\">Path:</label>-->\r\n                                <div class=\"form-group\" style=\"padding-right:40px;\">\r\n                                App Name <label for=\"required\"> ( Required ) </label>\r\n                                \r\n                                <!-- <input  style=\"padding:3px; height:15px;\" formControlName='serverPathControl' required name='serverPath' type=\"text\" class='form-control'> -->\r\n                                <input  style=\"padding:3px; height:15px;\" [(ngModel)]='server.path' required name='serverPath' #serverPath=\"ngModel\" type=\"text\" class='form-control'>\r\n                                <div *ngIf=\"serverPath.invalid && (serverPath.dirty || serverPath.touched)\" class=\"alert alert-danger\">\r\n                                        Web application name is required.\r\n                                    </div>\r\n                                </div>\r\n                            </td>\r\n                            <td style=\"width:35%;\">\r\n\r\n                                <div class=\"form-group\" style=\"padding-right:40px;\">\r\n                                Username <label for=\"required\"> ( Required ) </label>\r\n                                \r\n                                <!-- <input style=\"padding:3px; height:15px;\" formControlName='serverUsernameControl' required name='serverUsername' type=\"text\" class='form-control'> -->\r\n                                <input style=\"padding:3px; height:15px;\" [(ngModel)]='server.username' required name='serverUsername' #serverUsername=\"ngModel\" type=\"text\" class='form-control'>\r\n                                    <div *ngIf=\"serverUsername.invalid && (serverUsername.dirty || serverUsername.touched)\" class=\"alert alert-danger\">\r\n                                        User name is required.\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" style=\"padding-right:40px;\">\r\n                                Password <label for=\"required\"> ( Required ) </label>\r\n                                \r\n                                <!-- <input  style=\"padding:3px; height:15px;\" formControlName='serverPasswordControl' required name='serverPassword' type=\"text\" class='form-control'> -->\r\n                                <input  style=\"padding:3px; height:15px;\" [(ngModel)]='server.password' required name='serverPassword' #serverPassword=\"ngModel\" type=\"text\" class='form-control'>\r\n                                <div *ngIf=\"serverPassword.invalid && (serverPassword.dirty || serverPassword.touched)\" class=\"alert alert-danger\">\r\n                                        Password is required.\r\n                                    </div>\r\n                                </div>\r\n                            </td>\r\n                            <td style=\"width:30%;\">\r\n                                <!--<label for=\"path\">Notes:</label>-->\r\n                                Notes<textarea [(ngModel)]='server.notes' name='serverNotes' #serverNotes=\"ngModel\" style=\"height:150px;\" >\r\n                                    {{server.notes}}</textarea>\r\n                            </td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>\r\n                                    <div style=\"text-align:left;\">\r\n                                            <button type=\"submit\" class=\"btn btn-primary\" style=\"height:30px;\"\r\n                                            [disabled]=\"serverForm.invalid\"\r\n                                            >refresh</button>\r\n                                    </div> \r\n                                </td>\r\n                                <td>\r\n                                </td>\r\n                                <td>\r\n                                    <div style=\"text-align:right;\">\r\n                                        <button  (click)=\"deleteServerInfo(server)\">Delete server definition</button>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n                                <br>\r\n                            </tr>\r\n                        </table>\r\n                    </form>\r\n                <!-- </div> -->\r\n                \r\n                <div style=\"margin-left:5px; margin-right:5px; margin-top:5px; margin-bottom:5px;\">\r\n                    <collapsible-list [type]=\"collapsibleType\">\r\n                        <collapsible-list-item>\r\n                        \r\n                        <collapsible-header class=\"waves-effect\" style=\"background-color:lightgrey\">\r\n                            <i class=\"fa fa-chevron-down\"\r\n                            [ngClass]=\"{\r\n                              'fa-chevron-down': server.diagnosticsModule.expanded,\r\n                              'fa-chevron-right': !server.diagnosticsModule.expanded\r\n                            }\"\r\n                            aria-hidden=\"true\"></i>\r\n                            <b>Load Test<span style=\"color:lightslategrey\"></span></b> \r\n                        </collapsible-header>\r\n            \r\n                        <collapsible-body  [expanded]=\"server.diagnosticsModule.expanded\"\r\n                        (toggleState)=\"server.diagnosticsModule.expanded = $event\">\r\n\r\n\r\n                            <!-- jsw.test.start -->\r\n                            <!--\r\n                            <div>\r\n                                <dialog-overview-example>loading</dialog-overview-example>\r\n                            </div>\r\n                            -->\r\n                            <!-- jsw.test.end -->\r\n                            \r\n                            <app-treeview [serverid]='server.id'></app-treeview>\r\n\r\n                            <h4><b>Selected Reports:</b></h4>\r\n                            <!-- <form #reportExecsForm=\"ngForm\" [formGroup]=\"selectedReportsForm\" (ngSubmit)=\"executeReportTests()\"> -->\r\n                            <form #reportExecsForm=\"ngForm\" (ngSubmit)=\"executeReportTests(server.id)\"> \r\n                                <ul style=\"list-style-type:disc\">         \r\n<!--\r\n                                    <input type='hidden' name='serverid' id='serverid' value='{{server.id}}'>\r\n-->\r\n                                    <li *ngFor=\"let report of server.diagnosticsModule.reports; let i = index\"> <b>{{report.name}}</b> ( {{report.url}} ) <button  (click)=\"deleteReportInfo(server,report)\"> X </button><br> \r\n                                        <table>\r\n                                            <tr>\r\n                                                <td style=\"width:50%;\">\r\n                                                    <div  style=\"padding-right:40px;\">\r\n\r\n                                                                \r\n                                                        Number of report iterations <label for=\"required\"> ( Required ) </label>\r\n                                                        <input  style=\"padding:3px; height:15px;\" [(ngModel)]='report.iterations' required name='iterations'  #iterations=\"ngModel\" \r\n                                                        type=\"number\" class='form-control'>\r\n                                                        <div *ngIf=\"iterations.invalid && (iterations.dirty || iterations.touched)\" class=\"alert alert-danger\">\r\n                                                                Report iterations value is required.\r\n                                                        </div>\r\n\r\n\r\n                                                        <!--\r\n                                                        Number of report execution iterations <label for=\"required\"> ( Required ) </label>\r\n                                                        <input required class=\"form-group\" formControlName=\"iterationsControl\" style=\"padding:3px; height:15px;\" name='reportIterations' \r\n                                                        type=\"number\" class='form-control'>  \r\n                                                        -->\r\n                                                        <!--    \r\n                                                        <input [formControl]=\"minRangeFormControl\" style=\"padding:3px; height:15px;\" [(ngModel)]='report.iterations' required name='reportIterations' \r\n                                                        #reportIterations=\"ngModel\" type=\"number\"> \r\n                                                        -->\r\n                                                        <!--\r\n                                                        <div *ngIf=\"reportIterations{{i}}.invalid && (reportIterations{{i}}.dirty || reportIterations{{i}}.touched)\" class=\"alert alert-danger\">\r\n                                                                Number of iterations for the report to be run is required.\r\n                                                            </div>\r\n                                                        -->\r\n                                                    </div>\r\n                                                </td>\r\n                                                <td style=\"width:50%;\">\r\n                                                        <div style=\"padding-right:40px;\">\r\n                                                        Think time between executions in seconds <label for=\"required\"> ( Required ) </label>\r\n                                                    \r\n                                                        <input  style=\"padding:3px; height:15px;\" [(ngModel)]='report.thinkTime' required name='thinkTime' #thinkTime=\"ngModel\" type=\"number\" class='form-control'>\r\n                                                        <div *ngIf=\"thinkTime.invalid && (thinkTime.dirty || thinkTime.touched)\" class=\"alert alert-danger\">\r\n                                                                Report think time value is required.\r\n                                                        </div>\r\n\r\n                                                    <!--\r\n                                                    <input required class=\"form-group\" formControlName='thinkTimeControl' style=\"padding:3px; height:15px;\" name='reportThinktime' \r\n                                                    type=\"number\" class='form-control'>                                        \r\n                                                    -->\r\n                                                    <!--\r\n                                                    <input min=\"1\" style=\"padding:3px; height:15px;\" [(ngModel)]='report.thinkTime' required name='reportThinktime' \r\n                                                    #reportThinktime=\"ngModel\" type=\"number\">\r\n                                                    -->\r\n                                                    <!--\r\n                                                    <div *ngIf=\"reportThinktime{{i}}.invalid && (reportThinktime{{i}}.dirty || reportThinktime{{i}}.touched)\" class=\"alert alert-danger\">\r\n                                                            Number of seconds between report iterations is required.\r\n                                                        </div>\r\n                                                    -->\r\n                                                    </div>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </table>\r\n                                    </li>\r\n                                </ul>\r\n                                <div style=\"text-align:left;\">\r\n                                        <button type=\"submit\" class=\"btn btn-primary\" style=\"height:30px;\"\r\n                                        [disabled]=\"(reportExecsForm.invalid || server.diagnosticsModule.reports.length<1)\"\r\n                                        >execute tests</button>\r\n                                </div> \r\n                            </form>             \r\n                            <hr>\r\n                            <!-- <h4><b>Test Results:</b></h4> -->\r\n                            <!-- <div innerHtml=\"{{testResultsHtml}}\"></div> -->\r\n                            \r\n                            <!--\r\n                            <div [innerHtml]=\"testResultsHtml | SafeHtml\"></div>\r\n                            -->\r\n                            <div style=\"position:relative;\" id='reportBottom_{{server.id}}'></div>\r\n                            <div style=\"position:relative;\" [innerHtml]=\"getServerRuntimeHtml(server.id) | SafeHtml\"></div>\r\n\r\n                            \r\n                           <!--\r\n                            <p></p>\r\n                            <app-reportview></app-reportview>\r\n                            <p></p>\r\n                           -->\r\n                        </collapsible-body>\r\n\r\n                    </collapsible-list-item>\r\n                </collapsible-list>\r\n                </div>\r\n            </collapsible-body>\r\n\r\n        </collapsible-list-item>\r\n    </collapsible-list>\r\n\r\n</div>\r\n\r\n \r\n"
 
 /***/ }),
 
@@ -46,9 +46,17 @@ module.exports = "<div style=\"margin-left:20px;text-align:left;font-family:aria
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SafeHtmlPipe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return BusyDialog; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ProgressDialog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__comms_service__ = __webpack_require__("../../../../../src/app/comms.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__("../../../../uuid/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,65 +66,95 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 
+
+
+
+
+//jsw.test.start.
+
+var SafeHtmlPipe = (function () {
+    function SafeHtmlPipe(sanitized) {
+        this.sanitized = sanitized;
+    }
+    SafeHtmlPipe.prototype.transform = function (value) {
+        //console.log(this.sanitized.bypassSecurityTrustHtml(value))
+        return this.sanitized.bypassSecurityTrustHtml(value);
+    };
+    SafeHtmlPipe = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({ name: 'SafeHtml' }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["DomSanitizer"]])
+    ], SafeHtmlPipe);
+    return SafeHtmlPipe;
+}());
 
 var AppComponent = (function () {
-    function AppComponent(dataService) {
+    function AppComponent(dataService, commsService, dialog) {
         this.dataService = dataService;
+        this.commsService = commsService;
+        this.dialog = dialog;
         this.title = 'app';
         this.servers = [];
+        this.serverRuntimes = [];
+        this.testsConcluded = false; //used for modal global wait state.
     }
     AppComponent.prototype.ngOnInit = function () {
-        var r1 = {
-            selected: true, name: 'first Report', url: "repo://test/report1"
-        };
-        var r2 = {
-            selected: true, name: 'second Report', url: "repo://test/report2"
-        };
-        var testReports = [r1, r2];
-        var s1 = {
-            label: 'first test server label',
-            domain: 'localhost',
-            port: 8080,
-            path: 'jasperserver-pro',
-            username: 'superuser',
-            password: 'superuser',
-            notes: 'some random notes',
-            reports: testReports,
-            expanded: false
-        };
-        var s2 = {
-            label: 'second test server label',
-            domain: 'localhost',
-            port: 8080,
-            path: 'jasperserver-pro',
-            username: 'superuser',
-            password: 'superuser',
-            notes: 'some random notes for server 2',
-            reports: testReports,
-            expanded: false
-        };
-        this.servers.push(s1);
-        this.servers.push(s2);
+        var _this = this;
+        /*
+            this.selectedReportsForm = new FormGroup({
+              iterationsControl : new FormControl('3',[<any>Validators.min(1),<any>Validators.required]),
+              thinkTimeControl : new FormControl('5',[<any>Validators.min(1),<any>Validators.required])
+            });
+            */
+        //populate with server meta data if any exists already.
+        this.dataService.getServerMeta().subscribe(function (serverMeta) {
+            _this.servers = serverMeta;
+            //console.log(String(this.servers));
+            //iterate through server entries and ensure report list is populated with a non null array.
+            var serverEntryLength = _this.servers.length;
+            for (var i = 0; i < serverEntryLength; i++) {
+                console.log(_this.servers[i]);
+                _this.servers[i].diagnosticsModule.reports = new Array();
+                var sri = {
+                    id: String(_this.servers[i].id),
+                    innerhtml: ''
+                };
+                _this.serverRuntimes.push(sri);
+            }
+        });
     };
-    AppComponent.prototype.onUpdateMeta = function () {
-        console.log("persist meta data");
-    };
-    AppComponent.prototype.addServerMeta = function (serverInfo) {
+    AppComponent.prototype.addServerMeta = function () {
         //console.log(serverInfo);
         var srs = [];
+        var diagModule = {
+            reports: srs,
+            expanded: true
+        };
+        var serverId = Object(__WEBPACK_IMPORTED_MODULE_3_uuid__["v4"])();
         var ss = {
-            label: serverInfo,
+            id: String(serverId),
+            label: this.workingServerLabel,
             domain: '',
             port: 8080,
             path: 'jasperserver-pro',
             username: '',
             password: '',
             notes: '',
-            reports: srs,
+            diagnosticsModule: diagModule,
             expanded: true
         };
+        var sri = {
+            id: String(serverId),
+            innerhtml: ''
+        };
+        //this.servers.unshift(ss);
+        this.workingServerLabel = '';
+        // this.workingServer = ss;  //TODO: find another means of transmitting the server ref.
         this.servers.unshift(ss);
+        this.serverRuntimes.unshift(sri);
         return false;
     };
     AppComponent.prototype.deleteServerInfo = function (server) {
@@ -126,30 +164,164 @@ var AppComponent = (function () {
             }
         }
     };
-    AppComponent.prototype.addServerDetail = function (server, domain, port, path, notes) {
-        //update details and try to update the list of reports.
-        //console.log(domain + port + path);
-        server.domain = domain;
-        server.port = port;
-        server.path = path;
-        server.notes = notes;
+    AppComponent.prototype.deleteReportInfo = function (server, report) {
+        for (var r = 0; r < server.diagnosticsModule.reports.length; r++) {
+            if (server.diagnosticsModule.reports[r] == report) {
+                server.diagnosticsModule.reports.splice(r, 1);
+            }
+        }
     };
-    AppComponent.prototype.testDataFetch = function () {
-        console.log("test data fetch:");
-        // var objOut:any = this.dataService.getRepoReports();
-        // var stringOut:string = JSON.stringify(objOut);
-        this.dataService.getRepoReports().subscribe(function (resource) { console.log(resource); });
-        //console.log(stringOut);
+    AppComponent.prototype.addServerDetail = function (server) {
+        //update details and try to update the list of reports.
+        //if form is valid, submit this information about the server to be persisted.
+        //also refresh the contents of the report list for the server.
+        //this.workingServer = server;  //TODO: find another means of transmitting the server ref.
+        this.busyDialog = this.dialog.open(BusyDialog, {
+            disableClose: true,
+            width: '400px',
+            data: {}
+        });
+        var newFetchPacket = {
+            serverInfo: server,
+            dialogR: this.busyDialog
+        };
+        this.commsService.updateReportTable(newFetchPacket); //get info from the server
+    };
+    AppComponent.prototype.addSelectedReport = function (treeServerId, data) {
+        var nr = {
+            selected: true,
+            iterations: 3,
+            thinkTime: 5,
+            name: data.row.label,
+            url: data.row.uri
+        };
+        this.getServerInstance(treeServerId).diagnosticsModule.reports.unshift(nr);
+        //this.workingServer.diagnosticsModule.reports.unshift(nr);
+    };
+    AppComponent.prototype.executeReportTests = function (serverid) {
+        //console.log('submitted val:' + subVal);
+        this.progressDialog = this.dialog.open(ProgressDialog, {
+            disableClose: true,
+            width: '500px',
+            data: {}
+        });
+        this.executeReportTestsCall(serverid);
+    };
+    AppComponent.prototype.executeReportTestsCall = function (serverid) {
+        var _this = this;
+        var relatedServer = this.getServerInstance(serverid);
+        this.dataService.execLoadTest(relatedServer).subscribe(function (sResp) {
+            _this.testsConcluded = false;
+            var serverResponse = sResp;
+        });
+        this.testIntervalId = setInterval(function () { return _this.checkStatusReportTests(serverid); }, 1000);
+    };
+    AppComponent.prototype.checkStatusReportTests = function (serverid) {
+        var _this = this;
+        if (this.testsConcluded === true) {
+            clearInterval(this.testIntervalId); //no need to update status.
+        }
+        else {
+            //get results.
+            var relatedServer = this.getServerInstance(serverid);
+            this.dataService.execStatusCheck(relatedServer).subscribe(function (sResp) {
+                //update progress bar.
+                var status = sResp.status;
+                var completed = sResp.totalcompleted;
+                var assigned = sResp.totalassigned;
+                _this.progressDialog.componentInstance.setProgress((completed / assigned) * 100);
+                if ((typeof assigned != 'undefined') && (typeof completed != 'undefined') && (completed === assigned)) {
+                    //if tests are complete:
+                    //  1.set the flag to indicate tests are done
+                    //  2.close the dialog.          
+                    //jsw.test.start
+                    //window.open("/viewreport?LoadTestId=testId1_jswTest", "_blank");
+                    _this.dataService.viewReportResults().subscribe(function (gResp) {
+                        //var sample = gResp.text();
+                        _this.setServerRuntimeHtml(serverid, gResp.text());
+                        var tempInterval = setInterval(function () {
+                            window.document.getElementById('reportBottom_' + serverid).scrollIntoView(true);
+                            clearInterval(tempInterval);
+                        }, 1000);
+                        _this.testsConcluded = true;
+                        _this.progressDialog.close();
+                    });
+                    //jsw.test.end
+                }
+            });
+        }
+    };
+    AppComponent.prototype.getServerInstance = function (serverid) {
+        var i;
+        for (i = 0; i < this.servers.length; i++) {
+            if (this.servers[i].id === serverid) {
+                return this.servers[i];
+            }
+        }
+    };
+    AppComponent.prototype.setServerRuntimeHtml = function (serverid, inner) {
+        var i;
+        for (i = 0; i < this.serverRuntimes.length; i++) {
+            if (this.serverRuntimes[i].id === serverid) {
+                this.serverRuntimes[i].innerhtml = inner;
+            }
+        }
+    };
+    AppComponent.prototype.getServerRuntimeHtml = function (serverid) {
+        var i;
+        for (i = 0; i < this.serverRuntimes.length; i++) {
+            if (this.serverRuntimes[i].id === serverid) {
+                return this.serverRuntimes[i].innerhtml;
+            }
+        }
+        return null;
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
             template: __webpack_require__("../../../../../src/app/app.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/app.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/app.component.css")],
+            providers: [__WEBPACK_IMPORTED_MODULE_2__comms_service__["a" /* CommsService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_2__comms_service__["a" /* CommsService */], __WEBPACK_IMPORTED_MODULE_5__angular_material__["i" /* MatDialog */]])
     ], AppComponent);
     return AppComponent;
+}());
+
+var BusyDialog = (function () {
+    function BusyDialog(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    BusyDialog = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'dialog-busy',
+            template: __webpack_require__("../../../../../src/app/dialogs/dialog.busy.window.html"),
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_5__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatDialogRef */], Object])
+    ], BusyDialog);
+    return BusyDialog;
+}());
+
+var ProgressDialog = (function () {
+    function ProgressDialog(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.progressPerc = 0;
+    }
+    ProgressDialog.prototype.setProgress = function (progress) {
+        this.progressPerc = progress;
+    };
+    ProgressDialog = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'dialog-progress',
+            template: __webpack_require__("../../../../../src/app/dialogs/dialog.progress.window.html"),
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_5__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatDialogRef */], Object])
+    ], ProgressDialog);
+    return ProgressDialog;
 }());
 
 
@@ -161,18 +333,20 @@ var AppComponent = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_treeview_treeview_component__ = __webpack_require__("../../../../../src/app/components/treeview/treeview.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_table_ng2_table__ = __webpack_require__("../../../../ng2-table/ng2-table.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_table_ng2_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_table_ng2_table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_table_ng2_table__ = __webpack_require__("../../../../ng2-table/ng2-table.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_table_ng2_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_table_ng2_table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_treeview_treeview_component__ = __webpack_require__("../../../../../src/app/components/treeview/treeview.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angular2_collapsible__ = __webpack_require__("../../../../angular2-collapsible/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_reportview_reportview_component__ = __webpack_require__("../../../../../src/app/components/reportview/reportview.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -190,24 +364,67 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import { MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
+
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__components_treeview_treeview_component__["a" /* TreeviewComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__components_treeview_treeview_component__["a" /* TreeviewComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["b" /* BusyDialog */],
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["c" /* ProgressDialog */],
+                __WEBPACK_IMPORTED_MODULE_12__components_reportview_reportview_component__["a" /* ReportviewComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["d" /* SafeHtmlPipe */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__["a" /* AlertModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_6_ng2_table_ng2_table__["Ng2TableModule"],
+                __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["BrowserModule"],
+                __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_5_ng2_table_ng2_table__["Ng2TableModule"],
                 __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__["b" /* PaginationModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_9_angular2_collapsible__["a" /* CollapsibleModule */]
+                __WEBPACK_IMPORTED_MODULE_9_angular2_collapsible__["a" /* CollapsibleModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["b" /* MatAutocompleteModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["c" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["d" /* MatButtonToggleModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["g" /* MatChipsModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["h" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["j" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["l" /* MatExpansionModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["m" /* MatGridListModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["n" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["o" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["p" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["q" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["r" /* MatNativeDateModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["s" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["t" /* MatProgressBarModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["u" /* MatProgressSpinnerModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["v" /* MatRadioModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["w" /* MatRippleModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["x" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["y" /* MatSidenavModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["A" /* MatSliderModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["z" /* MatSlideToggleModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["B" /* MatSnackBarModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["C" /* MatSortModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["E" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["F" /* MatTabsModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["G" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["H" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["D" /* MatStepperModule */]
+            ],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["b" /* BusyDialog */], __WEBPACK_IMPORTED_MODULE_4__app_component__["c" /* ProgressDialog */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_7__services_data_service__["a" /* DataService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
@@ -220,719 +437,46 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/treeview/table-data.ts":
+/***/ "../../../../../src/app/comms.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TableData; });
-var TableData = [
-    {
-        'name': 'Victoria Cantrell',
-        'position': 'Integer Corporation',
-        'office': 'Croatia',
-        'ext': "<strong>0839</strong>",
-        'startDate': '2015/08/19',
-        'salary': 208.178
-    }, {
-        'name': 'Pearl Crosby',
-        'position': 'In PC',
-        'office': 'Cambodia',
-        'ext': "<strong>8262</strong>",
-        'startDate': '2014/10/08',
-        'salary': 114.367
-    }, {
-        'name': 'Colette Foley',
-        'position': 'Lorem Inc.',
-        'office': 'Korea, North',
-        'ext': '8968',
-        'startDate': '2015/07/19',
-        'salary': 721.473
-    }, {
-        'name': 'Anastasia Shaffer',
-        'position': 'Dolor Nulla Semper LLC',
-        'office': 'Suriname',
-        'ext': '7980',
-        'startDate': '2015/04/20',
-        'salary': 264.620
-    }, {
-        'name': 'Gabriel Castro',
-        'position': 'Sed Limited',
-        'office': 'Bahrain',
-        'ext': '0757',
-        'startDate': '2015/03/04',
-        'salary': 651.350
-    }, {
-        'name': 'Cherokee Ware',
-        'position': 'Tincidunt LLC',
-        'office': 'United Kingdom (Great Britain)',
-        'ext': '3995',
-        'startDate': '2015/06/17',
-        'salary': 666.259
-    }, {
-        'name': 'Barry Moss',
-        'position': 'Sociis Industries',
-        'office': 'Western Sahara',
-        'ext': '6697',
-        'startDate': '2015/08/13',
-        'salary': 541.631
-    }, {
-        'name': 'Maryam Tucker',
-        'position': 'Elit Pede Malesuada Inc.',
-        'office': 'Brazil',
-        'ext': '5203',
-        'startDate': '2014/10/02',
-        'salary': 182.294
-    }, {
-        'name': 'Constance Clayton',
-        'position': 'Auctor Velit Aliquam LLP',
-        'office': 'United Arab Emirates',
-        'ext': '4204',
-        'startDate': '2015/08/01',
-        'salary': 218.597
-    }, {
-        'name': 'Rogan Tucker',
-        'position': 'Arcu Vestibulum Ante Associates',
-        'office': 'Jersey',
-        'ext': '0885',
-        'startDate': '2015/01/04',
-        'salary': 861.632
-    }, {
-        'name': 'Emery Mcdowell',
-        'position': 'Gravida Company',
-        'office': 'New Zealand',
-        'ext': '3951',
-        'startDate': '2015/06/02',
-        'salary': 413.568
-    }, {
-        'name': 'Yael Greer',
-        'position': 'Orci Limited',
-        'office': 'Madagascar',
-        'ext': '1416',
-        'startDate': '2014/12/04',
-        'salary': 121.831
-    }, {
-        'name': 'Jared Burgess',
-        'position': 'Auctor Incorporated',
-        'office': 'Burundi',
-        'ext': '4673',
-        'startDate': '2015/01/12',
-        'salary': 62.243
-    }, {
-        'name': 'Sharon Campbell',
-        'position': 'Elit Curabitur Sed Consulting',
-        'office': 'Comoros',
-        'ext': '6274',
-        'startDate': '2014/09/14',
-        'salary': 200.854
-    }, {
-        'name': 'Yeo Church',
-        'position': 'Donec Vitae Erat PC',
-        'office': 'Saudi Arabia',
-        'ext': '0269',
-        'startDate': '2015/06/07',
-        'salary': 581.193
-    }, {
-        'name': 'Kylie Barlow',
-        'position': 'Fermentum Risus Corporation',
-        'office': 'Papua New Guinea',
-        'ext': '2010',
-        'startDate': '2014/12/03',
-        'salary': 418.115
-    }, {
-        'name': 'Nell Leonard',
-        'position': 'Vestibulum Consulting',
-        'office': 'Saudi Arabia',
-        'ext': '4839',
-        'startDate': '2015/05/29',
-        'salary': 466.201
-    }, {
-        'name': 'Brandon Fleming',
-        'position': 'Donec Egestas Associates',
-        'office': 'Poland',
-        'ext': '0622',
-        'startDate': '2015/01/22',
-        'salary': 800.011
-    }, {
-        'name': 'Inga Pena',
-        'position': 'Et Magnis Dis Limited',
-        'office': 'Belgium',
-        'ext': '8140',
-        'startDate': '2015/05/18',
-        'salary': 564.245
-    }, {
-        'name': 'Arden Russo',
-        'position': 'Est Tempor Bibendum Corp.',
-        'office': 'Dominican Republic',
-        'ext': '6774',
-        'startDate': '2015/07/23',
-        'salary': 357.222
-    }, {
-        'name': 'Liberty Gallegos',
-        'position': 'Nec Diam LLC',
-        'office': 'Ghana',
-        'ext': '9266',
-        'startDate': '2015/06/18',
-        'salary': 554.375
-    }, {
-        'name': 'Dennis York',
-        'position': 'Nullam Suscipit Foundation',
-        'office': 'Namibia',
-        'ext': '3133',
-        'startDate': '2015/03/20',
-        'salary': 90.417
-    }, {
-        'name': 'Petra Chandler',
-        'position': 'Pede Nonummy Inc.',
-        'office': 'Namibia',
-        'ext': '3367',
-        'startDate': '2015/03/26',
-        'salary': 598.915
-    }, {
-        'name': 'Aurelia Marshall',
-        'position': 'Donec Consulting',
-        'office': 'Nicaragua',
-        'ext': '2690',
-        'startDate': '2015/08/18',
-        'salary': 201.680
-    }, {
-        'name': 'Rose Carter',
-        'position': 'Enim Consequat Purus Industries',
-        'office': 'Morocco',
-        'ext': '0619',
-        'startDate': '2015/03/06',
-        'salary': 220.187
-    }, {
-        'name': 'Denton Atkins',
-        'position': 'Non Vestibulum PC',
-        'office': 'Mali',
-        'ext': '5806',
-        'startDate': '2015/04/19',
-        'salary': 324.588
-    }, {
-        'name': 'Germaine Osborn',
-        'position': 'Tristique Aliquet PC',
-        'office': 'Lesotho',
-        'ext': '4469',
-        'startDate': '2015/01/19',
-        'salary': 351.108
-    }, {
-        'name': 'Nell Butler',
-        'position': 'Sit Amet Dapibus Industries',
-        'office': 'Cuba',
-        'ext': '7860',
-        'startDate': '2015/01/06',
-        'salary': 230.072
-    }, {
-        'name': 'Brent Stein',
-        'position': 'Eu Augue Porttitor LLP',
-        'office': 'Cyprus',
-        'ext': '4697',
-        'startDate': '2014/11/02',
-        'salary': 853.413
-    }, {
-        'name': 'Alexandra Shaw',
-        'position': 'Aenean Gravida Limited',
-        'office': 'Uruguay',
-        'ext': '1140',
-        'startDate': '2015/05/16',
-        'salary': 401.970
-    }, {
-        'name': 'Veronica Allison',
-        'position': 'Aliquet Diam Sed Institute',
-        'office': 'Samoa',
-        'ext': '9966',
-        'startDate': '2015/05/17',
-        'salary': 79.193
-    }, {
-        'name': 'Katelyn Gamble',
-        'position': 'Sed Associates',
-        'office': 'Mauritius',
-        'ext': '4767',
-        'startDate': '2015/03/20',
-        'salary': 484.299
-    }, {
-        'name': 'James Greer',
-        'position': 'A Dui Incorporated',
-        'office': 'Norway',
-        'ext': '5517',
-        'startDate': '2015/02/21',
-        'salary': 333.518
-    }, {
-        'name': 'Cain Vasquez',
-        'position': 'Nulla Facilisis Suspendisse Institute',
-        'office': 'China',
-        'ext': '3179',
-        'startDate': '2015/05/27',
-        'salary': 651.761
-    }, {
-        'name': 'Shaeleigh Barr',
-        'position': 'Eleifend Cras Institute',
-        'office': 'Ghana',
-        'ext': '5904',
-        'startDate': '2015/04/01',
-        'salary': 627.095
-    }, {
-        'name': 'Baker Mckay',
-        'position': 'Ut Sagittis Associates',
-        'office': 'Isle of Man',
-        'ext': '9840',
-        'startDate': '2015/01/12',
-        'salary': 742.247
-    }, {
-        'name': 'Jayme Pace',
-        'position': 'Cras Eu Tellus Associates',
-        'office': 'Bouvet Island',
-        'ext': '4580',
-        'startDate': '2015/08/12',
-        'salary': 591.588
-    }, {
-        'name': 'Reuben Albert',
-        'position': 'Lobortis Institute',
-        'office': 'Zambia',
-        'ext': '8725',
-        'startDate': '2015/04/04',
-        'salary': 791.408
-    }, {
-        'name': 'Idola Burns',
-        'position': 'Non Industries',
-        'office': 'Myanmar',
-        'ext': '3201',
-        'startDate': '2015/06/24',
-        'salary': 142.906
-    }, {
-        'name': 'Laura Macias',
-        'position': 'Phasellus Inc.',
-        'office': 'Mauritania',
-        'ext': '2033',
-        'startDate': '2014/11/21',
-        'salary': 226.591
-    }, {
-        'name': 'Nichole Salas',
-        'position': 'Duis PC',
-        'office': 'Madagascar',
-        'ext': '4397',
-        'startDate': '2015/01/18',
-        'salary': 234.196
-    }, {
-        'name': 'Hunter Walter',
-        'position': 'Ullamcorper Duis Cursus Foundation',
-        'office': 'Brazil',
-        'ext': '2227',
-        'startDate': '2015/02/28',
-        'salary': 655.052
-    }, {
-        'name': 'Asher Rich',
-        'position': 'Mauris Ipsum LLP',
-        'office': 'Paraguay',
-        'ext': '7288',
-        'startDate': '2015/08/08',
-        'salary': 222.946
-    }, {
-        'name': 'Angela Carlson',
-        'position': 'Donec Tempor Institute',
-        'office': 'Papua New Guinea',
-        'ext': '5416',
-        'startDate': '2015/02/12',
-        'salary': 562.194
-    }, {
-        'name': 'James Dorsey',
-        'position': 'Ipsum Leo Associates',
-        'office': 'Congo (Brazzaville)',
-        'ext': '6019',
-        'startDate': '2015/01/10',
-        'salary': 629.925
-    }, {
-        'name': 'Wesley Cobb',
-        'position': 'Nunc Est Incorporated',
-        'office': 'Australia',
-        'ext': '6466',
-        'startDate': '2015/01/30',
-        'salary': 343.476
-    }, {
-        'name': 'Meghan Stephens',
-        'position': 'Interdum PC',
-        'office': 'Turkey',
-        'ext': '8001',
-        'startDate': '2014/10/11',
-        'salary': 469.305
-    }, {
-        'name': 'Bertha Herrera',
-        'position': 'Amet Limited',
-        'office': 'Kenya',
-        'ext': '4799',
-        'startDate': '2014/11/22',
-        'salary': 56.606
-    }, {
-        'name': 'Karina Key',
-        'position': 'Quisque Varius Nam Company',
-        'office': 'France',
-        'ext': '3907',
-        'startDate': '2015/03/26',
-        'salary': 314.260
-    }, {
-        'name': 'Uriel Carson',
-        'position': 'Penatibus PC',
-        'office': 'Venezuela',
-        'ext': '5902',
-        'startDate': '2015/01/07',
-        'salary': 106.335
-    }, {
-        'name': 'Mira Baird',
-        'position': 'Felis Orci PC',
-        'office': 'Niue',
-        'ext': '4189',
-        'startDate': '2015/08/25',
-        'salary': 515.671
-    }, {
-        'name': 'Ursula Parrish',
-        'position': 'Ac Corporation',
-        'office': 'Macao',
-        'ext': '4771',
-        'startDate': '2015/06/30',
-        'salary': 72.295
-    }, {
-        'name': 'Josephine Sykes',
-        'position': 'Blandit Congue Limited',
-        'office': 'Holy See (Vatican City State)',
-        'ext': '4684',
-        'startDate': '2014/12/22',
-        'salary': 694.656
-    }, {
-        'name': 'Maggie Sims',
-        'position': 'Vulputate Posuere Industries',
-        'office': 'Sudan',
-        'ext': '6482',
-        'startDate': '2014/11/22',
-        'salary': 363.743
-    }, {
-        'name': 'Rogan Fuentes',
-        'position': 'Vestibulum Accumsan Neque Company',
-        'office': 'Jersey',
-        'ext': '4837',
-        'startDate': '2015/07/29',
-        'salary': 606.004
-    }, {
-        'name': 'Maya Haney',
-        'position': 'Ac Foundation',
-        'office': 'Falkland Islands',
-        'ext': '5752',
-        'startDate': '2015/09/03',
-        'salary': 745.500
-    }, {
-        'name': 'Aquila Battle',
-        'position': 'Sociis Natoque Penatibus Foundation',
-        'office': 'Azerbaijan',
-        'ext': '8470',
-        'startDate': '2015/03/06',
-        'salary': 582.265
-    }, {
-        'name': 'Connor Coleman',
-        'position': 'Orci Lacus Vestibulum Foundation',
-        'office': 'Croatia',
-        'ext': '6217',
-        'startDate': '2014/10/21',
-        'salary': 416.958
-    }, {
-        'name': 'Charity Thomas',
-        'position': 'Convallis Ligula Donec Inc.',
-        'office': 'Benin',
-        'ext': '6240',
-        'startDate': '2015/07/12',
-        'salary': 540.999
-    }, {
-        'name': 'Blythe Powers',
-        'position': 'Amet Orci Limited',
-        'office': 'Falkland Islands',
-        'ext': '5608',
-        'startDate': '2015/01/23',
-        'salary': 480.067
-    }, {
-        'name': 'Adria Battle',
-        'position': 'Ornare Lectus Incorporated',
-        'office': 'British Indian Ocean Territory',
-        'ext': '7419',
-        'startDate': '2015/05/28',
-        'salary': 257.937
-    }, {
-        'name': 'Melanie Mcintyre',
-        'position': 'Nunc Corp.',
-        'office': 'Mongolia',
-        'ext': '4326',
-        'startDate': '2015/01/06',
-        'salary': 359.737
-    }, {
-        'name': 'Keely Bauer',
-        'position': 'Nec Tempus Institute',
-        'office': 'Somalia',
-        'ext': '8372',
-        'startDate': '2015/03/09',
-        'salary': 99.718
-    }, {
-        'name': 'Noelani Strong',
-        'position': 'Nec LLP',
-        'office': 'Iran',
-        'ext': '0049',
-        'startDate': '2015/08/24',
-        'salary': 480.718
-    }, {
-        'name': 'Jeanette Henderson',
-        'position': 'Eu Elit Nulla Corporation',
-        'office': 'Italy',
-        'ext': '7586',
-        'startDate': '2015/06/19',
-        'salary': 253.772
-    }, {
-        'name': 'Candace Huber',
-        'position': 'Sed Institute',
-        'office': 'Uganda',
-        'ext': '7183',
-        'startDate': '2015/06/16',
-        'salary': 388.879
-    }, {
-        'name': 'Bethany Potter',
-        'position': 'Vivamus Nibh Dolor Incorporated',
-        'office': 'Puerto Rico',
-        'ext': '3354',
-        'startDate': '2014/11/12',
-        'salary': 747.310
-    }, {
-        'name': 'Whoopi Burks',
-        'position': 'Justo Inc.',
-        'office': 'Fiji',
-        'ext': '2185',
-        'startDate': '2014/09/24',
-        'salary': 803.037
-    }, {
-        'name': 'Sheila Long',
-        'position': 'Diam Associates',
-        'office': 'Sao Tome and Principe',
-        'ext': '7760',
-        'startDate': '2014/12/21',
-        'salary': 674.379
-    }, {
-        'name': 'Sonya Church',
-        'position': 'Laoreet Institute',
-        'office': 'Grenada',
-        'ext': '8920',
-        'startDate': '2015/06/03',
-        'salary': 625.147
-    }, {
-        'name': 'Shaine Forbes',
-        'position': 'Eu Arcu LLP',
-        'office': 'Cyprus',
-        'ext': '2369',
-        'startDate': '2015/01/18',
-        'salary': 208.100
-    }, {
-        'name': 'Alexandra Patrick',
-        'position': 'Ligula Donec Inc.',
-        'office': 'Viet Nam',
-        'ext': '8531',
-        'startDate': '2015/04/09',
-        'salary': 104.063
-    }, {
-        'name': 'Patience Vincent',
-        'position': 'Sem Molestie Associates',
-        'office': 'Philippines',
-        'ext': '8888',
-        'startDate': '2015/07/04',
-        'salary': 673.556
-    }, {
-        'name': 'Evelyn Smith',
-        'position': 'Fusce Industries',
-        'office': 'Togo',
-        'ext': '5051',
-        'startDate': '2015/08/15',
-        'salary': 737.284
-    }, {
-        'name': 'Kieran Gonzalez',
-        'position': 'Non Corp.',
-        'office': 'Equatorial Guinea',
-        'ext': '4834',
-        'startDate': '2015/08/24',
-        'salary': 90.195
-    }, {
-        'name': 'Molly Oneil',
-        'position': 'Non Dui Consulting',
-        'office': 'Belize',
-        'ext': '7501',
-        'startDate': '2014/10/28',
-        'salary': 140.767
-    }, {
-        'name': 'Nigel Davenport',
-        'position': 'Ullamcorper Velit In Industries',
-        'office': 'Vanuatu',
-        'ext': '0976',
-        'startDate': '2015/03/16',
-        'salary': 70.536
-    }, {
-        'name': 'Thor Young',
-        'position': 'Malesuada Consulting',
-        'office': 'French Southern Territories',
-        'ext': '0211',
-        'startDate': '2015/01/28',
-        'salary': 75.501
-    }, {
-        'name': 'Finn Delacruz',
-        'position': 'Lorem Industries',
-        'office': 'Cocos (Keeling) Islands',
-        'ext': '2980',
-        'startDate': '2014/12/11',
-        'salary': 754.967
-    }, {
-        'name': 'Lane Henderson',
-        'position': 'Pede Foundation',
-        'office': 'Kazakhstan',
-        'ext': '1446',
-        'startDate': '2015/07/02',
-        'salary': 842.050
-    }, {
-        'name': 'Shea Potter',
-        'position': 'Curabitur Limited',
-        'office': 'Timor-Leste',
-        'ext': '4654',
-        'startDate': '2015/05/07',
-        'salary': 263.629
-    }, {
-        'name': 'Brynn Yang',
-        'position': 'Ut Limited',
-        'office': 'Mayotte',
-        'ext': '4668',
-        'startDate': '2015/01/17',
-        'salary': 74.292
-    }, {
-        'name': 'Kylan Fuentes',
-        'position': 'Sapien Aenean Associates',
-        'office': 'Brazil',
-        'ext': '6623',
-        'startDate': '2014/12/28',
-        'salary': 108.632
-    }, {
-        'name': 'Lionel Mcbride',
-        'position': 'Ipsum PC',
-        'office': 'Portugal',
-        'ext': '3978',
-        'startDate': '2015/07/11',
-        'salary': 34.244
-    }, {
-        'name': 'Paul Lucas',
-        'position': 'Eget LLP',
-        'office': 'Nicaragua',
-        'ext': '8890',
-        'startDate': '2014/09/30',
-        'salary': 690.834
-    }, {
-        'name': 'Lareina Williamson',
-        'position': 'Imperdiet Ullamcorper Ltd',
-        'office': 'Cocos (Keeling) Islands',
-        'ext': '9489',
-        'startDate': '2014/12/01',
-        'salary': 603.498
-    }, {
-        'name': 'Amy Acevedo',
-        'position': 'Id Institute',
-        'office': 'Cook Islands',
-        'ext': '5592',
-        'startDate': '2015/02/04',
-        'salary': 125.165
-    }, {
-        'name': 'Nomlanga Silva',
-        'position': 'Eget LLC',
-        'office': 'Belize',
-        'ext': '3110',
-        'startDate': '2015/01/31',
-        'salary': 268.509
-    }, {
-        'name': 'Amena Stone',
-        'position': 'Enim Incorporated',
-        'office': 'Guinea',
-        'ext': '1211',
-        'startDate': '2014/09/23',
-        'salary': 214.381
-    }, {
-        'name': 'Danielle Coffey',
-        'position': 'Feugiat Placerat Corp.',
-        'office': 'Sao Tome and Principe',
-        'ext': '8176',
-        'startDate': '2015/06/17',
-        'salary': 137.423
-    }, {
-        'name': 'Buffy Russell',
-        'position': 'Lacus Quisque Ltd',
-        'office': 'Ecuador',
-        'ext': '6741',
-        'startDate': '2014/10/17',
-        'salary': 612.184
-    }, {
-        'name': 'Kaitlin Lamb',
-        'position': 'Malesuada Fringilla Est Associates',
-        'office': 'Algeria',
-        'ext': '5054',
-        'startDate': '2014/10/18',
-        'salary': 327.367
-    }, {
-        'name': 'Leilani Yates',
-        'position': 'Mus Proin LLC',
-        'office': 'South Sudan',
-        'ext': '1550',
-        'startDate': '2015/05/27',
-        'salary': 743.493
-    }, {
-        'name': 'Jemima Moon',
-        'position': 'Phasellus Corp.',
-        'office': 'South Georgia and The South Sandwich Islands',
-        'ext': '7582',
-        'startDate': '2015/05/21',
-        'salary': 496.067
-    }, {
-        'name': 'Hiroko Schwartz',
-        'position': 'Neque Institute',
-        'office': 'Saint Vincent and The Grenadines',
-        'ext': '9368',
-        'startDate': '2015/03/13',
-        'salary': 178.782
-    }, {
-        'name': 'Nathaniel Jensen',
-        'position': 'Mi Tempor Limited',
-        'office': 'Dominica',
-        'ext': '8331',
-        'startDate': '2014/12/05',
-        'salary': 37.441
-    }, {
-        'name': 'Silas Sweeney',
-        'position': 'Ultrices Institute',
-        'office': 'Turkmenistan',
-        'ext': '0746',
-        'startDate': '2014/11/13',
-        'salary': 152.980
-    }, {
-        'name': 'Jermaine Barry',
-        'position': 'Dapibus Corporation',
-        'office': 'Uzbekistan',
-        'ext': '1545',
-        'startDate': '2015/03/06',
-        'salary': 409.463
-    }, {
-        'name': 'Tatiana Nichols',
-        'position': 'Nec Diam Industries',
-        'office': 'Cook Islands',
-        'ext': '4395',
-        'startDate': '2015/05/22',
-        'salary': 51.155
-    }, {
-        'name': 'Rama Waller',
-        'position': 'Sem Pellentesque LLC',
-        'office': 'Andorra',
-        'ext': '2973',
-        'startDate': '2014/12/01',
-        'salary': 223.227
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var CommsService = (function () {
+    function CommsService() {
+        this.messageSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["b" /* Subject */]();
+        this.messageObs$ = this.messageSource.asObservable();
     }
-];
+    /*
+    testAlert(server:ServerInfo, note:string){
+        this.messageSource.next(note);
+        alert(note);
+    }
+    */
+    CommsService.prototype.updateReportTable = function (fetchInfo) {
+        this.messageSource.next(fetchInfo);
+    };
+    CommsService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+    ], CommsService);
+    return CommsService;
+}());
+
 
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/treeview/treeview.component.css":
+/***/ "../../../../../src/app/components/reportview/reportview.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -950,10 +494,72 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/reportview/reportview.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h4><b>Test Results:</b></h4>\n<div id='report_view'></div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/reportview/reportview.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportviewComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ReportviewComponent = (function () {
+    function ReportviewComponent() {
+    }
+    ReportviewComponent.prototype.ngOnInit = function () {
+    };
+    ReportviewComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-reportview',
+            template: __webpack_require__("../../../../../src/app/components/reportview/reportview.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/reportview/reportview.component.css")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
+        }),
+        __metadata("design:paramtypes", [])
+    ], ReportviewComponent);
+    return ReportviewComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/treeview/treeview.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".hoverTable{\r\n    border-collapse:collapse; \r\n}\r\n.hoverTable td{ \r\n    padding:2px;\r\n}\r\n.hoverTableBackground{\r\n    background:lightskyblue;\r\n}\r\n.hoverTable tr:hover {\r\n    background-color: #ffff99;\r\n}\r\n\r\n.table-hover > tbody > tr:hover {\r\n    background-color: blue;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/treeview/treeview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <div style=\"margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;\"> -->\n<h4>Repository Reports:</h4>\n<div>\n  <ng-table [config]=\"config\"\n    (tableChanged)=\"onChangeTable(config)\"\n    (cellClicked)=\"onCellClick($event)\"\n    [rows]=\"rows\" [columns]=\"columns\">\n  </ng-table>\n  <pagination *ngIf=\"config.paging\" class=\"pagination-sm\"\n    [(ngModel)]=\"page\"\n    [totalItems]=\"length\"\n    [itemsPerPage]=\"itemsPerPage\"\n    [maxSize]=\"maxSize\"\n    [boundaryLinks]=\"true\"\n    [rotate]=\"false\"\n    (pageChanged)=\"onChangeTable(config,$event)\"\n    (numPages)=\"numPages = $event\">\n  </pagination>\n</div>\n<br>\n<h4>Selected Reports:</h4>\n<div>\n    <ng-table [config]=\"selConfig\"\n      (tableChanged)=\"onSelChangeTable(selConfig)\"\n      (cellClicked)=\"onSelCellClick($event)\"\n      [rows]=\"selRows\" [columns]=\"selColumns\">\n    </ng-table>\n    <pagination *ngIf=\"selConfig.paging\" class=\"pagination-sm\"\n      [(ngModel)]=\"selPage\"\n      [totalItems]=\"selLength\"\n      [itemsPerPage]=\"selItemsPerPage\"\n      [maxSize]=\"maxSize\"\n      [boundaryLinks]=\"true\"\n      [rotate]=\"false\"\n      (pageChanged)=\"onSelChangeTable(config,$event)\"\n      (numPages)=\"numPages = $event\">\n    </pagination>\n  </div>"
+module.exports = "<!-- <div style=\"margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom:20px;\"> -->\n<h4><b>Repository Reports:</b></h4>\n<div>\n  <ng-table ng-mouseover=\"table-hover\" id=\"reportViewTable_{{serverid}}\" [config]=\"getCurrentInstance(serverid).config\"\n    (tableChanged)=\"onChangeTable(getCurrentInstance(serverid).config)\"\n    (cellClicked)=\"onCellClick($event)\"\n    [rows]=\"getCurrentInstance(serverid).instrows\" [columns]=\"getCurrentInstance(serverid).instcolumns\">\n  </ng-table>\n  <pagination *ngIf=\"getCurrentInstance(serverid).config.paging\" class=\"pagination-sm\"\n    [(ngModel)]=\"getCurrentInstance(serverid).page\"\n    [totalItems]=\"getCurrentInstance(serverid).length\"\n    [itemsPerPage]=\"getCurrentInstance(serverid).itemsPerPage\"\n    [maxSize]=\"getCurrentInstance(serverid).maxSize\"\n    [boundaryLinks]=\"true\"\n    [rotate]=\"false\"\n    (pageChanged)=\"onChangeTable(getCurrentInstance(serverid).config,$event)\"\n    (numPages)=\"getCurrentInstance(serverid).numPages = $event\">\n  </pagination>\n</div>"
 
 /***/ }),
 
@@ -964,7 +570,8 @@ module.exports = "\n<!-- <div style=\"margin-left:20px; margin-right:20px; margi
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__table_data__ = __webpack_require__("../../../../../src/app/components/treeview/table-data.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__comms_service__ = __webpack_require__("../../../../../src/app/comms.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -977,71 +584,130 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var template = __webpack_require__("../../../../../src/app/components/treeview/treeview.component.html");
 var TreeviewComponent = (function () {
-    //test.end.
-    function TreeviewComponent(dataService) {
+    function TreeviewComponent(dataService, appComponent, commsService) {
         this.dataService = dataService;
-        this.rows = [];
-        this.columns = [
-            { title: 'Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' } },
-            {
-                title: 'Position',
-                name: 'position',
-                sort: false,
-                filtering: { filterString: '', placeholder: 'Filter by position' }
-            },
-            { title: 'Office', className: ['office-header', 'text-success'], name: 'office', sort: 'asc' },
-            { title: 'Extn.', name: 'ext', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' } },
-            { title: 'Start date', className: 'text-warning', name: 'startDate' },
-            { title: 'Salary ($)', name: 'salary' }
-        ];
-        this.selRows = [];
-        this.selColumns = [
-            { title: 'Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' } },
-            {
-                title: 'Position',
-                name: 'position',
-                sort: false,
-                filtering: { filterString: '', placeholder: 'Filter by position' }
-            },
-            { title: 'Office', className: ['office-header', 'text-success'], name: 'office', sort: 'asc' },
-            { title: 'Extn.', name: 'ext', sort: '', filtering: { filterString: '', placeholder: 'Filter by extn.' } },
-            { title: 'Start date', className: 'text-warning', name: 'startDate' },
-            { title: 'Salary ($)', name: 'salary' }
-        ];
-        this.page = 1;
-        this.selPage = 1;
-        this.itemsPerPage = 10;
-        this.selItemsPerPage = 5;
-        this.maxSize = 5;
-        this.numPages = 1;
-        this.length = 0;
-        this.selLength = 0;
-        this.config = {
-            paging: true,
-            sorting: { columns: this.columns },
-            filtering: { filterString: '' },
-            className: ['table-striped', 'table-bordered', 'table-condensed']
-        };
-        this.selConfig = {
-            paging: true,
-            sorting: { columns: this.columns },
-            filtering: { filterString: '' },
-            className: ['table-striped', 'table-bordered', 'table-condensed']
-        };
+        this.appComponent = appComponent;
+        this.commsService = commsService;
+        this.serverid = '';
         //test.start.  TODO: remove.
-        this.data = __WEBPACK_IMPORTED_MODULE_2__table_data__["a" /* TableData */];
+        //private data:Array<any> = TableData; //jsw.localtest.2 of 3
+        //private data:Array<any>; //jsw.deployed.1 of 2
+        //test.end.
+        //private dataMap = new Map<string,any>();
+        this.instanceInfoMap = new Map();
     }
+    //public rows:Array<any> = [];
+    //public columns:Array<any> = [
+    //  {title: 'Label', name: 'label', filtering: {filterString: '', placeholder: 'Filter by label'}},
+    //  {title: 'URI', name: 'uri', filtering: {filterString: '', placeholder: 'Filter by uri'}} 
+    /*,
+    {title: 'Office', className: ['office-header', 'text-success'], name: 'office', sort: 'asc'},
+    {title: 'Extn.', name: 'ext', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'}},
+    {title: 'Start date', className: 'text-warning', name: 'startDate'},
+    {title: 'Salary ($)', name: 'salary'} */
+    //];
+    /*
+    public selRows:Array<any> = [];
+    public selColumns:Array<any> = [
+      {title: 'Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'}},
+      {
+        title: 'Position',
+        name: 'position',
+        sort: false,
+        filtering: {filterString: '', placeholder: 'Filter by position'}
+      },
+      {title: 'Office', className: ['office-header', 'text-success'], name: 'office', sort: 'asc'},
+      {title: 'Extn.', name: 'ext', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'}},
+      {title: 'Start date', className: 'text-warning', name: 'startDate'},
+      {title: 'Salary ($)', name: 'salary'}
+    ];
+  */
+    /*
+      public page:number = 1;
+      public itemsPerPage:number = 10;
+      public maxSize:number = 5;
+      public numPages:number = 1;
+      public length:number = 0;
+    */
+    /*
+    public selPage:number=1;
+    public selItemsPerPage:number = 5;
+    public selLength:number = 0;
+    */
+    /*
+    public config:any = {
+      paging: true,
+      sorting: {columns: this.columns},
+      filtering: {filterString: ''},
+      className: ['table-striped', 'table-bordered', 'table-condensed'],
+      selectedRowClass: 'selectedRow'
+    };
+    */
+    TreeviewComponent.prototype.createInstanceInfo = function () {
+        var newTreeInstance = {
+            instrows: [],
+            instcolumns: [
+                { title: 'Label', name: 'label', filtering: { filterString: '', placeholder: 'Filter by label' } },
+                { title: 'URI', name: 'uri', filtering: { filterString: '', placeholder: 'Filter by uri' } }
+            ],
+            data: null,
+            page: 1,
+            itemsPerPage: 10,
+            maxSize: 5,
+            numPages: 1,
+            length: 0,
+            config: {
+                paging: true,
+                sorting: { columns: null },
+                filtering: { filterString: '' },
+                className: ['table-striped', 'table-bordered', 'table-condensed'],
+                selectedRowClass: 'selectedRow'
+            }
+        };
+        newTreeInstance.config.sorting.columns = newTreeInstance.instcolumns;
+        this.instanceInfoMap.set(this.serverid, newTreeInstance);
+        return newTreeInstance;
+    };
+    TreeviewComponent.prototype.getCurrentInstance = function (sid) {
+        //console.log ('get current instance from=' + sid + ', serverid=' + this.serverid);
+        return this.instanceInfoMap.get(sid);
+    };
     TreeviewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dataService.getPosts().subscribe(function (posts) {
-            console.log(posts);
-            _this.onChangeTable(_this.config);
+        //jsw.localtest.3 of 3 
+        //this.onChangeTable(this.config);
+        var treeInst = this.createInstanceInfo();
+        this.commsService.messageObs$.subscribe(function (fetchPacket) {
+            //alert('message observed');
+            //console.log('treeview subscribe function access.');
+            //jsw.deployed.2 of 2
+            _this.dataService.getRepoReports(fetchPacket.serverInfo.id, fetchPacket.serverInfo.domain, String(fetchPacket.serverInfo.port), fetchPacket.serverInfo.path, fetchPacket.serverInfo.username, fetchPacket.serverInfo.password, fetchPacket.serverInfo.label, fetchPacket.serverInfo.notes).subscribe(function (reportServerData) {
+                //console.log(reportServerData); 
+                //this.data = reportServerData;
+                //this.dataMap.set(this.serverid, reportServerData);
+                _this.getCurrentInstance(_this.serverid).data = reportServerData;
+                _this.onChangeTable(_this.getCurrentInstance(_this.serverid).config);
+                fetchPacket.dialogR.close();
+            });
         });
     };
+    TreeviewComponent.prototype.ngOnDestroy = function () {
+    };
+    TreeviewComponent.prototype.externalChangePage = function () {
+        this.onChangeTable(this.getCurrentInstance(this.serverid).config);
+    };
+    /*
+      public changePage(page:any, data:Array<any> = this.data):Array<any> {
+        let start = (page.page - 1) * page.itemsPerPage;
+        let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
+        return data.slice(start, end);
+      }
+    */
     TreeviewComponent.prototype.changePage = function (page, data) {
-        if (data === void 0) { data = this.data; }
+        if (data === void 0) { data = this.getCurrentInstance(this.serverid).data; }
         var start = (page.page - 1) * page.itemsPerPage;
         var end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
         return data.slice(start, end);
@@ -1050,7 +716,7 @@ var TreeviewComponent = (function () {
         if (!config.sorting) {
             return data;
         }
-        var columns = this.config.sorting.columns || [];
+        var columns = this.getCurrentInstance(this.serverid).config.sorting.columns || [];
         var columnName = void 0;
         var sort = void 0;
         for (var i = 0; i < columns.length; i++) {
@@ -1076,7 +742,7 @@ var TreeviewComponent = (function () {
     TreeviewComponent.prototype.changeFilter = function (data, config) {
         var _this = this;
         var filteredData = data;
-        this.columns.forEach(function (column) {
+        this.getCurrentInstance(this.serverid).instcolumns.forEach(function (column) {
             if (column.filtering) {
                 filteredData = filteredData.filter(function (item) {
                     return item[column.name].match(column.filtering.filterString);
@@ -1088,14 +754,14 @@ var TreeviewComponent = (function () {
         }
         if (config.filtering.columnName) {
             return filteredData.filter(function (item) {
-                return item[config.filtering.columnName].match(_this.config.filtering.filterString);
+                return item[config.filtering.columnName].match(_this.getCurrentInstance(_this.serverid).config.filtering.filterString);
             });
         }
         var tempArray = [];
         filteredData.forEach(function (item) {
             var flag = false;
-            _this.columns.forEach(function (column) {
-                if (item[column.name].toString().match(_this.config.filtering.filterString)) {
+            _this.getCurrentInstance(_this.serverid).instcolumns.forEach(function (column) {
+                if (item[column.name].toString().match(_this.getCurrentInstance(_this.serverid).config.filtering.filterString)) {
                     flag = true;
                 }
             });
@@ -1107,37 +773,36 @@ var TreeviewComponent = (function () {
         return filteredData;
     };
     TreeviewComponent.prototype.onChangeTable = function (config, page) {
-        if (page === void 0) { page = { page: this.page, itemsPerPage: this.itemsPerPage }; }
+        if (page === void 0) { page = { page: this.getCurrentInstance(this.serverid).page,
+            itemsPerPage: this.getCurrentInstance(this.serverid).itemsPerPage }; }
         if (config.filtering) {
-            Object.assign(this.config.filtering, config.filtering);
+            Object.assign(this.getCurrentInstance(this.serverid).config.filtering, config.filtering);
         }
         if (config.sorting) {
-            Object.assign(this.config.sorting, config.sorting);
+            Object.assign(this.getCurrentInstance(this.serverid).config.sorting, config.sorting);
         }
-        var filteredData = this.changeFilter(this.data, this.config);
-        var sortedData = this.changeSort(filteredData, this.config);
-        this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
-        this.length = sortedData.length;
-    };
-    TreeviewComponent.prototype.onSelChangeTable = function (config, page) {
-        if (page === void 0) { page = { page: this.page, itemsPerPage: this.itemsPerPage }; }
-        if (config.filtering) {
-            Object.assign(this.config.filtering, config.filtering);
-        }
-        if (config.sorting) {
-            Object.assign(this.config.sorting, config.sorting);
-        }
-        var filteredData = this.changeFilter(this.data, this.config);
-        var sortedData = this.changeSort(filteredData, this.config);
-        this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
-        this.length = sortedData.length;
+        //let filteredData = this.changeFilter(this.data, this.config);
+        var filteredData = this.changeFilter(this.getCurrentInstance(this.serverid).data, this.getCurrentInstance(this.serverid).config);
+        var sortedData = this.changeSort(filteredData, this.getCurrentInstance(this.serverid).config);
+        this.getCurrentInstance(this.serverid).instrows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+        this.getCurrentInstance(this.serverid).length = sortedData.length;
     };
     TreeviewComponent.prototype.onCellClick = function (data) {
-        console.log(data);
+        //console.log(data);
+        //console.log("on cell click from server: " + this.serverid);
+        this.appComponent.addSelectedReport(this.serverid, data);
+        /*
+        let index = this.data.indexOf(data.row);
+        
+        document.getElementById('reportViewTable')  on('click','tr', function(event:any)){
+          $(this).classList.add("hoverTableBackground");
+        }
+        */
     };
-    TreeviewComponent.prototype.onSelCellClick = function (data) {
-        console.log(data);
-    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String)
+    ], TreeviewComponent.prototype, "serverid", void 0);
     TreeviewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-treeview',
@@ -1145,12 +810,26 @@ var TreeviewComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/components/treeview/treeview.component.css")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */], __WEBPACK_IMPORTED_MODULE_3__comms_service__["a" /* CommsService */]])
     ], TreeviewComponent);
     return TreeviewComponent;
 }());
 
 
+
+/***/ }),
+
+/***/ "../../../../../src/app/dialogs/dialog.busy.window.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Loading report list</h1>\r\n<div mat-dialog-content>\r\n  <!-- <p>Loading report list.</p> -->\r\n  <mat-progress-bar mode=\"indeterminate\"></mat-progress-bar>\r\n</div>\r\n "
+
+/***/ }),
+
+/***/ "../../../../../src/app/dialogs/dialog.progress.window.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Executing report tests</h1>\r\n<div mat-dialog-content>\r\n  <!-- <p>Executing report tests.</p> -->\r\n  current progress: {{progressPerc | number: '1.0-0'}}%\r\n  <mat-progress-bar mode=\"determinate\" value=\"{{progressPerc}}\"></mat-progress-bar>\r\n</div> \r\n "
 
 /***/ }),
 
@@ -1184,13 +863,35 @@ var DataService = (function () {
         return this.http.get('https://jsonplaceholder.typicode.com/posts')
             .map(function (res) { return res.json(); });
     };
-    DataService.prototype.getRepoReports = function () {
-        return this.http.get('http://localhost:8080/jasperserver-pro/rest_v2/resources?type=reportUnit&j_username=superuser&j_password=superuser')
-            .map(function (res) { return res.json(); });
+    //jsw.test.end.
+    DataService.prototype.getServerMeta = function () {
+        var serverMeta = this.http.get('/serverinfo/meta').map(function (sMeta) { return sMeta.json(); });
+        return serverMeta;
+    };
+    DataService.prototype.getRepoReports = function (id, hostName, port, path, username, password, label, notes) {
+        var reportResults = this.http.get(encodeURI('/serverinfo/reportList?' + 'id=' + id + '&hostname=' + hostName +
+            '&port=' + port + '&path=' + path + '&username=' + username + '&password=' + password +
+            '&label=' + label + '&notes=' + notes)).map(function (res) { return res.json(); });
+        return reportResults;
+    };
+    DataService.prototype.execLoadTest = function (server) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('LoadTestId', 'testId1_jswTest');
+        return this.http.post('/loadtest/start', server, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    DataService.prototype.execStatusCheck = function (server) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('LoadTestId', 'testId1_jswTest');
+        return this.http.post('/loadtest/status', server, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    DataService.prototype.viewReportResults = function () {
+        return this.http.get('/viewreport?LoadTestId=testId1_jswTest');
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], DataService);
     return DataService;
 }());

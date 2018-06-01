@@ -1,0 +1,11 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+/*
+ * $Id$
+ */
+public interface LogAggregate {
+
+	public void addLogEntry(LogEntry entry);
+	public String generateStringSummary();
+	
+}

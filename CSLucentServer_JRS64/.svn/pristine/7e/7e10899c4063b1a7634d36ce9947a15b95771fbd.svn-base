@@ -1,0 +1,21 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.LogAggregate;
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+
+/*
+ * $Id$
+ */
+public class BasicLogAggImpl implements LogAggregate {
+	
+	private ConcurrentHashMap<String, >
+	
+	public void addLogEntry(LogEntry entry) {
+		
+		
+	}
+	
+}
+
+
+

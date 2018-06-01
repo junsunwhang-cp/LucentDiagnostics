@@ -1,0 +1,33 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+import org.springframework.beans.factory.InitializingBean;
+
+/*
+ * $Id: LucentConfiguration.java 124 2016-11-09 19:00:49Z jwhang $
+ */
+public class LucentConfiguration implements InitializingBean {
+	
+	public final static String C_LUCENT_TEST_ID = "csLucentTestId";
+	
+	private int serverMonitorState = 5;
+
+	//wire together listeners and default event categories.
+	public void afterPropertiesSet() throws Exception {
+	
+		
+	}
+
+	public int getServerMonitorState() {
+		return serverMonitorState;
+	}
+
+	public void setServerMonitorState(int serverMonitorState) {
+		this.serverMonitorState = serverMonitorState;
+	}
+	
+}
+
+
+
+
+

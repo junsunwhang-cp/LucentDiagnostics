@@ -1,0 +1,21 @@
+package com.tibco.jaspersoft.cs.lucent.server.ws;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.jaspersoft.jasperserver.remote.exception.RemoteException;
+
+/*
+ * $Id$
+ */
+public interface LucentService {
+
+	String getMetrics(HttpServletRequest request, Map<String,String[]> parameterMap) throws RemoteException;
+	
+}
+
+
+
+
+

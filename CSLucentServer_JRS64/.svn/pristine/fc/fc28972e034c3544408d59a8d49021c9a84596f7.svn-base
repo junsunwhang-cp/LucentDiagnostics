@@ -1,0 +1,22 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.LogAggregate;
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+
+/*
+ * $Id$
+ */
+public interface DataStore {
+
+	public void writeLogEntry(LogEntry entry);
+	public Map<Long, LogAggregate> readLogEntries(String testId);
+	public String summarizeLogEntries(String testId);
+	public void deleteLogEntries(String testId);
+	
+}
+
+

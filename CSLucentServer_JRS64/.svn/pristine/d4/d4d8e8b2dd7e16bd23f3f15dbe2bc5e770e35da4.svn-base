@@ -1,0 +1,89 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.LogAggregate;
+
+/*
+ * $Id$
+ */
+public class BasicLogAggImpl implements LogAggregate {
+	
+	private String eventType = "";
+	private long count = 1;
+	private long aggregatedTimeNs = 0;
+	private long creationTimeMs = 0;
+	private long lastUpdateTimeMs = 0;
+	
+	public BasicLogAggImpl(){
+		
+	}
+	
+	public BasicLogAggImpl(String eventType, long creationTimeMs, long firstElapsedTimeNs){
+		this.eventType = eventType;
+		this.creationTimeMs = creationTimeMs;
+		this.aggregatedTimeNs = firstElapsedTimeNs;
+	}
+	
+	public String getEventType() {
+		return eventType;
+	}
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
+	}
+	
+	public long getCount() {
+		return count;
+	}
+	public void setCount(long count) {
+		this.count = count;
+	}
+	
+	public long getAggregatedTimeNs() {
+		return aggregatedTimeNs;
+	}
+	public void setAggregatedTimeNs(long aggregatedTimeNs) {
+		this.aggregatedTimeNs = aggregatedTimeNs;
+	}
+	
+	public void increment(long timeNs){
+		this.aggregatedTimeNs += timeNs;
+		this.count++;
+		setLastUpdateTimeMs(System.currentTimeMillis());
+	}
+
+	public long getCreationTimeMs() {
+		return creationTimeMs;
+	}
+
+	public void setCreationTimeMs(long creationTimeMs) {
+		this.creationTimeMs = creationTimeMs;
+		setLastUpdateTimeMs(creationTimeMs);
+	}
+
+	public long getLastUpdateTimeMs() {
+		return lastUpdateTimeMs;
+	}
+
+	public void setLastUpdateTimeMs(long lastUpdateTimeMs) {
+		this.lastUpdateTimeMs = lastUpdateTimeMs;
+	}
+	
+	public String getXmlRepresentation(){
+		StringBuffer stateBuf = new StringBuffer();
+		stateBuf.append("<LogAggregate>\n");
+		stateBuf.append(wrapEntry("eventType",eventType));
+		stateBuf.append(wrapEntry("totalTimeNs",String.valueOf(aggregatedTimeNs)));
+		stateBuf.append(wrapEntry("count",String.valueOf(count)));
+		stateBuf.append(wrapEntry("creationTimeMs",String.valueOf(creationTimeMs)));
+		stateBuf.append(wrapEntry("lastUpdateTimeMs",String.valueOf(lastUpdateTimeMs)));
+		stateBuf.append("</LogAggregate>\n");
+		return stateBuf.toString();
+	}
+	
+	private String wrapEntry(String tag, String value){
+		return "<" + tag + ">" + value + "</" + tag + ">\n";
+	}
+	
+}
+
+
+

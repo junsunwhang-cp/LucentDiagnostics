@@ -1,0 +1,76 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.beans.factory.InitializingBean;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.EntryCategory;
+import com.tibco.jaspersoft.cs.lucent.server.api.LucentGlobalContext;
+import com.tibco.jaspersoft.cs.lucent.server.logging.EntryCategoryImpl;
+
+/*
+ * $Id$
+ */
+public class LucentConfiguration implements InitializingBean {
+	
+	public final static String C_LUCENT_TEST_ID = "csLucentTestId";
+	
+	private DataStore dataStore = new DataStoreImpl(); 
+	private int serverMonitorState = 5;
+	private static Map<String,EntryCategory> categories = new ConcurrentHashMap<String,EntryCategory>();
+
+	//wire together configured listeners and default event categories.
+	public void afterPropertiesSet() throws Exception {
+		//populate global context.
+		LucentGlobalContext.getInstance().setLucentConfiguration(this);
+		
+		//generate default event category objects (immutable and for reuse).
+		categories.put(EntryCategory.EC_ReportUnitSetup,
+				new EntryCategoryImpl(EntryCategory.EC_ReportUnitSetup, "Report Unit Setup"));
+		categories.put(EntryCategory.EC_DataRetrieval,
+				new EntryCategoryImpl(EntryCategory.EC_DataRetrieval, "Data Retrieval"));
+		categories.put(EntryCategory.EC_ReportFill,
+				new EntryCategoryImpl(EntryCategory.EC_ReportFill, "Report Fill"));
+		categories.put(EntryCategory.EC_ReportExport,
+				new EntryCategoryImpl(EntryCategory.EC_ReportExport, "Report Export"));
+		
+		//add second tier categories.
+		categories.put(EntryCategory.EC_ReportFill_Initialize, 
+				new EntryCategoryImpl(EntryCategory.EC_ReportFill_Initialize, "Report Fill.Initialize", EntryCategory.EC_ReportFill));
+		categories.put(EntryCategory.EC_ReportFill_RetrieveField, 
+				new EntryCategoryImpl(EntryCategory.EC_ReportFill_RetrieveField, "Report Fill.Retrieve Field", EntryCategory.EC_ReportFill));
+		categories.put(EntryCategory.EC_ReportFill_NextRow, 
+				new EntryCategoryImpl(EntryCategory.EC_ReportFill_NextRow, "Report Fill.Next Row", EntryCategory.EC_ReportFill));
+	}
+	
+	public DataStore getDataStore() {
+		return dataStore;
+	}
+
+	public void setDataStore(DataStore dataStore) {
+		this.dataStore = dataStore;
+	}
+
+	public int getServerMonitorState() {
+		return serverMonitorState;
+	}
+
+	public void setServerMonitorState(int serverMonitorState) {
+		this.serverMonitorState = serverMonitorState;
+	}
+
+	public static Map<String, EntryCategory> getCategories() {
+		return categories;
+	}
+
+	public static void setCategories(Map<String, EntryCategory> categs) {
+		categories = categs;
+	}
+	
+}
+
+
+
+
+

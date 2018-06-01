@@ -1,5 +1,5 @@
 <div style="margin-left:20px;text-align:left;font-family:arial;color:#337ab7">
-    <h3><b>Lucent Utilities - alpha 02</b></h3>
+    <h3><b>Lucent Utilities - a.04</b></h3>
 </div>
 
 <!-- TODO: remove manual persistence after normal version is implemented. -->
@@ -166,35 +166,59 @@
                             -->
                             <!-- jsw.test.end -->
                             
-                            <app-treeview></app-treeview>
+                            <app-treeview [serverid]='server.id'></app-treeview>
 
                             <h4><b>Selected Reports:</b></h4>
-                            <form #reportExecsForm="ngForm" [formGroup]="selectedReportsForm" (ngSubmit)="executeReportTests()">
-                                <ul style="list-style-type:disc">                    
-                                    <li *ngFor="let report of server.diagnosticsModule.reports; let i=index"> <b>{{report.name}}</b> ( {{report.url}} ) <button  (click)="deleteReportInfo(server,report)"> X </button><br> 
+                            <!-- <form #reportExecsForm="ngForm" [formGroup]="selectedReportsForm" (ngSubmit)="executeReportTests()"> -->
+                            <form #reportExecsForm="ngForm" (ngSubmit)="executeReportTests(server.id)"> 
+                                <ul style="list-style-type:disc">         
+<!--
+                                    <input type='hidden' name='serverid' id='serverid' value='{{server.id}}'>
+-->
+                                    <li *ngFor="let report of server.diagnosticsModule.reports; let i = index"> <b>{{report.name}}</b> ( {{report.url}} ) <button  (click)="deleteReportInfo(server,report)"> X </button><br> 
                                         <table>
                                             <tr>
                                                 <td style="width:50%;">
-                                                        <div  style="padding-right:40px;">
-                                                    Number of report execution iterations <label for="required"> ( Required ) </label>
-                                                    <input required class="form-group" formControlName="iterationsControl" style="padding:3px; height:15px;" name='reportIterations' 
-                                                    type="number" class='form-control'>  
-                                                    <!--    
-                                                    <input [formControl]="minRangeFormControl" style="padding:3px; height:15px;" [(ngModel)]='report.iterations' required name='reportIterations' 
-                                                    #reportIterations="ngModel" type="number"> 
-                                                    -->
-                                                    <!--
-                                                    <div *ngIf="reportIterations{{i}}.invalid && (reportIterations{{i}}.dirty || reportIterations{{i}}.touched)" class="alert alert-danger">
-                                                            Number of iterations for the report to be run is required.
+                                                    <div  style="padding-right:40px;">
+
+                                                                
+                                                        Number of report iterations <label for="required"> ( Required ) </label>
+                                                        <input  style="padding:3px; height:15px;" [(ngModel)]='report.iterations' required name='iterations'  #iterations="ngModel" 
+                                                        type="number" class='form-control'>
+                                                        <div *ngIf="iterations.invalid && (iterations.dirty || iterations.touched)" class="alert alert-danger">
+                                                                Report iterations value is required.
                                                         </div>
-                                                    -->
+
+
+                                                        <!--
+                                                        Number of report execution iterations <label for="required"> ( Required ) </label>
+                                                        <input required class="form-group" formControlName="iterationsControl" style="padding:3px; height:15px;" name='reportIterations' 
+                                                        type="number" class='form-control'>  
+                                                        -->
+                                                        <!--    
+                                                        <input [formControl]="minRangeFormControl" style="padding:3px; height:15px;" [(ngModel)]='report.iterations' required name='reportIterations' 
+                                                        #reportIterations="ngModel" type="number"> 
+                                                        -->
+                                                        <!--
+                                                        <div *ngIf="reportIterations{{i}}.invalid && (reportIterations{{i}}.dirty || reportIterations{{i}}.touched)" class="alert alert-danger">
+                                                                Number of iterations for the report to be run is required.
+                                                            </div>
+                                                        -->
                                                     </div>
                                                 </td>
                                                 <td style="width:50%;">
                                                         <div style="padding-right:40px;">
-                                                    Think time in seconds <label for="required"> ( Required ) </label>
+                                                        Think time between executions in seconds <label for="required"> ( Required ) </label>
+                                                    
+                                                        <input  style="padding:3px; height:15px;" [(ngModel)]='report.thinkTime' required name='thinkTime' #thinkTime="ngModel" type="number" class='form-control'>
+                                                        <div *ngIf="thinkTime.invalid && (thinkTime.dirty || thinkTime.touched)" class="alert alert-danger">
+                                                                Report think time value is required.
+                                                        </div>
+
+                                                    <!--
                                                     <input required class="form-group" formControlName='thinkTimeControl' style="padding:3px; height:15px;" name='reportThinktime' 
                                                     type="number" class='form-control'>                                        
+                                                    -->
                                                     <!--
                                                     <input min="1" style="padding:3px; height:15px;" [(ngModel)]='report.thinkTime' required name='reportThinktime' 
                                                     #reportThinktime="ngModel" type="number">
@@ -216,7 +240,22 @@
                                         >execute tests</button>
                                 </div> 
                             </form>             
+                            <hr>
+                            <!-- <h4><b>Test Results:</b></h4> -->
+                            <!-- <div innerHtml="{{testResultsHtml}}"></div> -->
+                            
+                            <!--
+                            <div [innerHtml]="testResultsHtml | SafeHtml"></div>
+                            -->
+                            <div style="position:relative;" id='reportBottom_{{server.id}}'></div>
+                            <div style="position:relative;" [innerHtml]="getServerRuntimeHtml(server.id) | SafeHtml"></div>
 
+                            
+                           <!--
+                            <p></p>
+                            <app-reportview></app-reportview>
+                            <p></p>
+                           -->
                         </collapsible-body>
 
                     </collapsible-list-item>
@@ -229,5 +268,4 @@
 
 </div>
 
-
-
+ 

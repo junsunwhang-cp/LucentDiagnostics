@@ -1,0 +1,48 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.EntryCategory;
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+import com.tibco.jaspersoft.cs.lucent.server.core.LucentConfiguration;
+
+/*
+ * $Id$
+ */
+public class LogEntryImpl implements LogEntry {
+
+	private EntryCategory entryCategory;
+	private Object value;
+	private long elapsedTime;
+		
+	public LogEntryImpl(String eventCategoryId, long elapsedTime, Object value){
+		this.elapsedTime = elapsedTime;
+		this.value = value;
+		this.entryCategory = getEntryCategoryById(eventCategoryId);
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
+
+	public long getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void setElapsedTime(long elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+	
+	protected EntryCategory getEntryCategoryById(String id){
+		EntryCategory entryCat = LucentConfiguration.getCategories().get(id);
+		if (entryCat!=null){
+			return entryCat;
+		} else { //return an undefined category.
+			return EntryCategoryImpl.getUndefinedCategory();
+		}
+	}
+}
+
+

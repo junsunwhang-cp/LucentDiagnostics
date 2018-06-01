@@ -1,0 +1,18 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+import java.util.List;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+
+/*
+ * $Id$
+ */
+public interface DataStore {
+
+	public void writeLogEntry(LogEntry entry);
+	public List<LogEntry> readAllLogEntries();
+	
+}
+
+
+

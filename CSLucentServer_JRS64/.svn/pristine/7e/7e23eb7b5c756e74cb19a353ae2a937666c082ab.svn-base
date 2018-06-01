@@ -1,0 +1,104 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.lang.reflect.Proxy;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.jaspersoft.jasperserver.api.metadata.user.domain.impl.client.MetadataUserDetails;
+import com.tibco.jaspersoft.cs.lucent.server.core.JRDataSourceProxy;
+import com.tibco.jaspersoft.cs.lucent.server.core.LucentConfiguration;
+import com.tibco.jaspersoft.cs.lucent.server.logging.LogEntryImpl;
+import net.sf.jasperreports.engine.query.JRQueryExecuter;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+
+/*
+ * $Id$
+ */
+public class LucentGlobalContext {
+
+	private static LucentGlobalContext lucentGlobalContext = null;
+	private LucentConfiguration lucentConfiguration = null;
+	
+	//#__replaced with datastore.
+	//private Queue<LogEntry> entryQueue = new ConcurrentLinkedQueue<LogEntry>();
+	
+	private LucentGlobalContext(){	
+	}
+	
+	public synchronized static LucentGlobalContext getInstance(){
+		if (lucentGlobalContext==null){
+			lucentGlobalContext= new LucentGlobalContext();
+		}
+		return lucentGlobalContext;
+	}
+	
+	public LucentConfiguration getLucentConfiguration() {
+		return lucentConfiguration;
+	}
+
+	public void setLucentConfiguration(LucentConfiguration lucentConfiguration) {
+		this.lucentConfiguration = lucentConfiguration;
+	}
+
+//	public Queue<LogEntry> getEntryQueue() {
+//		return entryQueue;
+//	}
+
+	//test id will be bound to the executing thread.
+	public void addEntry(String entryCategoryId, long elapsedTime){
+		lucentConfiguration.getDataStore().writeLogEntry(new LogEntryImpl(entryCategoryId, elapsedTime, null));
+	}
+	
+	public void addEntry(String entryCategoryId, long elapsedTime, Object value){
+		//TODO: support injection of custom data structures.
+		lucentConfiguration.getDataStore().writeLogEntry(new LogEntryImpl(entryCategoryId, elapsedTime, value));
+	}
+	
+	public List<LogEntry> readAllEntries(){
+		return lucentConfiguration.getDataStore().readAllLogEntries();
+	}
+
+	//
+	public JRDataSource wrapCreateJRDataSource(JRQueryExecuter queryExecuter) throws JRException {
+		long startTime = System.nanoTime();
+		JRDataSource retDs = (wrapJRDataSource(queryExecuter.createDatasource()));
+		long elapsedTime = System.nanoTime() - startTime;
+		addEntry(EntryCategory.EC_ReportFill_Initialize, elapsedTime);
+		return retDs;
+	}
+	
+	public JRDataSource wrapJRDataSource(JRDataSource localDs){
+		JRDataSource proxiedDs = null;
+		if (localDs!=null){
+			Class[] relatedClasses = {JRDataSource.class};
+	        proxiedDs = (JRDataSource)Proxy.newProxyInstance(localDs.getClass().getClassLoader(),
+	        		relatedClasses, new JRDataSourceProxy(localDs));
+		}
+        return proxiedDs;
+	}
+	
+//	public void setEntryQueue(Queue<LogEntry> entryQueue) {
+//		this.entryQueue = entryQueue;
+//	}
+	
+	public LucentFlowContext getFlowContext(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object userDetailObj = auth.getPrincipal();
+		if (userDetailObj instanceof MetadataUserDetails){
+			MetadataUserDetails mud = (MetadataUserDetails)userDetailObj;
+			LucentFlowContext lfc = mud.getLucentFlowContext();
+			if (lfc==null){
+				lfc = new LucentFlowContext();
+			}
+			return lfc;
+		}
+		return null;
+	}
+	
+}

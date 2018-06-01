@@ -1,0 +1,13 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+/*
+ * LogSearchResults
+ * $Id$ 
+ */
+
+public class LogSearchResults {
+
+}
+
+
+

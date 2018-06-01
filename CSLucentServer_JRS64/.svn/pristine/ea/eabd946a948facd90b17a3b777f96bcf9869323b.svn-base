@@ -1,0 +1,12 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+/*
+ * $Id$
+ */
+public class DataStoreImpl implements DataStore {
+
+}
+
+
+
+

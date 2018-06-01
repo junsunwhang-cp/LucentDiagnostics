@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { AppComponent, SafeHtmlPipe } from './app.component';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 import { TreeviewComponent } from './components/treeview/treeview.component';
@@ -14,6 +14,7 @@ import { DataService } from './services/data.service';
 import { PaginationModule, AlertModule } from 'ngx-bootstrap';
 import { CollapsibleModule } from 'angular2-collapsible';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 //import { MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import {
@@ -50,16 +51,17 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
-//jsw.test.start.
 import { BusyDialog, ProgressDialog } from './app.component';
-//jsw.test.end.
+import { ReportviewComponent } from './components/reportview/reportview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TreeviewComponent, 
     BusyDialog,
-    ProgressDialog
+    ProgressDialog,
+    ReportviewComponent,
+    SafeHtmlPipe
   ],
   imports: [
     AlertModule.forRoot(),

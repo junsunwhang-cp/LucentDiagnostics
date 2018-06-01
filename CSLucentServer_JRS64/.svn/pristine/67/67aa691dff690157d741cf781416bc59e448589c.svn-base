@@ -1,0 +1,50 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+/*
+ * $Id: Entry.java 134 2016-12-02 23:15:16Z jwhang $
+ */
+public class LogEntry {
+	
+	public enum Category {reportUnitSetup, dataRetrieval, reportFill, reportExport};
+	public enum EventType {reportFill, retrieveField, nextRow, initialize};
+	
+	private EventType type;
+	private Object value;
+	private long elapsedTime;
+	
+	public LogEntry(){
+	
+	}
+
+	public LogEntry(EventType type, long elapsedTime){
+		this.type = type;
+		this.elapsedTime = elapsedTime;
+	}
+	
+	public EventType getType() {
+		return type;
+	}
+
+	public void setType(EventType type) {
+		this.type = type;
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
+
+	public long getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void setElapsedTime(long elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+	
+}
+
+

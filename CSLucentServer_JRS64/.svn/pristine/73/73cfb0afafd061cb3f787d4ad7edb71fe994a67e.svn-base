@@ -1,0 +1,58 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.jaspersoft.jasperserver.api.metadata.user.domain.impl.client.MetadataUserDetails;
+
+/*
+ * $Id: LucentGlobalContext.java 126 2016-11-09 19:21:01Z jwhang $
+ */
+public class LucentGlobalContext {
+
+	private static LucentGlobalContext lucentGlobalContext = null;
+	private Queue<LogEntry> entryQueue = new ConcurrentLinkedQueue<LogEntry>();
+	
+	private LucentGlobalContext(){	
+	}
+	
+	public synchronized static LucentGlobalContext getInstance(){
+		if (lucentGlobalContext==null){
+			lucentGlobalContext= new LucentGlobalContext();
+		}
+		return lucentGlobalContext;
+	}
+
+	
+	public Queue<LogEntry> getEntryQueue() {
+		return entryQueue;
+	}
+
+	public void addEntry(EntryCategory entryCategory, long elapsedTime){
+		
+	}
+	
+	//TODO: remove for more specific version.
+	public void setEntryQueue(Queue<LogEntry> entryQueue) {
+		this.entryQueue = entryQueue;
+	}
+	
+	
+	public LucentFlowContext getFlowContext(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object userDetailObj = auth.getPrincipal();
+		if (userDetailObj instanceof MetadataUserDetails){
+			MetadataUserDetails mud = (MetadataUserDetails)userDetailObj;
+			LucentFlowContext lfc = mud.getLucentFlowContext();
+			if (lfc==null){
+				lfc = new LucentFlowContext();
+			}
+			return lfc;
+		}
+		return null;
+	}
+	
+}

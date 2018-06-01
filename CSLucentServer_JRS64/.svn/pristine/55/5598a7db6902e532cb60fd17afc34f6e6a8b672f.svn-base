@@ -1,0 +1,10 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+/*
+ * $Id: LucentConfiguration.java 124 2016-11-09 19:00:49Z jwhang $
+ */
+public class LucentConfiguration {
+
+	public final static String C_LUCENT_TEST_ID = "csLucentTestId";
+	
+}

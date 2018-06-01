@@ -1,0 +1,50 @@
+package com.tibco.jaspersoft.cs.lucent.server.ws;
+
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
+import org.springframework.stereotype.Service;
+
+import com.jaspersoft.jasperserver.remote.common.CallTemplate;
+import com.jaspersoft.jasperserver.remote.common.RemoteServiceWrapper;
+import com.jaspersoft.jasperserver.remote.exception.RemoteException;
+
+/*
+ * $Id: LucentJaxRsService.java 203 2017-08-22 21:27:17Z jwhang $
+ */
+
+@Service
+@Path("/lucentService")
+@CallTemplate(LucentServiceCallTemplate.class)
+public class LucentJaxRsService extends RemoteServiceWrapper<LucentService> {
+
+	@Resource(name = "lucentService")
+    public void setRemoteService(LucentService remoteService) {
+        this.remoteService = remoteService;
+    }
+	
+	@GET
+	@Path("/getInfo")
+    public Response setAttributes(@Context final HttpServletRequest request) {
+        return callRemoteService(new ConcreteCaller<Response>() {
+            @Override
+			public Response call(LucentService remoteService) throws RemoteException {
+                // @SuppressWarnings("unchecked")
+                Map<String, String[]> parameterMap = request.getParameterMap();
+                return Response.ok(remoteService.getMetrics(request, parameterMap)).build();
+            }
+        });
+    }
+	
+}
+
+
+
+
+

@@ -1,0 +1,11 @@
+package com.tibco.jaspersoft.cs.lucent.server.logging;
+
+/*
+ * $Id$
+ */
+public class LogAggregate {
+
+}
+
+
+

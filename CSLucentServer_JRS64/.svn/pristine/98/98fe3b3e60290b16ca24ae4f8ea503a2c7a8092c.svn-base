@@ -1,0 +1,19 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+import java.io.Serializable;
+
+/*
+ * $Id$
+ */
+public interface LogEntry extends Serializable {
+
+	public EntryCategory getEntryCategory();
+	public void setEntryCategory(EntryCategory entryCategory);
+	
+	public long getStartTimeNs();
+	public void setStartTimeNs(long startTimeNs);
+	
+	public long getElapsedTimeNs();
+	public void setElapsedTimeNs(long elapsedTimeNs);
+	
+}

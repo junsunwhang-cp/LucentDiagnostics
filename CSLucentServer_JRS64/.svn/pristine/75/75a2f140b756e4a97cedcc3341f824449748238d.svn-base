@@ -1,0 +1,23 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+/*
+ * $Id$
+ */
+public class LucentFlowContext {
+	String testId = null;
+	
+	public LucentFlowContext(){
+		
+	}
+
+	public String getTestId() {
+		return testId;
+	}
+
+	public void setTestId(String testId) {
+		this.testId = testId;
+	}
+	
+	
+	
+}

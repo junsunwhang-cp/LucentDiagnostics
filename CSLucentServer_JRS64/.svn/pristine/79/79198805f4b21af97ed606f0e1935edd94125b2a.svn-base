@@ -1,0 +1,15 @@
+package com.tibco.jaspersoft.cs.lucent.server.api;
+
+/*
+ * $Id$
+ */
+public interface LogAggregate {
+
+	public String getEventType();
+	public long getCount();
+	public long getAggregatedTimeNs();
+	public void increment(long timeNs);
+	
+	public long getCreationTimeMs();
+	public long getLastUpdateTimeMs();
+}

@@ -1,0 +1,28 @@
+package com.tibco.jaspersoft.cs.lucent.server.core;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
+
+/*
+ * $Id$
+ */
+public class DataStoreImpl implements DataStore {
+
+	private List<LogEntry> entryQueue = Collections.synchronizedList(new ArrayList<LogEntry>()); //TODO: scaffold code.
+	
+	public void writeLogEntry(LogEntry entry) {
+		entryQueue.add(entry);
+	}
+	
+	public List<LogEntry> readAllLogEntries() {
+		return entryQueue;
+	}
+	
+}
+
+
+
+

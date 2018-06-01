@@ -12,21 +12,24 @@ export class DataService {
   }
 
   //jsw: test only. TODO: remove.
-  getPosts(){
-    
+  getPosts(){   
     return this.http.get('https://jsonplaceholder.typicode.com/posts')
       .map(res => res.json());
-      
+  }
+  //jsw.test.end.
+
+  getServerMeta(){
+    var serverMeta = this.http.get('/serverinfo/meta').map(sMeta => sMeta.json());
+    return serverMeta;
   }
 
-  getRepoReports(hostName:string, port:string, path:string, username:string, password:string){
- 
-    var reportResults = this.http.get('/serverinfo?hostname=' + hostName + 
-    '&port=' + port + '&path=' + path + '&username=' + username + '&password=' + password)
-    .map(res => res.json());
-
+  getRepoReports(id:string, hostName:string, port:string, path:string, username:string, 
+    password:string, label:string, notes:string ){
+    var reportResults = this.http.get(encodeURI('/serverinfo/reportList?' + 'id=' + id + '&hostname=' + hostName + 
+    '&port=' + port + '&path=' + path + '&username=' + username + '&password=' + password +
+    '&label=' + label + '&notes=' + notes)
+  ).map(res => res.json());
     return reportResults;
- 
   }
 
   execLoadTest(server:ServerInfo){
@@ -34,6 +37,17 @@ export class DataService {
         headers.append('Content-Type', 'application/json');
         headers.append('LoadTestId', 'testId1_jswTest');
     return this.http.post('/loadtest/start', server, {headers}).map(res => res.json());
+  }
+
+  execStatusCheck(server:ServerInfo){
+    var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('LoadTestId', 'testId1_jswTest');
+    return this.http.post('/loadtest/status', server, {headers}).map(res => res.json());
+  }
+
+  viewReportResults(){
+    return this.http.get('/viewreport?LoadTestId=testId1_jswTest');
   }
 
 } 

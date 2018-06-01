@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>Executing report tests</h1>
 <div mat-dialog-content>
   <!-- <p>Executing report tests.</p> -->
-  <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-</div>
+  current progress: {{progressPerc | number: '1.0-0'}}%
+  <mat-progress-bar mode="determinate" value="{{progressPerc}}"></mat-progress-bar>
+</div> 
  
