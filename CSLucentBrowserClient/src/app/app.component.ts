@@ -216,7 +216,7 @@ export class AppComponent implements OnInit {
 
           //jsw.test.start
           //window.open("/viewreport?LoadTestId=testId1_jswTest", "_blank");
-          this.dataService.viewReportResults().subscribe((gResp) => {
+          this.dataService.viewReportResults(relatedServer).subscribe((gResp) => {
             //var sample = gResp.text();
            
             this.setServerRuntimeHtml(serverid,gResp.text());

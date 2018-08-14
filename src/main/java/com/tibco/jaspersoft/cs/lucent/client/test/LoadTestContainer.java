@@ -99,7 +99,7 @@ public class LoadTestContainer {
 				
 				Timer testReportTimer = new Timer("testReportTimer");
 				TimerTask testReportTask = new TestReportJob(url, reportExecUuid, reportJobInfo, serverPath,
-						serverInfo.getUsername(), serverInfo.getPassword());
+						serverInfo.getUsername(), serverInfo.getPassword(), this.loadTestId);
 				testReportTimer.scheduleAtFixedRate(testReportTask, calculatedTimeOffset, thinkTimeMs);
 			}
 		}

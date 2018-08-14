@@ -223,8 +223,8 @@ var AppComponent = (function () {
         }
         else {
             //get results.
-            var relatedServer = this.getServerInstance(serverid);
-            this.dataService.execStatusCheck(relatedServer).subscribe(function (sResp) {
+            var relatedServer_1 = this.getServerInstance(serverid);
+            this.dataService.execStatusCheck(relatedServer_1).subscribe(function (sResp) {
                 //update progress bar.
                 var status = sResp.status;
                 var completed = sResp.totalcompleted;
@@ -236,7 +236,7 @@ var AppComponent = (function () {
                     //  2.close the dialog.          
                     //jsw.test.start
                     //window.open("/viewreport?LoadTestId=testId1_jswTest", "_blank");
-                    _this.dataService.viewReportResults().subscribe(function (gResp) {
+                    _this.dataService.viewReportResults(relatedServer_1).subscribe(function (gResp) {
                         //var sample = gResp.text();
                         _this.setServerRuntimeHtml(serverid, gResp.text());
                         var tempInterval = setInterval(function () {
@@ -840,7 +840,9 @@ module.exports = "<h1 mat-dialog-title>Executing report tests</h1>\r\n<div mat-d
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid__ = __webpack_require__("../../../../uuid/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_uuid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -850,6 +852,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -876,18 +879,22 @@ var DataService = (function () {
     };
     DataService.prototype.execLoadTest = function (server) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        var newTestId = Object(__WEBPACK_IMPORTED_MODULE_2_uuid__["v4"])();
+        server.testId = newTestId;
         headers.append('Content-Type', 'application/json');
-        headers.append('LoadTestId', 'testId1_jswTest');
+        headers.append('LoadTestId', newTestId);
+        //headers.append('LoadTestId', 'testId1_jswTest');
         return this.http.post('/loadtest/start', server, { headers: headers }).map(function (res) { return res.json(); });
     };
     DataService.prototype.execStatusCheck = function (server) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
-        headers.append('LoadTestId', 'testId1_jswTest');
+        //headers.append('LoadTestId', 'testId1_jswTest');
+        headers.append('LoadTestId', server.testId);
         return this.http.post('/loadtest/status', server, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DataService.prototype.viewReportResults = function () {
-        return this.http.get('/viewreport?LoadTestId=testId1_jswTest');
+    DataService.prototype.viewReportResults = function (server) {
+        return this.http.get('/viewreport?LoadTestId=' + server.testId);
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import com.tibco.jaspersoft.cs.lucent.client.core.InMemoryDataStore;
+
 /*
  * $Id: ExecGeneratePdf.java 239 2018-01-16 20:15:57Z jwhang $
  */
@@ -30,7 +32,8 @@ public class ExecGeneratePdf {
 		*/
 	}
 	
-	public long writePdf(String serverPath, String reportUri, String username, String password, String outputPath){
+	public long writePdf(String serverPath, String reportUri, String username, String password, 
+			String outputPath, String testId){
 		long timeElapsed = System.currentTimeMillis();
 		try{
 			// test only.start.
@@ -40,7 +43,8 @@ public class ExecGeneratePdf {
 			// test only.end.
 			
 			HttpClient client = HttpClientBuilder.create().build();
-			String requestString = serverPath + "/rest_v2/reports" + reportUri + ".pdf?j_username=" + username + "&j_password=" + password;
+			String requestString = serverPath + "/rest_v2/reports" + reportUri + ".pdf?j_username=" + username + 
+					"&j_password=" + password + "&" + InMemoryDataStore.C_LOADTESTID + "=" + testId ;
 			
 			//jsw.test only.
 			System.out.println(currentStartTime + ": " + requestString);

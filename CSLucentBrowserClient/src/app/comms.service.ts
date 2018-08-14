@@ -13,7 +13,8 @@ import { BusyDialog } from './app.component';
     password ?:string,
     notes ?:string,
     diagnosticsModule ?:DiagnosticsInfo,
-    expanded ?:boolean
+    expanded ?:boolean,
+    testId ?:string
   }
 
   export interface ServerRuntimeInfo {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2018-02-08T13:35:39 -->
+<!-- 2018-06-05T11:00:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BasicDiagnosticReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="37e92ec9-fc28-4471-9191-2238879e9a1e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="banding">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT} % 2)==1)]]></conditionExpression>
@@ -64,39 +65,39 @@
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="510" height="30" backcolor="#DFE2F5" uuid="9b5cd6d7-16e3-47f6-ba7a-ff86334e9fbb"/>
+				<reportElement mode="Opaque" x="0" y="0" width="500" height="30" backcolor="#DFE2F5" uuid="9b5cd6d7-16e3-47f6-ba7a-ff86334e9fbb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="16"/>
 				</textElement>
 				<text><![CDATA[Report Url]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="610" y="0" width="190" height="30" backcolor="#DFE2F5" uuid="87695ba8-dbb1-44d9-b765-634212497b09"/>
+				<reportElement mode="Opaque" x="650" y="0" width="150" height="30" backcolor="#DFE2F5" uuid="87695ba8-dbb1-44d9-b765-634212497b09"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="16"/>
 				</textElement>
-				<text><![CDATA[Start Time]]></text>
+				<text><![CDATA[Start Timestamp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="510" y="0" width="100" height="30" backcolor="#DFE2F5" uuid="e0170e70-bffb-4c18-b359-d807d63c5871"/>
+				<reportElement mode="Opaque" x="500" y="0" width="150" height="30" backcolor="#DFE2F5" uuid="e0170e70-bffb-4c18-b359-d807d63c5871"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="16"/>
 				</textElement>
-				<text><![CDATA[Time Ms]]></text>
+				<text><![CDATA[Execution Time (ms)]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement style="banding" x="0" y="0" width="510" height="20" uuid="98988609-e1b1-41d7-b69c-1fc4e229fbc0"/>
+				<reportElement style="banding" x="0" y="0" width="500" height="20" uuid="98988609-e1b1-41d7-b69c-1fc4e229fbc0"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reportUrl}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="banding" x="610" y="0" width="190" height="20" uuid="1e8477c2-fe9b-47b0-a525-83be58769cfd"/>
+				<reportElement style="banding" x="650" y="0" width="150" height="20" uuid="1e8477c2-fe9b-47b0-a525-83be58769cfd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14"/>
 				</textElement>
@@ -104,7 +105,7 @@
 				<patternExpression><![CDATA["yyyy-MM-dd HH:mm:ss aa"]]></patternExpression>
 			</textField>
 			<textField>
-				<reportElement style="banding" x="510" y="0" width="100" height="20" uuid="d5637d83-a0d5-4de6-a8aa-a314be8662c8"/>
+				<reportElement style="banding" x="500" y="0" width="150" height="20" uuid="d5637d83-a0d5-4de6-a8aa-a314be8662c8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14"/>
 				</textElement>

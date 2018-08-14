@@ -1,5 +1,6 @@
 import { Injectable, Component, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { v4 as uuid } from 'uuid';
 
 import { ServerInfo, ReportInfo, DiagnosticsInfo } from '../comms.service';
 import 'rxjs/add/operator/map';
@@ -34,20 +35,24 @@ export class DataService {
 
   execLoadTest(server:ServerInfo){
     var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('LoadTestId', 'testId1_jswTest');
+    var newTestId = uuid();
+    server.testId = newTestId;
+    headers.append('Content-Type', 'application/json');
+    headers.append('LoadTestId', newTestId);
+    //headers.append('LoadTestId', 'testId1_jswTest');
     return this.http.post('/loadtest/start', server, {headers}).map(res => res.json());
   }
 
   execStatusCheck(server:ServerInfo){
     var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        headers.append('LoadTestId', 'testId1_jswTest');
+        //headers.append('LoadTestId', 'testId1_jswTest');
+        headers.append('LoadTestId', server.testId);
     return this.http.post('/loadtest/status', server, {headers}).map(res => res.json());
   }
 
-  viewReportResults(){
-    return this.http.get('/viewreport?LoadTestId=testId1_jswTest');
+  viewReportResults(server:ServerInfo){
+    return this.http.get('/viewreport?LoadTestId=' + server.testId);
   }
 
 } 

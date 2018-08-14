@@ -33,7 +33,7 @@ public class LoadTestController {
 			){
 		
 		//proto.start //FIXME: implemenet client side generated test container IDs.
-		System.out.println("load Test ID: " + loadTestId);
+		System.out.println("/start, load Test ID: " + loadTestId);
 		//proto.end
 		
 		LoadTestContainer ltc = new LoadTestContainer(loadTestId, serverInfo);
@@ -66,6 +66,10 @@ public class LoadTestController {
 			@RequestHeader(InMemoryDataStore.C_LOADTESTID) String loadTestId,
 			@RequestBody ServerInfo serverInfo
 			){
+		
+		//proto.start //FIXME: implemenet client side generated test container IDs.
+		System.out.println("/status, load Test ID: " + loadTestId);
+		//proto.end
 		LoadTestContainer relevantContainer = InMemoryDataStore.getRunningLoadTests().get(loadTestId);
 		if (relevantContainer!=null){
 			return relevantContainer.getTestStatus(C_STATUS);

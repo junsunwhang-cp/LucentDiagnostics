@@ -1,16 +1,22 @@
 package com.tibco.jaspersoft.cs.lucent.client.test;
 
+import java.util.Comparator;
+
 /*
  * $Id: TestReportJobInfo.java 241 2018-01-30 06:57:07Z jwhang $
  * Class to hold status of running report job and persist past the report job thread's termination.
  */
-public class TestReportJobInfo {
+public class TestReportJobInfo implements Comparator<TestReportJobInfo> {
 	
 	String uuid = "";
 	String url = "";
 	long startTime = 0;
 	long elapsedTime = 0;
 	boolean completed = false;
+	
+	public TestReportJobInfo(){
+		
+	}
 	
 	public TestReportJobInfo(String uuid, String url){
 		this.uuid = uuid;
@@ -60,6 +66,17 @@ public class TestReportJobInfo {
 	public synchronized void flagExecutionComplete(long elapsedTime){
 		this.elapsedTime = elapsedTime;
 		this.completed = true;
+	}
+
+	public int compare(TestReportJobInfo ji1, TestReportJobInfo ji2) {
+		
+		int retCode =  ji1.getUrl().compareTo(ji2.getUrl());
+		if (retCode == 0){ //URL is the same, return based on time stamp.
+			int timeCode = (int)(ji1.getStartTime() - ji2.getStartTime());
+			return timeCode;
+		} else {
+			return retCode;
+		}
 	}
 }
 
