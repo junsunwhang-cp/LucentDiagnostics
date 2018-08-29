@@ -1,15 +1,25 @@
 package com.tibco.jaspersoft.cs.lucent.server.api;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /*
- * $Id: LucentFlowContext.java 266 2018-04-26 20:14:31Z jwhang $
+ * $Id: LucentFlowContext.java 287 2018-08-29 09:09:08Z jwhang $
  */
-public class LucentFlowContext {
-	String testCategory = null;
-	String testId = null;
+public class LucentFlowContext implements Serializable {
+	
+	public final static long serialVersionUID = 0l;
+	
+	String testCategory = "testCategory_uninitialized";
+	String testId = "testId_uninitialized";
 	String transactionId = null;
+	Map<String,String> propertyBag = new HashMap<String, String>();
 	
 	public LucentFlowContext(){
-		
+		//assign a new transaction id per generation of a Lucent Flow Context.
+		this.transactionId = UUID.randomUUID().toString();
 	}
 	
 	public LucentFlowContext(String testCategory, String testId){
@@ -39,6 +49,14 @@ public class LucentFlowContext {
 
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
+	}
+
+	public Map<String, String> getPropertyBag() {
+		return propertyBag;
+	}
+
+	public void setPropertyBag(Map<String, String> propertyBag) {
+		this.propertyBag = propertyBag;
 	}
 	
 }

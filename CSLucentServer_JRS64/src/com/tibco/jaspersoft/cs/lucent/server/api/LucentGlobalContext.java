@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.jaspersoft.jasperserver.api.metadata.user.domain.impl.client.MetadataUserDetails;
+import com.tibco.jaspersoft.cs.lucent.server.core.DataStore;
 import com.tibco.jaspersoft.cs.lucent.server.core.JRDataSourceProxy;
 import com.tibco.jaspersoft.cs.lucent.server.core.LucentConfiguration;
 import com.tibco.jaspersoft.cs.lucent.server.logging.LogEntryImpl;
@@ -19,7 +20,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 
 /*
- * $Id: LucentGlobalContext.java 282 2018-05-23 03:13:55Z jwhang $
+ * $Id: LucentGlobalContext.java 287 2018-08-29 09:09:08Z jwhang $
  */
 public class LucentGlobalContext {
 
@@ -61,6 +62,10 @@ public class LucentGlobalContext {
 		lucentConfiguration.getDataStore().writeLogEntry(new LogEntryImpl(entryCategoryId, startTimeMs, elapsedTimeNs, value));
 	}
 	
+	public DataStore getDataStore(){
+		return lucentConfiguration.getDataStore();
+	}
+	
 	public Map<String, LogAggregate> readLogEntries(String testId){
 		return lucentConfiguration.getDataStore().readLogEntries(testId);
 	}
@@ -95,7 +100,7 @@ public class LucentGlobalContext {
 		if (userDetailObj instanceof MetadataUserDetails){
 			MetadataUserDetails mud = (MetadataUserDetails)userDetailObj;
 			LucentFlowContext lfc = mud.getLucentFlowContext();
-			if (lfc==null){
+			if (lfc==null){ //this should have been generated already.
 				lfc = new LucentFlowContext();
 				mud.setLucentFlowContext(lfc);
 			}

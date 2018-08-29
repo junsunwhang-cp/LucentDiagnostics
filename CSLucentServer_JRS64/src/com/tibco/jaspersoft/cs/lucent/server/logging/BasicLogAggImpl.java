@@ -3,7 +3,7 @@ package com.tibco.jaspersoft.cs.lucent.server.logging;
 import com.tibco.jaspersoft.cs.lucent.server.api.LogAggregate;
 
 /*
- * $Id: BasicLogAggImpl.java 285 2018-05-23 23:26:51Z jwhang $
+ * $Id: BasicLogAggImpl.java 287 2018-08-29 09:09:08Z jwhang $
  */
 public class BasicLogAggImpl implements LogAggregate {
 	
@@ -12,6 +12,8 @@ public class BasicLogAggImpl implements LogAggregate {
 	private long aggregatedTimeNs = 0;
 	private long creationTimeMs = 0;
 	private long lastUpdateTimeMs = 0;
+	
+	private final static String indent = "      ";
 	
 	public BasicLogAggImpl(){
 		
@@ -69,18 +71,18 @@ public class BasicLogAggImpl implements LogAggregate {
 	
 	public String getXmlRepresentation(){
 		StringBuffer stateBuf = new StringBuffer();
-		stateBuf.append("<LogAggregate>\n");
+		stateBuf.append(indent + "<LogAggregate>\n");
 		stateBuf.append(wrapEntry("eventType",eventType));
 		stateBuf.append(wrapEntry("totalTimeNs",String.valueOf(aggregatedTimeNs)));
 		stateBuf.append(wrapEntry("count",String.valueOf(count)));
 		stateBuf.append(wrapEntry("creationTimeMs",String.valueOf(creationTimeMs)));
 		stateBuf.append(wrapEntry("lastUpdateTimeMs",String.valueOf(lastUpdateTimeMs)));
-		stateBuf.append("</LogAggregate>\n");
+		stateBuf.append(indent + "</LogAggregate>\n");
 		return stateBuf.toString();
 	}
 	
 	private String wrapEntry(String tag, String value){
-		return "<" + tag + ">" + value + "</" + tag + ">\n";
+		return indent + "  <" + tag + ">" + value + "</" + tag + ">\n";
 	}
 	
 }

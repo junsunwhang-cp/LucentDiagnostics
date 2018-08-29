@@ -30,6 +30,10 @@ import com.jaspersoft.jasperserver.remote.services.ReportExecutionOptions;
 import com.jaspersoft.jasperserver.remote.services.ReportOutputPages;
 import com.jaspersoft.jasperserver.remote.services.ReportOutputResource;
 import com.jaspersoft.jasperserver.remote.services.RunReportService;
+import com.tibco.jaspersoft.cs.lucent.server.api.LucentFlowContext;
+import com.tibco.jaspersoft.cs.lucent.server.api.LucentGlobalContext;
+import com.tibco.jaspersoft.cs.lucent.server.ws.LucentService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -91,6 +95,26 @@ public class RunReportsJaxrsService extends RemoteServiceWrapper<RunReportServic
                 // parameters map can be safely cast to Map<String, String[]>
                 @SuppressWarnings("unchecked")
                 Map<String, String[]> parameterMap = request.getParameterMap();
+                
+                //jsw.start.
+                //If a test id exists, add it to the Lucent flow context.
+                Object testIdObj = parameterMap.get(LucentService.TEST_ID);
+                String testId = "testId_uninitialized";
+                if (testIdObj!=null){
+                	if (testIdObj.getClass().isArray()){
+                		Object[] testArray = (Object [])testIdObj;
+                		testId = String.valueOf(testArray[0]);
+                	} else {
+                		testId = String.valueOf(testIdObj);
+                	}
+                	LucentFlowContext lfc = LucentGlobalContext.getInstance().getFlowContext();
+                	lfc.setTestId(testId);
+                	Map<String,String> propBag = lfc.getPropertyBag();
+                	propBag.put("requestUri", request.getRequestURI());
+                	LucentGlobalContext.getInstance().getDataStore().recordPropertyBagChange();
+                } 
+                //jsw.end.
+                
                 final ReportExecutionOptions reportExecutionOptions = new ReportExecutionOptions()
                         .setTransformerKey(transformerKey)
                         .setDefaultAttachmentsPrefixTemplate(ReportExecutionHelper

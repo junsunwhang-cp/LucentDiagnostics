@@ -9,7 +9,9 @@ import com.tibco.jaspersoft.cs.lucent.client.test.LoadTestContainer;
  */
 public class InMemoryDataStore {
 
-	public final static String C_LOADTESTID = "LoadTestId";
+	//public final static String C_LOADTESTID = "LoadTestId";
+	
+	public final static String C_LOADTESTID = "lucent_test_id";
 	
 	private static ConcurrentHashMap<String, LoadTestContainer> runningLoadTests = new ConcurrentHashMap<String, LoadTestContainer>();
 

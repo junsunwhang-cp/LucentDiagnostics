@@ -3,7 +3,7 @@ package com.tibco.jaspersoft.cs.lucent.client.test;
 import java.util.TimerTask;
 
 /*
- * $Id: TestReportJob.java 241 2018-01-30 06:57:07Z jwhang $
+ * $Id: TestReportJob.java 286 2018-08-21 18:13:32Z jwhang $
  */
 public class TestReportJob extends TimerTask {
 
@@ -14,9 +14,10 @@ public class TestReportJob extends TimerTask {
 	String username = null;
 	String password = null;
 	String loadTestId = null;
+	String parameters = null;
 	
 	public TestReportJob(String url, String uuid, TestReportJobInfo reportJobInfo, String serverPath, String username, 
-			String password, String loadTestId){
+			String password, String loadTestId, String parameters){
 		this.url = url;
 		this.uuid = uuid;
 		this.reportJobInfo = reportJobInfo;
@@ -24,6 +25,7 @@ public class TestReportJob extends TimerTask {
 		this.username = username;
 		this.password = password;
 		this.loadTestId = loadTestId;
+		this.parameters = parameters;
 	}
 	
 	public void run(){
@@ -31,7 +33,8 @@ public class TestReportJob extends TimerTask {
 		ExecGeneratePdf egp = new ExecGeneratePdf();
 		String tempPath = System.getProperty("java.io.tmpdir");
 		
-		long elapsedTime = egp.writePdf(this.serverPath, this.url, this.username, this.password, tempPath, this.loadTestId);
+		long elapsedTime = egp.writePdf(this.serverPath, this.url, this.username, this.password, tempPath, 
+				this.loadTestId, this.parameters);
 		
 		reportJobInfo.flagExecutionComplete(elapsedTime);
 		cancel(); //only run this job once.

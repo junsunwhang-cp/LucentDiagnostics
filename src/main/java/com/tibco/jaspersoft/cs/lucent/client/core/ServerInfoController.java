@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thoughtworks.xstream.XStream;
 import com.tibco.jaspersoft.cs.lucent.client.store.LucentException;
+import com.tibco.jaspersoft.cs.lucent.client.store.ReportInfo;
 import com.tibco.jaspersoft.cs.lucent.client.store.ServerInfo;
 import com.tibco.jaspersoft.cs.lucent.client.store.UserDataStore;
 
@@ -32,7 +33,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 /*
- * $Id: ServerInfoController.java 254 2018-04-05 21:36:09Z jwhang $
+ * $Id: ServerInfoController.java 286 2018-08-21 18:13:32Z jwhang $
  */
 
 @Controller

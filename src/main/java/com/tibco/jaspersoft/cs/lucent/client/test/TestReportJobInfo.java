@@ -3,7 +3,7 @@ package com.tibco.jaspersoft.cs.lucent.client.test;
 import java.util.Comparator;
 
 /*
- * $Id: TestReportJobInfo.java 241 2018-01-30 06:57:07Z jwhang $
+ * $Id: TestReportJobInfo.java 286 2018-08-21 18:13:32Z jwhang $
  * Class to hold status of running report job and persist past the report job thread's termination.
  */
 public class TestReportJobInfo implements Comparator<TestReportJobInfo> {

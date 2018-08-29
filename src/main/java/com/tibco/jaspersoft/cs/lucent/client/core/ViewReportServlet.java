@@ -41,17 +41,38 @@ import com.tibco.jaspersoft.cs.lucent.client.test.TestReportJobInfo;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /*
- * $Id: ViewReportServlet.java 253 2018-04-03 19:23:50Z jwhang $
+ * $Id: ViewReportServlet.java 286 2018-08-21 18:13:32Z jwhang $
  */
 public class ViewReportServlet extends HttpServlet {
+	
+	private static final String C_DOMAIN = "domain";
+	private static final String C_PORT = "port";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LoadTestContainer targetContainer = null;
 		ServletContext context = this.getServletConfig().getServletContext();
+		
+		//start.evaluate parameters.
+		String paramTestId = "";
+		String paramDomain = "";
+		String paramPort = "";
+		
 		Object testIdObj = request.getParameter(InMemoryDataStore.C_LOADTESTID);
 		if (testIdObj !=null){
 			targetContainer = InMemoryDataStore.getRunningLoadTests().get(String.valueOf(testIdObj));
+			paramTestId = String.valueOf(testIdObj);
+			System.out.println("/viewReport, loadTestId: " + paramTestId);
 		}
+		Object paramDomainObj = request.getParameter(C_DOMAIN);
+		if (paramDomainObj!=null){
+			paramDomain = String.valueOf(paramDomainObj);
+		}
+		Object paramPortObj = request.getParameter(C_PORT); 
+		if (paramPortObj!=null){
+			paramPort = String.valueOf(paramPortObj);
+		}
+		//end.evaluateParameters.
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
@@ -87,7 +108,12 @@ public class ViewReportServlet extends HttpServlet {
 				exporter.setExporterOutput(output);				
 				exporter.exportReport();
 				//outputStream.close();
-				out.write("<a href=\"retrieveTestData?cs_testDataKey=test1&cs_serverPath=localhost:8080/jasperserver-pro_lucent\">Retrieve fine grained data</a>");
+				
+				if ((paramTestId.length()>0)||(paramPort.length()>0)){
+					out.write("<a href=\"retrieveTestData?cs_testDataKey=" + paramTestId + "&cs_serverPath=" + paramDomain + ":" + paramPort + "/jasperserver-pro_lucent\">Retrieve fine grained data</a>");
+				} else {
+					out.write("Missing target URL information.");
+				}
 			} catch (JRException jre){
 				jre.printStackTrace();
 			}

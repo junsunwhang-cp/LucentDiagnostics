@@ -17,11 +17,12 @@ import com.jaspersoft.jasperserver.remote.exception.RemoteException;
 import com.tibco.jaspersoft.cs.lucent.server.api.LogAggregate;
 import com.tibco.jaspersoft.cs.lucent.server.api.LogEntry;
 import com.tibco.jaspersoft.cs.lucent.server.api.LucentGlobalContext;
+import com.tibco.jaspersoft.cs.lucent.server.core.DataStore;
 import com.tibco.jaspersoft.cs.lucent.server.logging.LogEntryImpl;
 import com.tibco.jaspersoft.cs.lucent.server.logging.LogTestResults;
 
 /*
- * $Id: LucentServiceImpl.java 285 2018-05-23 23:26:51Z jwhang $
+ * $Id: LucentServiceImpl.java 287 2018-08-29 09:09:08Z jwhang $
  */
 public class LucentServiceImpl implements LucentService, BeanFactoryAware {
 
@@ -38,16 +39,51 @@ public class LucentServiceImpl implements LucentService, BeanFactoryAware {
 		Object testIdObj = parameterMap.get(LucentService.TEST_ID);
 		if ((testIdObj!=null)&&(testIdObj instanceof String[])){
 			testId = String.valueOf( ((String[])testIdObj)[0] );
+			DataStore ds = LucentGlobalContext.getInstance().getDataStore();
 			Map<String, LogAggregate> entryList = LucentGlobalContext.getInstance().readLogEntries(testId);	
 			
-			
 			sb.append("<Metrics testId=\"" + testId + "\">\n");
+			
+			//aggregate information.
+			sb.append("  <GlobalAggregates>\n");
+			
 			Set<String> entryKeys = entryList.keySet();
 			Iterator<String> keyIt = entryKeys.iterator();
 			while (keyIt.hasNext()){
 				LogAggregate nextAgg = entryList.get(keyIt.next());
 				sb.append(nextAgg.getXmlRepresentation());
 			}
+			sb.append("  </GlobalAggregates>\n");
+			
+			//per transaction information.
+			
+			
+			
+			sb.append("  <PerTransactionAggregates>\n");
+			Set<String> transactionKeys =  ds.getTransactionsforTestId(testId);
+			for (String tk: transactionKeys){
+				Map<String, LogAggregate> transLogAggs = ds.readLogEntriesByTransaction(tk);
+				Map<String,String> transProperties = ds.getPropertyBagForTransactionId(tk);
+				String requestUriProp = transProperties.get("requestUri");
+				
+				sb.append("    <Transaction transactionId=\"" + tk + "\">\n");
+				
+				if (requestUriProp!=null){
+					sb.append("    <![CDATA[requestUri=" + requestUriProp + "]]>\n");
+				}
+				
+				Set<String> transKeys = transLogAggs.keySet();
+				Iterator<String> transIt = transKeys.iterator();
+				while (transIt.hasNext()){
+					LogAggregate tAgg = transLogAggs.get(transIt.next());
+					sb.append(tAgg.getXmlRepresentation());
+				}
+				
+				sb.append("    </Transaction>\n");
+			}
+			
+			sb.append("  </PerTransactionAggregates>\n");
+			
 			sb.append("</Metrics>\n");
 			
 			/*

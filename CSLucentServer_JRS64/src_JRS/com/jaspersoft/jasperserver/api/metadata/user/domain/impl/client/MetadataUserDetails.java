@@ -42,7 +42,7 @@ import java.util.Set;
  * User object for security in JasperServer with Spring Security.
  *
  * @author swood
- * @version $Id: MetadataUserDetails.java 264 2018-04-24 23:26:16Z jwhang $
+ * @version $Id: MetadataUserDetails.java 287 2018-08-29 09:09:08Z jwhang $
  */
 @JasperServerAPI
 public class MetadataUserDetails implements UserDetails, User {
@@ -58,7 +58,7 @@ public class MetadataUserDetails implements UserDetails, User {
     private Date previousPasswordChangeTime = null;
     private List attributes = null;
     private String tenantId = null;
-    private LucentFlowContext lucentFlowContext = null;
+    private LucentFlowContext lucentFlowContext = new LucentFlowContext();;
     
     /**
      * Constructor

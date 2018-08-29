@@ -10,6 +10,8 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -17,7 +19,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.tibco.jaspersoft.cs.lucent.client.core.InMemoryDataStore;
 
 /*
- * $Id: ExecGeneratePdf.java 239 2018-01-16 20:15:57Z jwhang $
+ * $Id: ExecGeneratePdf.java 286 2018-08-21 18:13:32Z jwhang $
  */
 public class ExecGeneratePdf {
 
@@ -33,7 +35,7 @@ public class ExecGeneratePdf {
 	}
 	
 	public long writePdf(String serverPath, String reportUri, String username, String password, 
-			String outputPath, String testId){
+			String outputPath, String testId, String parameters){
 		long timeElapsed = System.currentTimeMillis();
 		try{
 			// test only.start.
@@ -41,10 +43,19 @@ public class ExecGeneratePdf {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
 			String currentStartTime = sdf.format(d);
 			// test only.end.
+								
+			HttpClientBuilder hcb = HttpClientBuilder.create();
+			//BasicHttpClientConnectionManager bccm = new BasicHttpClientConnectionManager();
+			PoolingHttpClientConnectionManager phccm = new PoolingHttpClientConnectionManager();
 			
-			HttpClient client = HttpClientBuilder.create().build();
+			hcb.setConnectionManager(phccm);
+			HttpClient client = hcb.build();
+			
 			String requestString = serverPath + "/rest_v2/reports" + reportUri + ".pdf?j_username=" + username + 
 					"&j_password=" + password + "&" + InMemoryDataStore.C_LOADTESTID + "=" + testId ;
+			if (parameters!=null){
+				requestString += "&" + parameters;
+			}
 			
 			//jsw.test only.
 			System.out.println(currentStartTime + ": " + requestString);
@@ -65,10 +76,12 @@ public class ExecGeneratePdf {
 			while (len != -1) {
 			    fos.write(buffer, 0, len);
 			    len = contentStream.read(buffer);
-			}
-		
+			}		
 			fos.flush();
 			fos.close();
+			request.releaseConnection();
+			phccm.close();
+			
 			return (System.currentTimeMillis() - timeElapsed);
 		} catch (Exception e){
 			e.printStackTrace();

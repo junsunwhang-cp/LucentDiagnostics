@@ -13,7 +13,7 @@ import com.tibco.jaspersoft.cs.lucent.client.store.ReportInfo;
 import com.tibco.jaspersoft.cs.lucent.client.store.ServerInfo;
 
 /*
- * $Id: LoadTestContainer.java 259 2018-04-17 23:54:35Z jwhang $
+ * $Id: LoadTestContainer.java 286 2018-08-21 18:13:32Z jwhang $
  */
 public class LoadTestContainer {
 
@@ -89,6 +89,8 @@ public class LoadTestContainer {
 			for (int t=0; t<ri.getIterations(); t++){
 				String url = ri.getUrl();
 				String reportExecUuid = UUID.randomUUID().toString();
+				String reportParameters = ri.getReportParameters();
+				
 				TestReportJobInfo reportJobInfo = new TestReportJobInfo(reportExecUuid, url);
 				
 				int thinkTimeMs = ri.getThinkTime() * 1000;
@@ -99,7 +101,7 @@ public class LoadTestContainer {
 				
 				Timer testReportTimer = new Timer("testReportTimer");
 				TimerTask testReportTask = new TestReportJob(url, reportExecUuid, reportJobInfo, serverPath,
-						serverInfo.getUsername(), serverInfo.getPassword(), this.loadTestId);
+						serverInfo.getUsername(), serverInfo.getPassword(), this.loadTestId, reportParameters);
 				testReportTimer.scheduleAtFixedRate(testReportTask, calculatedTimeOffset, thinkTimeMs);
 			}
 		}

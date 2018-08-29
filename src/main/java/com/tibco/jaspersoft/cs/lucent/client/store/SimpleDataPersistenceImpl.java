@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.StreamException;
 
 /*
- * $Id: SimpleDataPersistenceImpl.java 254 2018-04-05 21:36:09Z jwhang $
+ * $Id: SimpleDataPersistenceImpl.java 286 2018-08-21 18:13:32Z jwhang $
  */
 //uses a simple file to save meta information about servers (excluding the password)
 //TODO: replace with a scalable data source to hold report result/metrics information.

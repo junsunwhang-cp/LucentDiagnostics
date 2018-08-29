@@ -1,7 +1,7 @@
 package com.tibco.jaspersoft.cs.lucent.client.store;
 
 /*
- * $Id: ReportInfo.java 252 2018-04-02 23:09:28Z jwhang $
+ * $Id: ReportInfo.java 286 2018-08-21 18:13:32Z jwhang $
  */
 public class ReportInfo {
 
@@ -10,6 +10,7 @@ public class ReportInfo {
 	private int thinkTime = 60;
 	private String name = null;
 	private String url = null;
+	private String reportParameters = null;
 
 	public boolean isSelected() {
 		return selected;
@@ -49,6 +50,14 @@ public class ReportInfo {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getReportParameters() {
+		return reportParameters;
+	}
+
+	public void setReportParameters(String reportParameters) {
+		this.reportParameters = reportParameters;
 	}
 
 }

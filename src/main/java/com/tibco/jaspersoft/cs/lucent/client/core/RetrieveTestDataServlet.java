@@ -69,12 +69,12 @@ public class RetrieveTestDataServlet extends HttpServlet {
 		if ((keyObj!=null)&&(serverPathObj!=null)){ //return specified test data.
 			String dataKey = String.valueOf(keyObj);
 			String serverPath = String.valueOf(serverPathObj);
-			
+			System.out.println("Retrieve data for key: " + dataKey);
 			HttpClient client = HttpClientBuilder.create().build();
 			
 			//test only.start.
 			String requestString = "http://" + serverPath + "/rest_v2/lucentService/" + 
-			"getInfo?lucent_test_id=null&j_username=superuser&j_password=superuser";
+			"getInfo?lucent_test_id=" + dataKey + "&j_username=superuser&j_password=superuser";
 			//test only.end.
 			
 			HttpGet requestSocket = new HttpGet(requestString);
