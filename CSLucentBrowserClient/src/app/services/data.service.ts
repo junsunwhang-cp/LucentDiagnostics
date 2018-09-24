@@ -38,7 +38,7 @@ export class DataService {
     var newTestId = uuid();
     server.testId = newTestId;
     headers.append('Content-Type', 'application/json');
-    headers.append('LoadTestId', newTestId);
+    headers.append('lucent_test_id', newTestId);
     //headers.append('LoadTestId', 'testId1_jswTest');
     return this.http.post('/loadtest/start', server, {headers}).map(res => res.json());
   }
@@ -47,12 +47,12 @@ export class DataService {
     var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         //headers.append('LoadTestId', 'testId1_jswTest');
-        headers.append('LoadTestId', server.testId);
+        headers.append('lucent_test_id', server.testId);
     return this.http.post('/loadtest/status', server, {headers}).map(res => res.json());
   }
 
   viewReportResults(server:ServerInfo){
-    return this.http.get('/viewreport?LoadTestId=' + server.testId);
+    return this.http.get('/viewreport?lucent_test_id=' + server.testId + "&domain=" + server.domain + "&port=" + server.port);
   }
 
 } 

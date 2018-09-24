@@ -213,20 +213,18 @@ export class AppComponent implements OnInit {
           //if tests are complete:
           //  1.set the flag to indicate tests are done
           //  2.close the dialog.          
+          this.testsConcluded = true;
 
           //jsw.test.start
           //window.open("/viewreport?LoadTestId=testId1_jswTest", "_blank");
           this.dataService.viewReportResults(relatedServer).subscribe((gResp) => {
             //var sample = gResp.text();
-           
             this.setServerRuntimeHtml(serverid,gResp.text());
-
             var tempInterval = setInterval(function(){
               window.document.getElementById('reportBottom_' + serverid).scrollIntoView(true); 
               clearInterval(tempInterval);
             }, 1000);
-
-            this.testsConcluded = true;
+            //this.testsConcluded = true;
             this.progressDialog.close();
           });
           //jsw.test.end

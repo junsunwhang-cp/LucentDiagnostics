@@ -33,7 +33,8 @@ import { BusyDialog } from './app.component';
     iterations ?:number,
     thinkTime ?:number,
     name ?:string,
-    url ?:string
+    url ?:string,
+    reportParameters ?:string
   }
 
   export interface FetchReportListPacket {
